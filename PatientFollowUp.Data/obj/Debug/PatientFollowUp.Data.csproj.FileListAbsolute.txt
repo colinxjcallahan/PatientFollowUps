@@ -1,0 +1,10 @@
+C:\Projects\Premier\PatientFollowUp.Data\bin\PatientFollowUp.Data.dll.config
+C:\Projects\Premier\PatientFollowUp.Data\bin\PatientFollowUp.Data.dll
+C:\Projects\Premier\PatientFollowUp.Data\bin\PatientFollowUp.Data.pdb
+C:\Projects\Premier\PatientFollowUp.Data\bin\EntityFramework.dll
+C:\Projects\Premier\PatientFollowUp.Data\bin\EntityFramework.SqlServer.dll
+C:\Projects\Premier\PatientFollowUp.Data\bin\EntityFramework.xml
+C:\Projects\Premier\PatientFollowUp.Data\bin\EntityFramework.SqlServer.xml
+C:\Projects\Premier\PatientFollowUp.Data\obj\Debug\PatientFollowUp.Data.csprojResolveAssemblyReference.cache
+C:\Projects\Premier\PatientFollowUp.Data\obj\Debug\PatientFollowUp.Data.dll
+C:\Projects\Premier\PatientFollowUp.Data\obj\Debug\PatientFollowUp.Data.pdb

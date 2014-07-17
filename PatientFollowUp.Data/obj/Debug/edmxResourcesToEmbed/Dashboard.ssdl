@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FollowUp">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReferrerID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+    <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+    <Property Name="FollowUpExamID" Type="bigint" />
+    <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="FollowUpStatus">
+    <Key>
+      <PropertyRef Name="FollowUpStatusID" />
+    </Key>
+    <Property Name="FollowUpStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="ExamID" Type="bigint" Nullable="false" />
+    <Property Name="ExamType" Type="nchar" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" MaxLength="75" />
+    <Property Name="PatientMRN" Type="nchar" MaxLength="20" />
+    <Property Name="ScheduleDate" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FollowUpWithSynonymData">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="int" Nullable="false" />
+    <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+    <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="FollowUpdate" Type="datetime" Nullable="false" />
+    <Property Name="FollowUpExamID" Type="bigint" />
+    <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="PatientFirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PatientLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PatientHomePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="PatientMobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReferrerFirstName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ReferrerLastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ReferrerPhone" Type="nvarchar" MaxLength="255" />
+    <Property Name="ReferrerMobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Report" Type="varchar(max)" />
+  </EntityType>
+  <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Exam].[ExamID] AS [ExamID], 
+    [Exam].[ExamType] AS [ExamType], 
+    [Exam].[Description] AS [Description], 
+    [Exam].[PatientMRN] AS [PatientMRN], 
+    [Exam].[ScheduleDate] AS [ScheduleDate], 
+    [Exam].[Status] AS [Status]
+    FROM [dbo].[Exam] AS [Exam]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FollowUpWithSynonymData" EntityType="Self.FollowUpWithSynonymData" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FollowUpWithSynonymData].[FollowUpID] AS [FollowUpID], 
+    [FollowUpWithSynonymData].[PatientMRN] AS [PatientMRN], 
+    [FollowUpWithSynonymData].[AccessionNumber] AS [AccessionNumber], 
+    [FollowUpWithSynonymData].[ExamType] AS [ExamType], 
+    [FollowUpWithSynonymData].[FollowUpdate] AS [FollowUpdate], 
+    [FollowUpWithSynonymData].[FollowUpExamID] AS [FollowUpExamID], 
+    [FollowUpWithSynonymData].[FollowUpCode] AS [FollowUpCode], 
+    [FollowUpWithSynonymData].[PatientFirstName] AS [PatientFirstName], 
+    [FollowUpWithSynonymData].[PatientLastName] AS [PatientLastName], 
+    [FollowUpWithSynonymData].[PatientHomePhone] AS [PatientHomePhone], 
+    [FollowUpWithSynonymData].[PatientMobilePhone] AS [PatientMobilePhone], 
+    [FollowUpWithSynonymData].[ReferrerFirstName] AS [ReferrerFirstName], 
+    [FollowUpWithSynonymData].[ReferrerLastName] AS [ReferrerLastName], 
+    [FollowUpWithSynonymData].[ReferrerPhone] AS [ReferrerPhone], 
+    [FollowUpWithSynonymData].[ReferrerMobilePhone] AS [ReferrerMobilePhone], 
+    [FollowUpWithSynonymData].[FollowUpStatus] AS [FollowUpStatus], 
+    [FollowUpWithSynonymData].[Report] AS [Report]
+    FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

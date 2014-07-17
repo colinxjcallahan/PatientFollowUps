@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DashboardEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FollowUp" EntityType="DashboardModel.FollowUp" />
+    <EntitySet Name="FollowUpStatus" EntityType="DashboardModel.FollowUpStatus" />
+    <EntitySet Name="FollowUpWithSynonymData" EntityType="DashboardModel.FollowUpWithSynonymData" />
+    <EntitySet Name="Exam" EntityType="DashboardModel.Exam" />
+  </EntityContainer>
+  <EntityType Name="FollowUp">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+    <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="FollowUpExamID" Type="Int64" />
+    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FollowUpStatus">
+    <Key>
+      <PropertyRef Name="FollowUpStatusID" />
+    </Key>
+    <Property Name="FollowUpStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowUpStatus1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FollowUpWithSynonymData">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="Int32" Nullable="false" />
+    <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+    <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FollowUpExamID" Type="Int64" />
+    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PatientFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PatientLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpStatus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PatientHomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PatientMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="ExamID" Type="Int64" Nullable="false" />
+    <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PatientMRN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+  </EntityType>
+</Schema>

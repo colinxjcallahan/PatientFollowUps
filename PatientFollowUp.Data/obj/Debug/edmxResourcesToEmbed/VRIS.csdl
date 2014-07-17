@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vRIS_DOTNETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="PatientID" />
+    </Key>
+    <Property Name="PatientID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PolicyID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Employer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmployerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Middle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhotoID" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="InsuranceCard" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="EmergencyContact" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstNameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastNameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarrierGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondCarrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondCarrierPolicyID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondCarrierGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InjuryDate" Type="DateTime" Precision="3" />
+    <Property Name="SubscriberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PtRelationship" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Guarantor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PatientAllergies" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OutstandingBalance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SubscriberAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriberCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriberState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriberZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubPtRelationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdCarrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdCarrierPolicyID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdCarrierGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubPtRelationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InsuranceCard2" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="InsuranceCard3" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="SubscriberDOB" Type="DateTime" Precision="3" />
+    <Property Name="SubscriberSSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberDOB" Type="DateTime" Precision="3" />
+    <Property Name="SecondSubscriberSSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberDOB" Type="DateTime" Precision="3" />
+    <Property Name="ThirdSubscriberSSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SiteCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="SecondaryID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PlanName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SecPlanName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdPlanName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar1Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar2Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiscCar3Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="AlternatePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmploymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Species" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Breed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerFirstName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerSurName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmployerPhoneExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyPhoneExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AlternatePhoneExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriberFirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberFirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberFirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="PtStatus" Type="Int32" />
+    <Property Name="HomePhoneExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="LastUpdatedLoginType" Type="Int32" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="SubscriberCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecondSubscriberCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThirdSubscriberCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DoNotSurvey" Type="Boolean" Nullable="false" />
+    <Property Name="SecondaryMSPTYPE" Type="Int32" />
+    <Property Name="Prefix" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Street2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HabitusID" Type="Int16" />
+    <Property Name="ImaginePatientID" Type="Int64" />
+    <Property Name="DoNotSendMammoRecall" Type="Boolean" />
+    <Property Name="DoNotSendMammoReason" Type="Int32" />
+    <Property Name="DMF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="vRIS_DOTNETEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Registrations" EntityType="Self.Registration" />
+    <EntitySet Name="Referrers" EntityType="vRIS_DOTNETModel.Referrer" />
+  </EntityContainer>
+  <EntityType Name="Referrer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="GroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Pager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReferrerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UPIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="AllowPrint" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="AllowFax" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ViewingGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Suffix" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordExpires" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="PasswordDate" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Marketer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TaxonomyCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="TaxIDorSSN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AccessNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Marketers" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="AllowEmail" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="UPIN2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UPIN3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UPIN4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="StateLicenseNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="BlueShieldProviderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MedicareProviderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MedicaidProviderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CHAMPUSNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmployerID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderCommercialNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LocationNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderPlanNetworkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="StateAccidentProviderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ReferralNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="BadLoginAttempts" Type="Byte" Nullable="false" />
+    <Property Name="CanViewReportAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CanEditOrder" Type="Boolean" Nullable="false" />
+    <Property Name="CanHearDication" Type="Boolean" Nullable="false" />
+    <Property Name="NPIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InterfaceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SendFilms" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="CanNotRequestStudy" Type="Boolean" Nullable="false" />
+    <Property Name="IsAPremiumReferrer" Type="Boolean" />
+    <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Prefix" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="OfficeNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AllowCrSms" Type="Boolean" />
+    <Property Name="AllowCrEmail" Type="Boolean" />
+    <Property Name="AllowCrVoiceMessage" Type="Boolean" />
+    <Property Name="PasswordMustChange" Type="Boolean" />
+    <Property Name="AllowExamChangeEmail" Type="Boolean" />
+    <Property Name="ImagineReferrerID" Type="Int64" />
+  </EntityType>
+</Schema>

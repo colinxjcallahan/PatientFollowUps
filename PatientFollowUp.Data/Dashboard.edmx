@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FollowUp">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+          </Key>
+          <Property Name="FollowUpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReferrerID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+          <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="FollowUpExamID" Type="bigint" />
+          <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FollowUpStatus">
+          <Key>
+            <PropertyRef Name="FollowUpStatusID" />
+          </Key>
+          <Property Name="FollowUpStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="bigint" Nullable="false" />
+          <Property Name="ExamType" Type="nchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="75" />
+          <Property Name="PatientMRN" Type="nchar" MaxLength="20" />
+          <Property Name="ScheduleDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FollowUpWithSynonymData">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="FollowUpID" Type="int" Nullable="false" />
+          <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+          <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FollowUpdate" Type="datetime" Nullable="false" />
+          <Property Name="FollowUpExamID" Type="bigint" />
+          <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="PatientFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientHomePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientMobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferrerFirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReferrerLastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReferrerPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReferrerMobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Report" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="DashboardModelStoreContainer">
+          <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Exam].[ExamID] AS [ExamID], 
+    [Exam].[ExamType] AS [ExamType], 
+    [Exam].[Description] AS [Description], 
+    [Exam].[PatientMRN] AS [PatientMRN], 
+    [Exam].[ScheduleDate] AS [ScheduleDate], 
+    [Exam].[Status] AS [Status]
+    FROM [dbo].[Exam] AS [Exam]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FollowUpWithSynonymData" EntityType="Self.FollowUpWithSynonymData" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FollowUpWithSynonymData].[FollowUpID] AS [FollowUpID], 
+    [FollowUpWithSynonymData].[PatientMRN] AS [PatientMRN], 
+    [FollowUpWithSynonymData].[AccessionNumber] AS [AccessionNumber], 
+    [FollowUpWithSynonymData].[ExamType] AS [ExamType], 
+    [FollowUpWithSynonymData].[FollowUpdate] AS [FollowUpdate], 
+    [FollowUpWithSynonymData].[FollowUpExamID] AS [FollowUpExamID], 
+    [FollowUpWithSynonymData].[FollowUpCode] AS [FollowUpCode], 
+    [FollowUpWithSynonymData].[PatientFirstName] AS [PatientFirstName], 
+    [FollowUpWithSynonymData].[PatientLastName] AS [PatientLastName], 
+    [FollowUpWithSynonymData].[PatientHomePhone] AS [PatientHomePhone], 
+    [FollowUpWithSynonymData].[PatientMobilePhone] AS [PatientMobilePhone], 
+    [FollowUpWithSynonymData].[ReferrerFirstName] AS [ReferrerFirstName], 
+    [FollowUpWithSynonymData].[ReferrerLastName] AS [ReferrerLastName], 
+    [FollowUpWithSynonymData].[ReferrerPhone] AS [ReferrerPhone], 
+    [FollowUpWithSynonymData].[ReferrerMobilePhone] AS [ReferrerMobilePhone], 
+    [FollowUpWithSynonymData].[FollowUpStatus] AS [FollowUpStatus], 
+    [FollowUpWithSynonymData].[Report] AS [Report]
+    FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DashboardEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FollowUp" EntityType="DashboardModel.FollowUp" />
+          <EntitySet Name="FollowUpStatus" EntityType="DashboardModel.FollowUpStatus" />
+          <EntitySet Name="FollowUpWithSynonymData" EntityType="DashboardModel.FollowUpWithSynonymData" />
+          <EntitySet Name="Exam" EntityType="DashboardModel.Exam" />
+        </EntityContainer>
+        <EntityType Name="FollowUp">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+          </Key>
+          <Property Name="FollowUpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+          <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="FollowUpExamID" Type="Int64" />
+          <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FollowUpStatus">
+          <Key>
+            <PropertyRef Name="FollowUpStatusID" />
+          </Key>
+          <Property Name="FollowUpStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FollowUpStatus1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FollowUpWithSynonymData">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+          </Key>
+          <Property Name="FollowUpID" Type="Int32" Nullable="false" />
+          <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+          <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FollowUpExamID" Type="Int64" />
+          <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PatientFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpStatus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PatientHomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="Int64" Nullable="false" />
+          <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientMRN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DashboardModelStoreContainer" CdmEntityContainer="DashboardEntities">
+          <EntitySetMapping Name="FollowUp">
+            <EntityTypeMapping TypeName="DashboardModel.FollowUp">
+              <MappingFragment StoreEntitySet="FollowUp">
+                <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+                <ScalarProperty Name="FollowUpExamID" ColumnName="FollowUpExamID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+                <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+                <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+                <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+                <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+                <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FollowUpStatus">
+            <EntityTypeMapping TypeName="DashboardModel.FollowUpStatus">
+              <MappingFragment StoreEntitySet="FollowUpStatus">
+                <ScalarProperty Name="FollowUpStatus1" ColumnName="FollowUpStatus" />
+                <ScalarProperty Name="FollowUpStatusID" ColumnName="FollowUpStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FollowUpWithSynonymData">
+            <EntityTypeMapping TypeName="DashboardModel.FollowUpWithSynonymData">
+              <MappingFragment StoreEntitySet="FollowUpWithSynonymData">
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="ReferrerMobilePhone" ColumnName="ReferrerMobilePhone" />
+                <ScalarProperty Name="ReferrerPhone" ColumnName="ReferrerPhone" />
+                <ScalarProperty Name="PatientMobilePhone" ColumnName="PatientMobilePhone" />
+                <ScalarProperty Name="PatientHomePhone" ColumnName="PatientHomePhone" />
+                <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
+                <ScalarProperty Name="ReferrerLastName" ColumnName="ReferrerLastName" />
+                <ScalarProperty Name="ReferrerFirstName" ColumnName="ReferrerFirstName" />
+                <ScalarProperty Name="PatientLastName" ColumnName="PatientLastName" />
+                <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
+                <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+                <ScalarProperty Name="FollowUpExamID" ColumnName="FollowUpExamID" />
+                <ScalarProperty Name="FollowUpdate" ColumnName="FollowUpdate" />
+                <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+                <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+                <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+                <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exam">
+            <EntityTypeMapping TypeName="DashboardModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

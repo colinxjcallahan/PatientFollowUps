@@ -1,0 +1,72 @@
+﻿@model PatientFollowUp.Web.Models.PatientDetailsViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Patient Details</title>
+        <link href="~/styles.css" rel="stylesheet" />
+        <style>
+            .first-column {
+                width: 33%;
+                float: left;
+                background-color: lightblue;
+            }
+
+            .second-column {
+                width: 33%;
+                float: left;
+                background-color: lightcoral;
+            }
+
+            .third-column {
+                width: 33%;
+                float: left;
+                background-color: lightgoldenrodyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="modal-dialog" style="width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Patient Information</h4>
+                </div>
+                <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
+                    <div id="topBox" style="width: 100%;">
+                        <div class="first-column">
+                            First Column
+                        </div>
+                        <div class="second-column">
+                            Second Column
+                        </div>
+                        <div class="third-column">
+                            Third Column
+                        </div>
+                    </div>
+                    <div id="topBox"  style="clear: both; width: 100%;">
+                        
+                        <div style="width: 50%; float: left;  background-color: lightskyblue;">Big box1</div>
+                        <div style="width: 50%; float: left;  background-color: lightgray;">
+                            <div>TOP </div>
+                            <div>Bottom</div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="modal-footer" style="position: relative; clear: both;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

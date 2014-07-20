@@ -12,13 +12,12 @@ namespace PatientFollowUp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Exam
+    public partial class FollowUpExam
     {
-        public long ExamID { get; set; }
-        public string ExamType { get; set; }
-        public string Description { get; set; }
-        public string PatientMRN { get; set; }
-        public Nullable<System.DateTime> ScheduleDate { get; set; }
-        public string Status { get; set; }
+        public int Id { get; set; }
+        public int FollowUpId { get; set; }
+        public long FollowUpExamId { get; set; }
+    
+        public virtual FollowUp FollowUp { get; set; }
     }
 }

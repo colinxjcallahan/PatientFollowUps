@@ -19,17 +19,16 @@ namespace PatientFollowUp.Data
         public long AccessionNumber { get; set; }
         public string ExamType { get; set; }
         public System.DateTime FollowUpdate { get; set; }
-        public Nullable<long> FollowUpExamID { get; set; }
         public string FollowUpCode { get; set; }
         public string PatientFirstName { get; set; }
         public string PatientLastName { get; set; }
-        public string ReferrerFirstName { get; set; }
-        public string ReferrerLastName { get; set; }
-        public string FollowUpStatus { get; set; }
         public string PatientHomePhone { get; set; }
         public string PatientMobilePhone { get; set; }
+        public string ReferrerFirstName { get; set; }
+        public string ReferrerLastName { get; set; }
         public string ReferrerPhone { get; set; }
         public string ReferrerMobilePhone { get; set; }
+        public string FollowUpStatus { get; set; }
         public string Report { get; set; }
     }
 }

@@ -147,6 +147,7 @@
     <Compile Include="Models\FollowUpViewModel.cs" />
     <Compile Include="Models\OpenFollowUpsViewModel.cs" />
     <Compile Include="Models\PatientDetailsViewModel.cs" />
+    <Compile Include="Models\SaveFollowUpUpdatesInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

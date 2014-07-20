@@ -29,6 +29,42 @@
                 background-color: lightgoldenrodyellow;
             }
         </style>
+        <script>
+            $(document).ready(function() {
+                $("#btn_submit").click(function() {
+
+                    var followUpExamIds = [];
+                    $('input[name="cb_exam"]:checked').each(function() {
+                        var examId = $(this).val().replace("cb_exam_", "");
+                        followUpExamIds.push(examId);
+                    });
+
+                    var noRelevantFollowupFound = $('input[name ="no_relevant_followup"]').is(":checked");
+                    var comments = $("#comments").val();
+
+                    var followUpId = $("#FollowUpId").val();
+
+                    $.ajax({
+                        url: "/FollowUp/SaveFollowUpUpdates",
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(
+                        {
+                            "FollowUpId": followUpId,
+                            "FollowUpExamIds": followUpExamIds,
+                            "NoRelevantFollowupFound": noRelevantFollowupFound,
+                            "Comments": comments
+                        })
+
+
+                    }).fail(function (jqXHR, textStatus) {
+                        alert(textStatus);
+
+                    });
+                });
+
+            });
+        </script>
     </head>
     <body>
         <div class="modal-dialog" style="width: 800px;">
@@ -42,6 +78,7 @@
                 <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
                     <div id="topBox" style="width: 100%;">
                         <div class="first-column">
+                            <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID"/>
                             <table style="width: 100%">
                                 <tr>
                                     <td>Name: @Model.FollowUp.PatientFirstName @Model.FollowUp.PatientLastName</td>
@@ -91,22 +128,24 @@
                                           @foreach (var exam in Model.Exams)
                                           {
                                               <tr data-row-key="@exam.ExamID">
-                                                  <td>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
+                                                  <td><input type="checkbox" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
                                                   <td>@exam.ExamType</td>
                                                   <td>@exam.Description</td>
                                               </tr>
                                           }
                                       </table>
                             </div>
-                            <div>Bottom</div>
+                            <div>
+                                <input type="checkbox" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>
+                                Comments <textarea id="comments" rows="4" cols="50"></textarea>
+                            </div>
                         </div>
 
                     </div>
                 </div>
                 
                 <div class="modal-footer" style="position: relative; clear: both;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button id="btn_submit" type="button" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>

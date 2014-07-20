@@ -5,6 +5,7 @@
     <EntitySet Name="FollowUpStatus" EntityType="DashboardModel.FollowUpStatus" />
     <EntitySet Name="FollowUpWithSynonymData" EntityType="DashboardModel.FollowUpWithSynonymData" />
     <EntitySet Name="Exam" EntityType="DashboardModel.Exam" />
+    <EntitySet Name="FollowUpExams" EntityType="DashboardModel.FollowUpExams" />
   </EntityContainer>
   <EntityType Name="FollowUp">
     <Key>
@@ -19,6 +20,8 @@
     <Property Name="StatusID" Type="Int32" Nullable="false" />
     <Property Name="FollowUpExamID" Type="Int64" />
     <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
+    <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="FollowUpStatus">
     <Key>
@@ -47,7 +50,7 @@
     <Property Name="PatientMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ReferrerPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ReferrerMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Report" Type="String" MaxLength="33" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="Exam">
     <Key>
@@ -59,5 +62,13 @@
     <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PatientMRN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FollowUpExams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowUpId" Type="Int32" Nullable="false" />
+    <Property Name="FollowUpExamId" Type="Int64" Nullable="false" />
   </EntityType>
 </Schema>

@@ -9,6 +9,7 @@ namespace PatientFollowUp.Web
         {
             AutoMapper.Mapper.CreateMap<FollowUpWithSynonymData, FollowUpViewModel>();
             AutoMapper.Mapper.CreateMap<Exam, ExamViewModel>();
+            AutoMapper.Mapper.CreateMap<SaveFollowUpUpdatesInputModel, FollowUp>();
 
         }
     }

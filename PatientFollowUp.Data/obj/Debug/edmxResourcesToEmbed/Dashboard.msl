@@ -4,8 +4,9 @@
     <EntitySetMapping Name="FollowUp">
       <EntityTypeMapping TypeName="DashboardModel.FollowUp">
         <MappingFragment StoreEntitySet="FollowUp">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
           <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
-          <ScalarProperty Name="FollowUpExamID" ColumnName="FollowUpExamID" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
           <ScalarProperty Name="ExamType" ColumnName="ExamType" />
@@ -56,6 +57,15 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExamType" ColumnName="ExamType" />
           <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpExams">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpExams">
+        <MappingFragment StoreEntitySet="FollowUpExams">
+          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+          <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

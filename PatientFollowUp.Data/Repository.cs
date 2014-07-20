@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -32,6 +33,15 @@ namespace PatientFollowUp.Data
             DbSet<T> set = _dbContext.Set<T>();
 
             return set.Where(predicate);
+        }
+
+        public void Save<T>(T objectToSave) where T : class 
+        {
+            DbSet<T> set = _dbContext.Set<T>();
+
+            set.AddOrUpdate(objectToSave);
+
+            _dbContext.SaveChanges();
         }
     }
 }

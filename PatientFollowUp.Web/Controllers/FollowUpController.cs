@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using PatientFollowUp.Data;
 using PatientFollowUp.Web.App_Data;
@@ -37,6 +39,29 @@ namespace PatientFollowUp.Web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public ActionResult SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
+        {
+            var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
+            existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
+            existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowupFound;
+
+            if (saveFollowUpUpdatesInputModel.FollowUpExamIds != null)
+            {
+                foreach (var followUpExamId in saveFollowUpUpdatesInputModel.FollowUpExamIds)
+                {
+                    existingFollowUp.FollowUpExams.Add(new FollowUpExam
+                    {
+                        FollowUpExamId = followUpExamId,
+                        FollowUp = existingFollowUp,
+                    });
+                }
+            }
+
+            _repository.Save<FollowUp>(existingFollowUp);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

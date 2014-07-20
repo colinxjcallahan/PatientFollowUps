@@ -12,9 +12,9 @@ namespace PatientFollowUp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class FollowUpStatus
+    public partial class FollowUpStatu
     {
         public int FollowUpStatusID { get; set; }
-        public string FollowUpStatus1 { get; set; }
+        public string FollowUpStatus { get; set; }
     }
 }

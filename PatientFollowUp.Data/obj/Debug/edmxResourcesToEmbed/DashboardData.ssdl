@@ -54,7 +54,6 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
     <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="FollowUpdate" Type="datetime" Nullable="false" />
-    <Property Name="FollowUpExamID" Type="bigint" />
     <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
     <Property Name="PatientFirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="PatientLastName" Type="nvarchar" MaxLength="50" />
@@ -67,6 +66,18 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Report" Type="varchar" MaxLength="33" Nullable="false" />
   </EntityType>
+  <Association Name="FK_FollowUpExams_FollowUp">
+    <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
+    <End Role="FollowUpExams" Type="Self.FollowUpExams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FollowUp">
+        <PropertyRef Name="FollowUpID" />
+      </Principal>
+      <Dependent Role="FollowUpExams">
+        <PropertyRef Name="FollowUpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DashboardModelStoreContainer">
     <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpExams" EntityType="Self.FollowUpExams" Schema="dbo" store:Type="Tables" />
@@ -88,7 +99,6 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[AccessionNumber] AS [AccessionNumber], 
     [FollowUpWithSynonymData].[ExamType] AS [ExamType], 
     [FollowUpWithSynonymData].[FollowUpdate] AS [FollowUpdate], 
-    [FollowUpWithSynonymData].[FollowUpExamID] AS [FollowUpExamID], 
     [FollowUpWithSynonymData].[FollowUpCode] AS [FollowUpCode], 
     [FollowUpWithSynonymData].[PatientFirstName] AS [PatientFirstName], 
     [FollowUpWithSynonymData].[PatientLastName] AS [PatientLastName], 
@@ -102,5 +112,9 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[Report] AS [Report]
     FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_FollowUpExams_FollowUp" Association="Self.FK_FollowUpExams_FollowUp">
+      <End Role="FollowUp" EntitySet="FollowUp" />
+      <End Role="FollowUpExams" EntitySet="FollowUpExams" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

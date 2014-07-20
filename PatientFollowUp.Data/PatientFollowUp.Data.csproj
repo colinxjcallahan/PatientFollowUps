@@ -65,35 +65,40 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dashboard.Context.cs">
+    <Compile Include="DashboardData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Dashboard.Context.tt</DependentUpon>
+      <DependentUpon>DashboardData.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.cs">
+    <Compile Include="DashboardData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Dashboard.tt</DependentUpon>
+      <DependentUpon>DashboardData.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.Designer.cs">
+    <Compile Include="DashboardData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Dashboard.edmx</DependentUpon>
+      <DependentUpon>DashboardData.edmx</DependentUpon>
     </Compile>
     <Compile Include="Exam.cs">
-      <DependentUpon>Dashboard.tt</DependentUpon>
+      <DependentUpon>DashboardData.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUp.cs">
-      <DependentUpon>Dashboard.tt</DependentUpon>
+      <DependentUpon>DashboardData.tt</DependentUpon>
     </Compile>
-    <Compile Include="FollowUpStatus.cs">
-      <DependentUpon>Dashboard.tt</DependentUpon>
+    <Compile Include="FollowUpExam.cs">
+      <DependentUpon>DashboardData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FollowUpStatu.cs">
+      <DependentUpon>DashboardData.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUpWithSynonymData.cs">
-      <DependentUpon>Dashboard.tt</DependentUpon>
+      <DependentUpon>DashboardData.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,22 +106,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Dashboard.edmx">
+    <EntityDeploy Include="DashboardData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Dashboard.Designer.cs</LastGenOutput>
+      <LastGenOutput>DashboardData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Dashboard.Context.tt">
+    <Content Include="DashboardData.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Dashboard.edmx</DependentUpon>
-      <LastGenOutput>Dashboard.Context.cs</LastGenOutput>
+      <DependentUpon>DashboardData.edmx</DependentUpon>
+      <LastGenOutput>DashboardData.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Dashboard.edmx.diagram">
-      <DependentUpon>Dashboard.edmx</DependentUpon>
+    <Content Include="DashboardData.edmx.diagram">
+      <DependentUpon>DashboardData.edmx</DependentUpon>
     </Content>
-    <Content Include="Dashboard.tt">
+    <Content Include="DashboardData.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Dashboard.edmx</DependentUpon>
-      <LastGenOutput>Dashboard.cs</LastGenOutput>
+      <DependentUpon>DashboardData.edmx</DependentUpon>
+      <LastGenOutput>DashboardData.cs</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

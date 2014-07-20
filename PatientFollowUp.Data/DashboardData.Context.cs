@@ -25,9 +25,10 @@ namespace PatientFollowUp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<FollowUp> FollowUp { get; set; }
-        public virtual DbSet<FollowUpStatus> FollowUpStatus { get; set; }
-        public virtual DbSet<FollowUpWithSynonymData> FollowUpWithSynonymData { get; set; }
-        public virtual DbSet<Exam> Exam { get; set; }
+        public virtual DbSet<FollowUp> FollowUps { get; set; }
+        public virtual DbSet<FollowUpExam> FollowUpExams { get; set; }
+        public virtual DbSet<FollowUpStatu> FollowUpStatus { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
+        public virtual DbSet<FollowUpWithSynonymData> FollowUpWithSynonymDatas { get; set; }
     }
 }

@@ -90,6 +90,7 @@
     <Compile Include="when_requesting_the_open_follow_ups_page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="when_requesting_the_patient_details_partial_view.cs" />
+    <Compile Include="when_saving_followup_details.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PatientFollowUp.Data\PatientFollowUp.Data.csproj">
@@ -102,7 +103,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

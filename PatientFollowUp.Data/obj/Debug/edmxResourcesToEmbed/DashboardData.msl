@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DashboardModelStoreContainer" CdmEntityContainer="DashboardEntities">
+    <EntitySetMapping Name="FollowUps">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUp">
+        <MappingFragment StoreEntitySet="FollowUp">
+          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpExams">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpExam">
+        <MappingFragment StoreEntitySet="FollowUpExams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
+          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpStatus">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpStatu">
+        <MappingFragment StoreEntitySet="FollowUpStatus">
+          <ScalarProperty Name="FollowUpStatusID" ColumnName="FollowUpStatusID" />
+          <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exams">
+      <EntityTypeMapping TypeName="DashboardModel.Exam">
+        <MappingFragment StoreEntitySet="Exam">
+          <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpWithSynonymDatas">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpWithSynonymData">
+        <MappingFragment StoreEntitySet="FollowUpWithSynonymData">
+          <ScalarProperty Name="Report" ColumnName="Report" />
+          <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
+          <ScalarProperty Name="ReferrerMobilePhone" ColumnName="ReferrerMobilePhone" />
+          <ScalarProperty Name="ReferrerPhone" ColumnName="ReferrerPhone" />
+          <ScalarProperty Name="ReferrerLastName" ColumnName="ReferrerLastName" />
+          <ScalarProperty Name="ReferrerFirstName" ColumnName="ReferrerFirstName" />
+          <ScalarProperty Name="PatientMobilePhone" ColumnName="PatientMobilePhone" />
+          <ScalarProperty Name="PatientHomePhone" ColumnName="PatientHomePhone" />
+          <ScalarProperty Name="PatientLastName" ColumnName="PatientLastName" />
+          <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
+          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="FollowUpdate" ColumnName="FollowUpdate" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

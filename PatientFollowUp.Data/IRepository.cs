@@ -12,5 +12,7 @@ namespace PatientFollowUp.Data
         T GetById<T>(int id) where T : class;
 
         IEnumerable<T> Find<T>(Expression<Func<T, bool>> predicate) where T : class;
+
+        void Save<T>(T objectToSave) where T : class;
     }
 }

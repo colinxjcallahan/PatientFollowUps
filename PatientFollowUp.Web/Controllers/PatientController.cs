@@ -22,7 +22,7 @@ namespace PatientFollowUp.Web.Controllers
             var followUp = _repository.GetById<FollowUpWithSynonymData>(followUpId);
             var followUpViewModel = _mapper.Map<FollowUpWithSynonymData, FollowUpViewModel>(followUp);
 
-            var exams = _repository.Find<Exam>(x => x.PatientMRN == followUp.PatientMRN);
+            var exams = _repository.Find<Exam>(x => x.PatientMRN == followUp.PatientMRN && x.CompletionDate > followUp.FollowUpDate);
             var examViewModels = exams.Select(x => _mapper.Map<Exam, ExamViewModel>(x));
 
             var patientDetailsViewModel = new PatientDetailsViewModel

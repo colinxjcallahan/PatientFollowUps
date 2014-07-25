@@ -33,6 +33,7 @@ namespace PatientFollowUp.Specs
             _followUpReturnedFromRepository = new FollowUpWithSynonymData
             {
                 PatientMRN = "some patient mrn",
+                Report = "some report info",
             };
             _repository.Setup(x => x.GetById<FollowUpWithSynonymData>(It.IsAny<int>()))
                 .Returns(_followUpReturnedFromRepository);
@@ -76,12 +77,6 @@ namespace PatientFollowUp.Specs
             List<ExamViewModel> exams = ((PatientDetailsViewModel) ((PartialViewResult) result).Model).Exams;
 
             Assert.AreEqual(_examReturnedFromMapper, exams.First());
-        }
-
-        [TestMethod]
-        public void it_should_display_the_providers_notes()
-        {
-            throw new NotImplementedException("Don't forget");
         }
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PatientFollowUp.Data;
-using PatientFollowUp.Web.App_Data;
 using PatientFollowUp.Web.Controllers;
 using PatientFollowUp.Web.Models;
 
@@ -14,58 +10,46 @@ namespace PatientFollowUp.Specs
     [TestClass]
     public class when_saving_followup_details
     {
-        private Mock<IDate> _date;
         private FollowUpController _followUpController;
-        private Mock<IMapper> _mapper;
+        private FollowUp _followUpPassedToRepository;
+        private FollowUp _followUpReturnedByRepository;
         private Mock<IRepository> _repository;
         private SaveFollowUpUpdatesInputModel _saveFollowUpUpdatesInputModel;
-        private FollowUp _followUpReturnedFromMapper;
-        private FollowUp _followUpPassedToRepository;
 
         [TestInitialize]
         public void Initialize()
         {
             _saveFollowUpUpdatesInputModel = new SaveFollowUpUpdatesInputModel
             {
-                Comments = "some comments",
-                FollowUpExamIds = new List<Int64>
-                {
-                    112233,
-                    223344,
-                },
-                NoRelevantFollowupFound = true,
+                Comments = "some new comments",
+                FollowUpExamId = 89098,
+                NoRelevantFollowUpFound = false,
+                FollowUpId = 890,
             };
 
-            _mapper = new Mock<IMapper>();
-            _followUpReturnedFromMapper = new FollowUp
-            {
-                 Comments = "some comments",
-            };
-            _mapper.Setup(x => x.Map<SaveFollowUpUpdatesInputModel, FollowUp>(_saveFollowUpUpdatesInputModel))
-                .Returns(_followUpReturnedFromMapper);
-            
-            
             _repository = new Mock<IRepository>();
-            
-            _repository.Setup(x => x.Save<FollowUp>(_followUpReturnedFromMapper))
+
+            _followUpReturnedByRepository = new FollowUp
+            {
+                Comments = "",
+                FollowUpExamId = 0,
+                NoRelevantFollowUpFound = false,
+                FollowUpID = 890,
+            };
+            _repository.Setup(x => x.GetById<FollowUp>(_saveFollowUpUpdatesInputModel.FollowUpId))
+                .Returns(_followUpReturnedByRepository);
+
+            _repository.Setup(x => x.Save(It.IsAny<FollowUp>()))
                 .Callback<FollowUp>(x => _followUpPassedToRepository = x);
 
-            _followUpController = new FollowUpController(_repository.Object, _mapper.Object, null);
+            _followUpController = new FollowUpController(_repository.Object, null, null, null);
         }
 
         [TestMethod]
         public void it_should_save_the_followup_details()
         {
-            ActionResult result = _followUpController.SaveFollowUpUpdates(_saveFollowUpUpdatesInputModel);
-            Assert.AreEqual(_followUpReturnedFromMapper.Comments, _followUpPassedToRepository.Comments);
-        }
-
-        [TestMethod]
-        public void it_should_save_the_followup_exams()
-        {
-            ActionResult result = _followUpController.SaveFollowUpUpdates(_saveFollowUpUpdatesInputModel);
-
-            Assert.AreEqual(_saveFollowUpUpdatesInputModel.FollowUpExamIds.First(), _followUpPassedToRepository.FollowUpExams.First().FollowUpExamId);
+            var result = _followUpController.SaveFollowUpUpdates(_saveFollowUpUpdatesInputModel);
+            Assert.AreEqual(_saveFollowUpUpdatesInputModel.Comments, _followUpPassedToRepository.Comments);
         }
     }
 }

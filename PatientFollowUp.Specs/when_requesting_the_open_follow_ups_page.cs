@@ -35,19 +35,19 @@ namespace PatientFollowUp.Specs
                     new FollowUpWithSynonymData
                     {
                         FollowUpStatus = "Open",
-                        FollowUpdate = new DateTime(2014, 1, 2),
+                        FollowUpDate = new DateTime(2014, 1, 2),
                     },
 
                     new FollowUpWithSynonymData
                     {
                         FollowUpStatus = "Open",
-                        FollowUpdate = new DateTime(2013, 12, 31),
+                        FollowUpDate = new DateTime(2013, 12, 31),
                     },
 
                     new FollowUpWithSynonymData
                     {
                         FollowUpStatus = "Closed",
-                        FollowUpdate = new DateTime(2014, 1, 2),
+                        FollowUpDate = new DateTime(2014, 1, 2),
                     },
 
 
@@ -60,7 +60,7 @@ namespace PatientFollowUp.Specs
             _mapper.Setup(x => x.Map<FollowUpWithSynonymData, FollowUpViewModel>(It.IsAny<FollowUpWithSynonymData>()))
                 .Returns(new FollowUpViewModel());
 
-            _followUpController = new FollowUpController(_repository.Object, _mapper.Object, _date.Object);
+            _followUpController = new FollowUpController(_repository.Object, _mapper.Object, _date.Object, null);
         }
 
 
@@ -68,7 +68,7 @@ namespace PatientFollowUp.Specs
         public void it_should_return_a_list_of_follow_ups_that_are_open_and_past_the_follow_up_date()
         {
             ActionResult result = _followUpController.OpenFollowUps();
-            List<FollowUpViewModel> followUps = ((OpenFollowUpsViewModel) ((ViewResult) result).Model).FollowUps;
+            List<FollowUpViewModel> followUps = ((OpenFollowUpsViewModel)((ViewResult)result).Model).FollowUps;
 
             Assert.AreEqual(1, followUps.Count);
         }

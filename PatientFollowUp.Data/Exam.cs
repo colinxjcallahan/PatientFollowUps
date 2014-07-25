@@ -19,6 +19,7 @@ namespace PatientFollowUp.Data
         public string Description { get; set; }
         public string PatientMRN { get; set; }
         public Nullable<System.DateTime> ScheduleDate { get; set; }
+        public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Status { get; set; }
     }
 }

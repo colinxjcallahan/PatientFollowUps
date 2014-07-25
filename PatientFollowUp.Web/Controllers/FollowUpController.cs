@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using PatientFollowUp.Data;
 using PatientFollowUp.Web.App_Data;
@@ -15,12 +15,14 @@ namespace PatientFollowUp.Web.Controllers
         private readonly IDate _date;
         private readonly IMapper _mapper;
         private readonly IRepository _repository;
+        private readonly IValidator _validator;
 
-        public FollowUpController(IRepository repository, IMapper mapper, IDate date)
+        public FollowUpController(IRepository repository, IMapper mapper, IDate date, IValidator validator)
         {
             _repository = repository;
             _mapper = mapper;
             _date = date;
+            _validator = validator;
         }
 
         public ActionResult OpenFollowUps()
@@ -29,7 +31,7 @@ namespace PatientFollowUp.Web.Controllers
 
             List<FollowUpWithSynonymData> followUps =
                 _repository.GetAll<FollowUpWithSynonymData>()
-                    .Where(x => x.FollowUpStatus == "Open" && x.FollowUpdate < currentDate)
+                    .Where(x => x.FollowUpStatus == "Open" && x.FollowUpDate < currentDate)
                     .ToList();
 
 
@@ -41,27 +43,28 @@ namespace PatientFollowUp.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
+        public HttpResponseMessage SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
         {
-            var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
-            existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
-            existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowupFound;
-
-            if (saveFollowUpUpdatesInputModel.FollowUpExamIds != null)
+            ValidationResult validationResult = _validator.Validate(saveFollowUpUpdatesInputModel);
+            if (!validationResult.IsValid)
             {
-                foreach (var followUpExamId in saveFollowUpUpdatesInputModel.FollowUpExamIds)
+                var responseMessage = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                foreach (string error in validationResult.Errors)
                 {
-                    existingFollowUp.FollowUpExams.Add(new FollowUpExam
-                    {
-                        FollowUpExamId = followUpExamId,
-                        FollowUp = existingFollowUp,
-                    });
+                    responseMessage.ReasonPhrase += " " + error;
                 }
+                return responseMessage;
             }
 
-            _repository.Save<FollowUp>(existingFollowUp);
+            var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
+            existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
+            existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
+
+            _repository.Save(existingFollowUp);
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }

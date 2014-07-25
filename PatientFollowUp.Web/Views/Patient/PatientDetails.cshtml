@@ -29,20 +29,16 @@
                 background-color: lightgoldenrodyellow;
             }
         </style>
-        <script>
+        @*<script>
             $(document).ready(function() {
                 $("#btn_submit").click(function() {
 
-                    var followUpExamIds = [];
-                    $('input[name="cb_exam"]:checked').each(function() {
-                        var examId = $(this).val().replace("cb_exam_", "");
-                        followUpExamIds.push(examId);
-                    });
-
+                    var followUpExamId = $('input:radio[name="cb_exam"]:checked').val().replace('cb_exam_', '');
                     var noRelevantFollowupFound = $('input[name ="no_relevant_followup"]').is(":checked");
                     var comments = $("#comments").val();
-
                     var followUpId = $("#FollowUpId").val();
+
+                    alert(followUpExamId);
 
                     $.ajax({
                         url: "/FollowUp/SaveFollowUpUpdates",
@@ -51,20 +47,20 @@
                         data: JSON.stringify(
                         {
                             "FollowUpId": followUpId,
-                            "FollowUpExamIds": followUpExamIds,
+                            "FollowUpExamId": followUpExamId,
                             "NoRelevantFollowupFound": noRelevantFollowupFound,
                             "Comments": comments
                         })
 
-
-                    }).fail(function (jqXHR, textStatus) {
+            
+                    }).fail(function(jqXHR, textStatus) {
                         alert(textStatus);
 
                     });
                 });
 
             });
-        </script>
+        </script>*@
     </head>
     <body>
         <div class="modal-dialog" style="width: 800px;">
@@ -115,7 +111,7 @@
                     <div id="topBox"  style="clear: both; width: 100%;">
                         
                         <div style="width: 50%; float: left;  background-color: lightskyblue;">
-                            <textarea aria-readonly="true" style="width: 100%; height: 400px; resize: none;">@Model.FollowUp.Report</textarea>
+                            @Html.Raw(Model.FollowUp.Report)
                         </div>
                         <div style="width: 50%; float: left;  background-color: lightgray;">
                             <div>
@@ -128,7 +124,7 @@
                                           @foreach (var exam in Model.Exams)
                                           {
                                               <tr data-row-key="@exam.ExamID">
-                                                  <td><input type="checkbox" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
+                                                  <td><input type="radio" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
                                                   <td>@exam.ExamType</td>
                                                   <td>@exam.Description</td>
                                               </tr>

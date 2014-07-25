@@ -25,6 +25,7 @@ namespace PatientFollowUp.Web
             container.RegisterType<IMapper, AutoMapperMapper>();
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<IDate, Date>();
+            container.RegisterType<IValidator, SaveFollowUpUpdatesInputModelValidator>();
 
             return container;
         }

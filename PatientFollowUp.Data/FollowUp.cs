@@ -14,11 +14,6 @@ namespace PatientFollowUp.Data
     
     public partial class FollowUp
     {
-        public FollowUp()
-        {
-            this.FollowUpExams = new HashSet<FollowUpExam>();
-        }
-    
         public int FollowUpID { get; set; }
         public string PatientMRN { get; set; }
         public string ReferrerID { get; set; }
@@ -29,7 +24,6 @@ namespace PatientFollowUp.Data
         public string FollowUpCode { get; set; }
         public Nullable<bool> NoRelevantFollowUpFound { get; set; }
         public string Comments { get; set; }
-    
-        public virtual ICollection<FollowUpExam> FollowUpExams { get; set; }
+        public Nullable<long> FollowUpExamId { get; set; }
     }
 }

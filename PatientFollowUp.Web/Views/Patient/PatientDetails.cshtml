@@ -29,16 +29,18 @@
                 background-color: lightgoldenrodyellow;
             }
         </style>
-        @*<script>
+        <script>
             $(document).ready(function() {
-                $("#btn_submit").click(function() {
+                $("#btn_submit").click(function () {
 
-                    var followUpExamId = $('input:radio[name="cb_exam"]:checked').val().replace('cb_exam_', '');
+                    var followUpExamId = $('input:radio[name="cb_exam"]:checked').val();
+                    if (followUpExamId) {
+                        followUpExamId = followUpExamId.replace('cb_exam_', '');
+                    }
                     var noRelevantFollowupFound = $('input[name ="no_relevant_followup"]').is(":checked");
                     var comments = $("#comments").val();
                     var followUpId = $("#FollowUpId").val();
 
-                    alert(followUpExamId);
 
                     $.ajax({
                         url: "/FollowUp/SaveFollowUpUpdates",
@@ -56,11 +58,16 @@
                     }).fail(function(jqXHR, textStatus) {
                         alert(textStatus);
 
+                    }).done(function() {
+                        
+                        $('#patientDetailModal').modal('hide');
+                        getOpenFollowUps();
+
                     });
                 });
 
             });
-        </script>*@
+        </script>
     </head>
     <body>
         <div class="modal-dialog" style="width: 800px;">

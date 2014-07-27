@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Date.cs" />
+    <Compile Include="App_Data\FollowUpStatusEnum.cs" />
     <Compile Include="App_Data\IDate.cs" />
     <Compile Include="App_Data\IMapper.cs" />
     <Compile Include="App_Data\IValidator.cs" />
@@ -201,6 +202,9 @@
     <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FollowUp\GetOpenFollowUps.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -24,7 +24,10 @@ namespace PatientFollowUp.Web.App_Data
     {
         public new ValidationResult Validate(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
         {
-            return new ValidationResult();
+            return new ValidationResult
+            {
+                IsValid = true,
+            };
         }
     }
 }

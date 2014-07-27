@@ -25,7 +25,7 @@ namespace PatientFollowUp.Web.Controllers
             _validator = validator;
         }
 
-        public ActionResult OpenFollowUps()
+        public ActionResult GetOpenFollowUps()
         {
             DateTime currentDate = _date.GetCurrentDate();
 
@@ -40,7 +40,13 @@ namespace PatientFollowUp.Web.Controllers
                 FollowUps = followUps.Select(x => _mapper.Map<FollowUpWithSynonymData, FollowUpViewModel>(x)).ToList(),
             };
 
-            return View(viewModel);
+            return PartialView(viewModel);
+
+        }
+
+        public ActionResult OpenFollowUps()
+        {
+            return View();
         }
 
         public HttpResponseMessage SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
@@ -58,6 +64,7 @@ namespace PatientFollowUp.Web.Controllers
 
             var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
 
+            existingFollowUp.StatusID = (int)FollowUpStatusEnum.Closed;
             existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;

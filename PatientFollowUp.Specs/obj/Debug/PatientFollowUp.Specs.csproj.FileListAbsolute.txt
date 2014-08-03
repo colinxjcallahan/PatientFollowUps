@@ -60,7 +60,6 @@ C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Web.WebPages
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\EntityFramework.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Web.Http.dll
-C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Unity.Mvc4.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Web.Http.WebHost.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Net.Http.Formatting.dll
@@ -82,7 +81,6 @@ C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Web.Http.Web
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\System.Net.Http.Formatting.xml
-C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\obj\Debug\PatientFollowUp.Specs.csprojResolveAssemblyReference.cache
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\obj\Debug\PatientFollowUp.Specs.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\obj\Debug\PatientFollowUp.Specs.pdb
@@ -102,3 +100,5 @@ C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\pt\FluentValidation
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\ru\FluentValidation.resources.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\sv\FluentValidation.resources.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\tr\FluentValidation.resources.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Unity.WebApi.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Newtonsoft.Json.xml

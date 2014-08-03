@@ -44,7 +44,7 @@
                     var followUpId = $("#FollowUpId").val();
 
                     $.ajax({
-                        url: "/FollowUp/SaveFollowUpUpdates",
+                        url: "../api/FollowUpApi/SaveFollowUpUpdates",
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
                         data: JSON.stringify(
@@ -59,10 +59,9 @@
                             200: function (jqXHR, textStatus) {
                                 alert('success:' + textStatus);
                             },
-                            400: function (xhr,textStatus, errorThrown) {
-                                alert('xhr.responseText: ' + xhr.responseText + 'textStatus: ' + textStatus + 'errorThrown: ' + errorThrown);
-
-
+                            400: function (xhr, textStatus, errorThrown) {
+                                var error = $.parseJSON(xhr.responseText);
+                                $("#message-box").html(error.Message);
                             },
                         }
                     });
@@ -82,6 +81,7 @@
                     <h4 class="modal-title" id="myModalLabel">Patient Information</h4>
                 </div>
                 <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
+                    <div id="message-box"></div>
                     <div id="topBox" style="width: 100%;">
                         <div class="first-column">
                             <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID"/>

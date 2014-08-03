@@ -1,22 +1,26 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
+using System.Web.Http;
 using PatientFollowUp.Data;
 using PatientFollowUp.Web.App_Data;
 using PatientFollowUp.Web.Models;
-using Unity.Mvc4;
+using Unity.WebApi;
 
 namespace PatientFollowUp.Web
 {
     public static class UnityConfig
     {
-        public static IUnityContainer Initialise()
+        public static IUnityContainer RegisterComponents()
         {
             IUnityContainer container = BuildUnityContainer();
 
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            DependencyResolver.SetResolver(new Unity.Mvc4.UnityDependencyResolver(container));
+
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
             return container;
         }
+
 
         private static IUnityContainer BuildUnityContainer()
         {

@@ -18,7 +18,7 @@ namespace PatientFollowUp.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutomapperConfig.RegisterMappings();
-            UnityConfig.Initialise();
+            UnityConfig.RegisterComponents();
         }
     }
 }

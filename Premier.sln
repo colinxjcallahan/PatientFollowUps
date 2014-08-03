@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientFollowUp.Web", "Pati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientFollowUp.Specs", "PatientFollowUp.Specs\PatientFollowUp.Specs.csproj", "{2D5F37BC-73A7-466A-80FC-BD3C168781C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientFollowUp.IntegrationTests", "PatientFollowUp.IntegrationTests\PatientFollowUp.IntegrationTests.csproj", "{263E41FE-C0EF-4A09-9602-9B4A5BEFE5D0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{2D5F37BC-73A7-466A-80FC-BD3C168781C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D5F37BC-73A7-466A-80FC-BD3C168781C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D5F37BC-73A7-466A-80FC-BD3C168781C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{263E41FE-C0EF-4A09-9602-9B4A5BEFE5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{263E41FE-C0EF-4A09-9602-9B4A5BEFE5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{263E41FE-C0EF-4A09-9602-9B4A5BEFE5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{263E41FE-C0EF-4A09-9602-9B4A5BEFE5D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

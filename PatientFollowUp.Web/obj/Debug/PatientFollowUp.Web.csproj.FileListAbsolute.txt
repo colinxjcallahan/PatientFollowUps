@@ -106,3 +106,13 @@ C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\pt\FluentValidation.resourc
 C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\ru\FluentValidation.resources.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\sv\FluentValidation.resources.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\tr\FluentValidation.resources.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\Unity.WebApi.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\Unity.Mvc3.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.Web.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.Web.Http.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\WebActivator.dll
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.xml
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.Web.xml
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\AttributeRouting.Web.Http.xml
+C:\Projects\PatientFollowUps\PatientFollowUp.Web\bin\WebActivator.pdb

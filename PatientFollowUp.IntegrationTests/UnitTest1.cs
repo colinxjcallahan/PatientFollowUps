@@ -26,9 +26,9 @@ namespace PatientFollowUp.IntegrationTests
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutomapperConfig.RegisterMappings();
-            UnityConfig.Initialise();
+            UnityConfig.RegisterComponents();
 
-            var container = UnityConfig.Initialise();
+            var container = UnityConfig.RegisterComponents();
 
             _repository = container.Resolve<IRepository>();
 

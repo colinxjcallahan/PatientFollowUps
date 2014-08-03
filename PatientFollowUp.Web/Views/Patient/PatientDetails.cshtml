@@ -58,12 +58,14 @@
                     }).fail(function(jqXHR, textStatus) {
                         alert(textStatus);
 
-                    }).done(function() {
+                    }).success(function() {
                         
                         $('#patientDetailModal').modal('hide');
                         getOpenFollowUps();
 
-                    });
+                    }.error(function(errorMessage) {
+                        alert(errorMessage);
+                    }));
                 });
 
             });

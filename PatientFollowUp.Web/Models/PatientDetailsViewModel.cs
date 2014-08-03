@@ -6,5 +6,6 @@ namespace PatientFollowUp.Web.Models
     {
         public FollowUpViewModel FollowUp { get; set; }
         public List<ExamViewModel> Exams { get; set; }
+        public List<FollowUpClosedReasonViewModel> FollowUpClosedReasons { get; set; }
     }
 }

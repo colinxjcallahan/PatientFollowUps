@@ -15,6 +15,7 @@
     <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
     <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
     <Property Name="FollowUpExamId" Type="Int64" />
+    <Property Name="FollowUpClosedReasonId" Type="Int32" />
   </EntityType>
   <EntityType Name="FollowUpStatu">
     <Key>
@@ -62,5 +63,13 @@
     <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatu" />
     <EntitySet Name="Exams" EntityType="Self.Exam" />
     <EntitySet Name="FollowUpWithSynonymDatas" EntityType="Self.FollowUpWithSynonymData" />
+    <EntitySet Name="FollowUpClosedReasons" EntityType="DashboardModel.FollowUpClosedReason" />
   </EntityContainer>
+  <EntityType Name="FollowUpClosedReason">
+    <Key>
+      <PropertyRef Name="FollowUpClosedReasonId" />
+    </Key>
+    <Property Name="FollowUpClosedReasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowUpClosedReasonDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

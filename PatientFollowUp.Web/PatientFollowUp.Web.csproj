@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="Models\AutoMapperMapper.cs" />
     <Compile Include="Models\ExamViewModel.cs" />
+    <Compile Include="Models\FollowUpClosedReasonViewModel.cs" />
     <Compile Include="Models\FollowUpViewModel.cs" />
     <Compile Include="Models\OpenFollowUpsViewModel.cs" />
     <Compile Include="Models\PatientDetailsViewModel.cs" />

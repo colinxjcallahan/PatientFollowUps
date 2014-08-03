@@ -25,10 +25,15 @@ namespace PatientFollowUp.Web.Controllers
             var exams = _repository.Find<Exam>(x => x.PatientMRN == followUp.PatientMRN && x.CompletionDate > followUp.FollowUpDate);
             var examViewModels = exams.Select(x => _mapper.Map<Exam, ExamViewModel>(x));
 
+            var followUpClosedReasons = _repository.GetAll<FollowUpClosedReason>().ToList();
+            var followUpClosedReasonViewModels =
+                followUpClosedReasons.Select(x => _mapper.Map<FollowUpClosedReason, FollowUpClosedReasonViewModel>(x));
+
             var patientDetailsViewModel = new PatientDetailsViewModel
             {
                 FollowUp = followUpViewModel,
                 Exams = examViewModels.ToList(),
+                FollowUpClosedReasons = followUpClosedReasonViewModels.ToList(),
             };
 
             return PartialView(patientDetailsViewModel);

@@ -15,6 +15,14 @@
     <Property Name="NoRelevantFollowUpFound" Type="bit" />
     <Property Name="Comments" Type="nvarchar" MaxLength="2000" />
     <Property Name="FollowUpExamId" Type="bigint" />
+    <Property Name="FollowUpClosedReasonId" Type="int" />
+  </EntityType>
+  <EntityType Name="FollowUpClosedReason">
+    <Key>
+      <PropertyRef Name="FollowUpClosedReasonId" />
+    </Key>
+    <Property Name="FollowUpClosedReasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FollowUpClosedReasonDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="FollowUpStatus">
     <Key>
@@ -63,6 +71,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
   </EntityType>
   <EntityContainer Name="DashboardModelStoreContainer">
     <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -15,14 +15,16 @@ namespace PatientFollowUp.Specs
     [TestClass]
     public class when_requesting_the_patient_details_partial_view
     {
+        private ExamViewModel _examReturnedFromMapper;
         private IEnumerable<Exam> _examsReturnedFromRepository;
+        private FollowUpClosedReasonViewModel _followUpClosedReasonReturnedByMapper;
+        private FollowUpClosedReason _followUpClosedReturnedByRepository;
         private int _followUpId;
         private FollowUpViewModel _followUpReturnedFromMapper;
         private FollowUpWithSynonymData _followUpReturnedFromRepository;
         private Mock<IMapper> _mapper;
         private PatientController _patientController;
         private Mock<IRepository> _repository;
-        private ExamViewModel _examReturnedFromMapper;
 
         [TestInitialize]
         public void Initialize()
@@ -43,7 +45,7 @@ namespace PatientFollowUp.Specs
                 new Exam(),
                 new Exam(),
             };
-            _repository.Setup(x => x.Find<Exam>(It.IsAny<Expression<Func<Exam, bool>>>()))
+            _repository.Setup(x => x.Find(It.IsAny<Expression<Func<Exam, bool>>>()))
                 .Returns(_examsReturnedFromRepository);
 
             _mapper = new Mock<IMapper>();
@@ -54,6 +56,19 @@ namespace PatientFollowUp.Specs
             _examReturnedFromMapper = new ExamViewModel();
             _mapper.Setup(x => x.Map<Exam, ExamViewModel>(It.IsAny<Exam>()))
                 .Returns(_examReturnedFromMapper);
+
+
+            _followUpClosedReturnedByRepository = new FollowUpClosedReason();
+            _repository.Setup(x => x.GetAll<FollowUpClosedReason>())
+                .Returns(new EnumerableQuery<FollowUpClosedReason>(new List<FollowUpClosedReason>
+                {
+                    _followUpClosedReturnedByRepository,
+                }));
+
+            _followUpClosedReasonReturnedByMapper = new FollowUpClosedReasonViewModel();
+            _mapper.Setup(
+                x => x.Map<FollowUpClosedReason, FollowUpClosedReasonViewModel>(_followUpClosedReturnedByRepository))
+                .Returns(_followUpClosedReasonReturnedByMapper);
 
 
             _patientController = new PatientController(_repository.Object, _mapper.Object);
@@ -77,6 +92,17 @@ namespace PatientFollowUp.Specs
             List<ExamViewModel> exams = ((PatientDetailsViewModel) ((PartialViewResult) result).Model).Exams;
 
             Assert.AreEqual(_examReturnedFromMapper, exams.First());
+        }
+
+        [TestMethod]
+        public void it_should_populate_the_follow_up_closed_reasons()
+        {
+            ActionResult result = _patientController.PatientDetails(_followUpId);
+
+            List<FollowUpClosedReasonViewModel> followUpClosedReasons =
+                ((PatientDetailsViewModel) ((PartialViewResult) result).Model).FollowUpClosedReasons;
+
+            Assert.AreEqual(_followUpClosedReasonReturnedByMapper, followUpClosedReasons.First());
         }
     }
 }

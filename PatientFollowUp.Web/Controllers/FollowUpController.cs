@@ -68,6 +68,7 @@ namespace PatientFollowUp.Web.Controllers
             existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
+            existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
 
             _repository.Save(existingFollowUp);
 

@@ -25,5 +25,6 @@ namespace PatientFollowUp.Data
         public Nullable<bool> NoRelevantFollowUpFound { get; set; }
         public string Comments { get; set; }
         public Nullable<long> FollowUpExamId { get; set; }
+        public Nullable<int> FollowUpClosedReasonId { get; set; }
     }
 }

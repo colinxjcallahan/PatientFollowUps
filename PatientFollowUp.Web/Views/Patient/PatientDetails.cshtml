@@ -28,6 +28,7 @@
                 float: left;
                 background-color: lightgoldenrodyellow;
             }
+
         </style>
         <script>
             $(document).ready(function() {
@@ -38,8 +39,10 @@
                         followUpExamId = followUpExamId.replace('cb_exam_', '');
                     }
                     var noRelevantFollowupFound = $('input[name ="no_relevant_followup"]').is(":checked");
+                    var followUpClosedReasonId = $("#FollowUpClosedReasonId").val();
                     var comments = $("#comments").val();
                     var followUpId = $("#FollowUpId").val();
+                    
 
 
                     $.ajax({
@@ -51,7 +54,8 @@
                             "FollowUpId": followUpId,
                             "FollowUpExamId": followUpExamId,
                             "NoRelevantFollowupFound": noRelevantFollowupFound,
-                            "Comments": comments
+                            "Comments": comments,
+                            "FollowUpClosedReasonId": followUpClosedReasonId,
                         })
 
             
@@ -125,30 +129,36 @@
                         <div style="width: 50%; float: left;  background-color: lightgray;">
                             <div>
                                 <table>
-                                          <tr>
-                                              <th>Exam Date</th>
-                                              <th>Exam Type</th>
-                                              <th>Exam Description</th>
-                                          </tr>
-                                          @foreach (var exam in Model.Exams)
-                                          {
-                                              <tr data-row-key="@exam.ExamID">
-                                                  <td><input type="radio" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
-                                                  <td>@exam.ExamType</td>
-                                                  <td>@exam.Description</td>
-                                              </tr>
-                                          }
-                                      </table>
+                                    <tr>
+                                        <th>Exam Date</th>
+                                        <th>Exam Type</th>
+                                        <th>Exam Description</th>
+                                    </tr>
+                                    @foreach (var exam in Model.Exams)
+                                    {
+                                        <tr data-row-key="@exam.ExamID">
+                                            <td><input type="radio" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
+                                            <td>@exam.ExamType</td>
+                                            <td>@exam.Description</td>
+                                        </tr>
+                                    }
+                                </table>
                             </div>
                             <div>
                                 <input type="checkbox" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>
+                                <select id="FollowUpClosedReasonId">
+                                    <option id="0">--No follow up selected reason</option>
+                                    @foreach (var followUpClosedReason in Model.FollowUpClosedReasons)
+                                    {
+                                        <option value="@followUpClosedReason.FollowUpClosedReasonId">@followUpClosedReason.FollowUpClosedReasonDescription</option>
+                                    }
+                                </select><br/>
                                 Comments <textarea id="comments" rows="4" cols="50"></textarea>
                             </div>
                         </div>
 
                     </div>
-                </div>
-                
+                </div>                
                 <div class="modal-footer" style="position: relative; clear: both;">
                     <button id="btn_submit" type="button" class="btn btn-primary">Submit</button>
                 </div>

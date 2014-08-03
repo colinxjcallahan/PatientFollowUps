@@ -88,6 +88,9 @@
     <Compile Include="FollowUp.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FollowUpClosedReason.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FollowUpStatu.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>

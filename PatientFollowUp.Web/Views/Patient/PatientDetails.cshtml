@@ -42,8 +42,6 @@
                     var followUpClosedReasonId = $("#FollowUpClosedReasonId").val();
                     var comments = $("#comments").val();
                     var followUpId = $("#FollowUpId").val();
-                    
-
 
                     $.ajax({
                         url: "/FollowUp/SaveFollowUpUpdates",
@@ -56,20 +54,19 @@
                             "NoRelevantFollowupFound": noRelevantFollowupFound,
                             "Comments": comments,
                             "FollowUpClosedReasonId": followUpClosedReasonId,
-                        })
+                        }),
+                        statusCode: {
+                            200: function (jqXHR, textStatus) {
+                                alert('success:' + textStatus);
+                            },
+                            400: function (xhr,textStatus, errorThrown) {
+                                alert('xhr.responseText: ' + xhr.responseText + 'textStatus: ' + textStatus + 'errorThrown: ' + errorThrown);
 
-            
-                    }).fail(function(jqXHR, textStatus) {
-                        alert(textStatus);
 
-                    }).success(function() {
-                        
-                        $('#patientDetailModal').modal('hide');
-                        getOpenFollowUps();
+                            },
+                        }
+                    });
 
-                    }.error(function(errorMessage) {
-                        alert(errorMessage);
-                    }));
                 });
 
             });

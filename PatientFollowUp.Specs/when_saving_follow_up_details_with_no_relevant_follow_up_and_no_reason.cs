@@ -1,13 +1,12 @@
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatientFollowUp.Web.App_Data;
-using PatientFollowUp.Web.Controllers;
 using PatientFollowUp.Web.Models;
 
 namespace PatientFollowUp.Specs
 {
     [TestClass]
-    public class when_saving_follow_up_details_without_checking_no_relevant_followup_found_and_no_followup_exam_id
+    public class when_saving_follow_up_details_with_no_relevant_follow_up_and_no_reason
     {
         private SaveFollowUpUpdatesInputModel _saveFollowUpUpdatesInputModel;
         private SaveFollowUpUpdatesInputModelValidator _saveFollowUpUpdatesInputModelValidator;
@@ -17,8 +16,8 @@ namespace PatientFollowUp.Specs
         {
             _saveFollowUpUpdatesInputModel = new SaveFollowUpUpdatesInputModel
             {
-                FollowUpExamId = 0,
-                NoRelevantFollowUpFound = false,
+                NoRelevantFollowUpFound = true,
+                FollowUpClosedReasonId = 0,
             };
             _saveFollowUpUpdatesInputModelValidator = new SaveFollowUpUpdatesInputModelValidator();
         }
@@ -26,15 +25,18 @@ namespace PatientFollowUp.Specs
         [TestMethod]
         public void it_should_not_be_valid()
         {
-            var validationResult = _saveFollowUpUpdatesInputModelValidator.Validate(_saveFollowUpUpdatesInputModel);
+            ValidationResult validationResult =
+                _saveFollowUpUpdatesInputModelValidator.Validate(_saveFollowUpUpdatesInputModel);
             Assert.IsFalse(validationResult.IsValid);
         }
 
         [TestMethod]
         public void it_should_return_an_error_message()
         {
-            var validationResult = _saveFollowUpUpdatesInputModelValidator.Validate(_saveFollowUpUpdatesInputModel);
-            Assert.AreEqual(validationResult.Errors.First(), "Either select an exam ID or select 'No Relevant Followup' and select a Reason");
+            ValidationResult validationResult =
+                _saveFollowUpUpdatesInputModelValidator.Validate(_saveFollowUpUpdatesInputModel);
+            Assert.AreEqual(validationResult.Errors.First(),
+                "You must select a reason when closing with no relevant exam found");
         }
     }
 }

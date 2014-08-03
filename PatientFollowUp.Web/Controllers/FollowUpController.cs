@@ -41,7 +41,6 @@ namespace PatientFollowUp.Web.Controllers
             };
 
             return PartialView(viewModel);
-
         }
 
         public ActionResult OpenFollowUps()
@@ -54,17 +53,19 @@ namespace PatientFollowUp.Web.Controllers
             ValidationResult validationResult = _validator.Validate(saveFollowUpUpdatesInputModel);
             if (!validationResult.IsValid)
             {
-                var responseMessage = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                foreach (string error in validationResult.Errors)
+                Response.StatusCode = (int) HttpStatusCode.BadRequest;
+
+                string errorMessage = validationResult.Errors.Aggregate(string.Empty, (current, error) => current + (", " + error));
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    responseMessage.ReasonPhrase += " " + error;
-                }
-                return responseMessage;
+                    ReasonPhrase = errorMessage,
+                    Content = new StringContent(errorMessage),
+                };
             }
 
             var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
 
-            existingFollowUp.StatusID = (int)FollowUpStatusEnum.Closed;
+            existingFollowUp.StatusID = (int) FollowUpStatusEnum.Closed;
             existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;

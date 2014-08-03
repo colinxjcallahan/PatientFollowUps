@@ -41,6 +41,10 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -94,7 +98,7 @@
     <Compile Include="when_saving_followup_details.cs" />
     <Compile Include="when_saving_followup_details_with_invalid_data.cs" />
     <Compile Include="when_saving_follow_up_details_without_checking_no_relevant_followup_found_and_no_followup_exam_id.cs" />
-    <Compile Include="when_saving_follow_up_details_with_no_relevant_follow_up_and_no_comments.cs" />
+    <Compile Include="when_saving_follow_up_details_with_no_relevant_follow_up_and_no_reason.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PatientFollowUp.Data\PatientFollowUp.Data.csproj">

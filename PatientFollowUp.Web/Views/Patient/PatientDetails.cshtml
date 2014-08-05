@@ -56,18 +56,21 @@
                             "FollowUpClosedReasonId": followUpClosedReasonId,
                         }),
                         statusCode: {
-                            200: function (jqXHR, textStatus) {
+                            200: function (xhr, textStatus) {
                                 alert('success:' + textStatus);
                             },
-                            400: function (xhr, textStatus, errorThrown) {
-                                var error = $.parseJSON(xhr.responseText);
-                                $("#message-box").html(error.Message);
+                            400: function (data) {
+
+                                var response = $.parseJSON(data.responseText);
+
+                                $.each(response.Errors, function(index, error) {
+
+                                    alert(error.Message);
+                                });
                             },
                         }
                     });
-
                 });
-
             });
         </script>
     </head>

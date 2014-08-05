@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PatientFollowUp.Data;
@@ -10,7 +10,7 @@ namespace PatientFollowUp.Specs
     [TestClass]
     public class when_saving_followup_details
     {
-        private FollowUpController _followUpController;
+        private FollowUpApiController _followUpController;
         private FollowUp _followUpPassedToRepository;
         private FollowUp _followUpReturnedByRepository;
         private Mock<IRepository> _repository;
@@ -42,13 +42,13 @@ namespace PatientFollowUp.Specs
             _repository.Setup(x => x.Save(It.IsAny<FollowUp>()))
                 .Callback<FollowUp>(x => _followUpPassedToRepository = x);
 
-            _followUpController = new FollowUpController(_repository.Object, null, null, null);
+            _followUpController = new FollowUpApiController(_repository.Object, null, null, null);
         }
 
         [TestMethod]
         public void it_should_save_the_followup_details()
         {
-            var result = _followUpController.SaveFollowUpUpdates(_saveFollowUpUpdatesInputModel);
+            HttpResponseMessage result = _followUpController.SaveFollowUpUpdates(_saveFollowUpUpdatesInputModel);
             Assert.AreEqual(_saveFollowUpUpdatesInputModel.Comments, _followUpPassedToRepository.Comments);
         }
     }

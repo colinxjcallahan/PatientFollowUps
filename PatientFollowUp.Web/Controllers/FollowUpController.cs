@@ -47,33 +47,5 @@ namespace PatientFollowUp.Web.Controllers
         {
             return View();
         }
-
-        public HttpResponseMessage SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
-        {
-            ValidationResult validationResult = _validator.Validate(saveFollowUpUpdatesInputModel);
-            if (!validationResult.IsValid)
-            {
-                Response.StatusCode = (int) HttpStatusCode.BadRequest;
-
-                string errorMessage = validationResult.Errors.Aggregate(string.Empty, (current, error) => current + (", " + error));
-                return new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    ReasonPhrase = errorMessage,
-                    Content = new StringContent(errorMessage),
-                };
-            }
-
-            var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
-
-            existingFollowUp.StatusID = (int) FollowUpStatusEnum.Closed;
-            existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
-            existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
-            existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
-            existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
-
-            _repository.Save(existingFollowUp);
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
     }
 }

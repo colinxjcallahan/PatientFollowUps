@@ -4,23 +4,22 @@ namespace PatientFollowUp.Web.App_Data
 {
     public class ValidationResult
     {
-        private readonly List<string> _errors;
+        private readonly List<ValidationError> _errors = new List<ValidationError>();
 
-        public ValidationResult()
-        {
-            _errors = new List<string>();
-        }
-
-        public bool IsValid { get; set; }
-
-        public IEnumerable<string> Errors
+        public List<ValidationError> Errors
         {
             get { return _errors; }
         }
 
-        public void AddError(string error)
+        public bool IsValid { get; set; }
+
+        public void AddError(string property, string error)
         {
-            _errors.Add(error);
+            _errors.Add(new ValidationError
+            {
+                Property = property,
+                Message = error,
+            });
         }
     }
 }

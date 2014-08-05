@@ -31,7 +31,7 @@ namespace PatientFollowUp.Web.App_Data
             validationResult.IsValid = fluentValidationResult.IsValid;
             foreach (ValidationFailure validationFailure in fluentValidationResult.Errors)
             {
-                validationResult.AddError(validationFailure.ErrorMessage);
+                validationResult.AddError(validationFailure.PropertyName, validationFailure.ErrorMessage);
             }
 
 

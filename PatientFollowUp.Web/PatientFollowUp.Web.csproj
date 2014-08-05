@@ -157,11 +157,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\GlobalExceptionFilter.cs" />
+    <Compile Include="Application\ValidationException.cs" />
     <Compile Include="App_Data\Date.cs" />
     <Compile Include="App_Data\FollowUpStatusEnum.cs" />
     <Compile Include="App_Data\IDate.cs" />
     <Compile Include="App_Data\IMapper.cs" />
     <Compile Include="App_Data\IValidator.cs" />
+    <Compile Include="App_Data\ValidationError.cs" />
     <Compile Include="App_Data\ValidationResult.cs" />
     <Compile Include="App_Data\SaveFollowUpUpdatesInputModelValidator.cs" />
     <Compile Include="App_Start\AutomapperConfig.cs" />

@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AttributeRouting.Web.Http;
 using PatientFollowUp.Data;
+using PatientFollowUp.Web.Application;
 using PatientFollowUp.Web.App_Data;
 using PatientFollowUp.Web.Models;
 
 namespace PatientFollowUp.Web.Controllers
 {
+    [GlobalExceptionFilter]
     public class FollowUpApiController : ApiController
     {
         private readonly IDate _date;
@@ -32,10 +32,12 @@ namespace PatientFollowUp.Web.Controllers
             ValidationResult validationResult = _validator.Validate(saveFollowUpUpdatesInputModel);
             if (!validationResult.IsValid)
             {
-                string errorMessage = validationResult.Errors.Aggregate(string.Empty,
-                    (current, error) => current + (", " + error));
+                var validationException = new ValidationException
+                {
+                    ValidationResult = validationResult,
+                };
 
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessage);
+                throw validationException;
             }
 
             var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);

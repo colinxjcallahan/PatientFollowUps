@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FacilityType">
+          <Key>
+            <PropertyRef Name="FacilityTypeId" />
+          </Key>
+          <Property Name="FacilityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacilityTypeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="FollowUp">
           <Key>
             <PropertyRef Name="FollowUpID" />
@@ -21,6 +28,7 @@
           <Property Name="Comments" Type="nvarchar" MaxLength="2000" />
           <Property Name="FollowUpExamId" Type="bigint" />
           <Property Name="FollowUpClosedReasonId" Type="int" />
+          <Property Name="FacilityTypeId" Type="int" />
         </EntityType>
         <EntityType Name="FollowUpClosedReason">
           <Key>
@@ -79,7 +87,20 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Report" Type="varchar(max)" />
         </EntityType>
+        <Association Name="FK_FollowUp_FacilityType">
+          <End Role="FacilityType" Type="Self.FacilityType" Multiplicity="0..1" />
+          <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityType">
+              <PropertyRef Name="FacilityTypeId" />
+            </Principal>
+            <Dependent Role="FollowUp">
+              <PropertyRef Name="FacilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DashboardModelStoreContainer">
+          <EntitySet Name="FacilityType" EntityType="Self.FacilityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
@@ -115,6 +136,10 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[Report] AS [Report]
     FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_FollowUp_FacilityType" Association="Self.FK_FollowUp_FacilityType">
+            <End Role="FacilityType" EntitySet="FacilityType" />
+            <End Role="FollowUp" EntitySet="FollowUp" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -136,6 +161,8 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="FollowUpExamId" Type="Int64" />
           <Property Name="FollowUpClosedReasonId" Type="Int32" />
+          <Property Name="FacilityTypeId" Type="Int32" />
+          <NavigationProperty Name="FacilityType" Relationship="DashboardModel.FK_FollowUp_FacilityType" FromRole="FollowUp" ToRole="FacilityType" />
         </EntityType>
         <EntityType Name="FollowUpStatu">
           <Key>
@@ -184,6 +211,11 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <EntitySet Name="Exams" EntityType="Self.Exam" />
           <EntitySet Name="FollowUpWithSynonymDatas" EntityType="Self.FollowUpWithSynonymData" />
           <EntitySet Name="FollowUpClosedReasons" EntityType="DashboardModel.FollowUpClosedReason" />
+          <EntitySet Name="FacilityTypes" EntityType="DashboardModel.FacilityType" />
+          <AssociationSet Name="FK_FollowUp_FacilityType" Association="DashboardModel.FK_FollowUp_FacilityType">
+            <End Role="FacilityType" EntitySet="FacilityTypes" />
+            <End Role="FollowUp" EntitySet="FollowUps" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="FollowUpClosedReason">
           <Key>
@@ -192,6 +224,26 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="FollowUpClosedReasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FollowUpClosedReasonDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="FacilityType">
+          <Key>
+            <PropertyRef Name="FacilityTypeId" />
+          </Key>
+          <Property Name="FacilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacilityTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FollowUps" Relationship="DashboardModel.FK_FollowUp_FacilityType" FromRole="FacilityType" ToRole="FollowUp" />
+        </EntityType>
+        <Association Name="FK_FollowUp_FacilityType">
+          <End Type="DashboardModel.FacilityType" Role="FacilityType" Multiplicity="0..1" />
+          <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityType">
+              <PropertyRef Name="FacilityTypeId" />
+            </Principal>
+            <Dependent Role="FollowUp">
+              <PropertyRef Name="FacilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -201,6 +253,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <EntitySetMapping Name="FollowUps">
             <EntityTypeMapping TypeName="DashboardModel.FollowUp">
               <MappingFragment StoreEntitySet="FollowUp">
+                <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
                 <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
                 <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
                 <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
@@ -265,6 +318,14 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
               <MappingFragment StoreEntitySet="FollowUpClosedReason">
                 <ScalarProperty Name="FollowUpClosedReasonDescription" ColumnName="FollowUpClosedReasonDescription" />
                 <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityTypes">
+            <EntityTypeMapping TypeName="DashboardModel.FacilityType">
+              <MappingFragment StoreEntitySet="FacilityType">
+                <ScalarProperty Name="FacilityTypeDescription" ColumnName="FacilityTypeDescription" />
+                <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

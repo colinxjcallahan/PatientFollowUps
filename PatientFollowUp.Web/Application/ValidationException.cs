@@ -5,6 +5,16 @@ namespace PatientFollowUp.Web.Application
 {
     public class ValidationException : Exception
     {
-        public ValidationResult ValidationResult { get; set; }
+        private ValidationResult _validationResult;
+
+        public ValidationException(ValidationResult validationResult)
+        {
+            _validationResult = validationResult;
+        }
+
+        public ValidationResult ValidationResult
+        {
+            get { return _validationResult ?? (_validationResult = new ValidationResult()); }
+        }
     }
 }

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="FollowUps">
       <EntityTypeMapping TypeName="DashboardModel.FollowUp">
         <MappingFragment StoreEntitySet="FollowUp">
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
           <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
           <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
           <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
@@ -68,6 +69,14 @@
         <MappingFragment StoreEntitySet="FollowUpClosedReason">
           <ScalarProperty Name="FollowUpClosedReasonDescription" ColumnName="FollowUpClosedReasonDescription" />
           <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacilityTypes">
+      <EntityTypeMapping TypeName="DashboardModel.FacilityType">
+        <MappingFragment StoreEntitySet="FacilityType">
+          <ScalarProperty Name="FacilityTypeDescription" ColumnName="FacilityTypeDescription" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

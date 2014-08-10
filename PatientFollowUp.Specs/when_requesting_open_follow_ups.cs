@@ -12,7 +12,7 @@ using PatientFollowUp.Web.Models;
 namespace PatientFollowUp.Specs
 {
     [TestClass]
-    public class when_requesting_the_open_follow_ups_page
+    public class when_requesting_open_follow_ups
     {
         private Mock<IDate> _date;
         private FollowUpController _followUpController;

@@ -31,7 +31,18 @@
 
         </style>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
+
+                $("#no_relevant_followup").click(function () {
+                    $(":radio").prop('checked', false);
+                });
+
+
+                $(":radio").click(function() {
+                    $("#no_relevant_followup").prop('checked', false);
+                });
+
+
                 $("#btn_submit").click(function () {
 
                     var followUpExamId = $('input:radio[name="cb_exam"]:checked').val();
@@ -57,15 +68,21 @@
                         }),
                         statusCode: {
                             200: function (xhr, textStatus) {
-                                alert('success:' + textStatus);
+                                $('#patientDetailModal').modal('hide');
+                                getOpenFollowUps();
                             },
                             400: function (data) {
+
+                                $("#error-message").empty();
 
                                 var response = $.parseJSON(data.responseText);
 
                                 $.each(response.Errors, function(index, error) {
 
-                                    alert(error.Message);
+                                    //append error.Message to div
+                                    $("#error-message").append(error.Message + "<br/>");
+
+
                                 });
                             },
                         }
@@ -81,6 +98,7 @@
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
+                    <div id="error-message" style="color: red"></div>
                     <h4 class="modal-title" id="myModalLabel">Patient Information</h4>
                 </div>
                 <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
@@ -137,7 +155,7 @@
                                     @foreach (var exam in Model.Exams)
                                     {
                                         <tr data-row-key="@exam.ExamID">
-                                            <td><input type="radio" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
+                                            <td><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.ExamID"/>@if(exam.ScheduleDate.HasValue){@exam.ScheduleDate.Value.ToShortDateString()}</td>
                                             <td>@exam.ExamType</td>
                                             <td>@exam.Description</td>
                                         </tr>
@@ -145,7 +163,7 @@
                                 </table>
                             </div>
                             <div>
-                                <input type="checkbox" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>
+                                <input type="checkbox" id="no_relevant_followup" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>
                                 <select id="FollowUpClosedReasonId">
                                     <option id="0">--No follow up selected reason</option>
                                     @foreach (var followUpClosedReason in Model.FollowUpClosedReasons)

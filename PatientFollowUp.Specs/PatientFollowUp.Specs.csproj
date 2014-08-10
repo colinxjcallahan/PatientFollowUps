@@ -103,7 +103,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="when_requesting_the_open_follow_ups_page.cs" />
+    <Compile Include="when_changing_follow_up_date.cs" />
+    <Compile Include="when_changing_follow_up_date_with_invalid_date.cs" />
+    <Compile Include="when_requesting_open_follow_ups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="when_requesting_the_patient_details_partial_view.cs" />
     <Compile Include="when_saving_followup_details.cs" />

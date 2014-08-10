@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PatientFollowUp.Data;
@@ -32,10 +33,7 @@ namespace PatientFollowUp.Web.Controllers
             ValidationResult validationResult = _validator.Validate(saveFollowUpUpdatesInputModel);
             if (!validationResult.IsValid)
             {
-                var validationException = new ValidationException
-                {
-                    ValidationResult = validationResult,
-                };
+                var validationException = new ValidationException(validationResult);
 
                 throw validationException;
             }
@@ -49,6 +47,25 @@ namespace PatientFollowUp.Web.Controllers
             existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
 
             _repository.Save(existingFollowUp);
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [Route("api/FollowUpApi/ChangeFollowUpDate")]
+        public HttpResponseMessage ChangeFollowUpDate(int followUpId, DateTime newFollowUpDate)
+        {
+            if (newFollowUpDate < _date.GetCurrentDate())
+            {
+                var validationResult = new ValidationResult();
+                validationResult.AddError("FollowUpId", "Follow Up Date must be later than today");
+                var validationException = new ValidationException(validationResult);
+                throw validationException;
+            }
+
+            var followUpToUpdate = _repository.GetById<FollowUp>(followUpId);
+            followUpToUpdate.FollowUpDate = newFollowUpDate;
+
+            _repository.Save(followUpToUpdate);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

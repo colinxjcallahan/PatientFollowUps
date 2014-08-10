@@ -30,5 +30,6 @@ namespace PatientFollowUp.Data
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<FollowUpWithSynonymData> FollowUpWithSynonymDatas { get; set; }
         public virtual DbSet<FollowUpClosedReason> FollowUpClosedReasons { get; set; }
+        public virtual DbSet<FacilityType> FacilityTypes { get; set; }
     }
 }

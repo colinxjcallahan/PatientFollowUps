@@ -85,6 +85,9 @@
     <Compile Include="Exam.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FacilityType.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FollowUp.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>

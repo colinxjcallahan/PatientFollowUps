@@ -26,5 +26,8 @@ namespace PatientFollowUp.Data
         public string Comments { get; set; }
         public Nullable<long> FollowUpExamId { get; set; }
         public Nullable<int> FollowUpClosedReasonId { get; set; }
+        public Nullable<int> FacilityTypeId { get; set; }
+    
+        public virtual FacilityType FacilityType { get; set; }
     }
 }

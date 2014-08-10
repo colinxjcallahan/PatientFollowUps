@@ -16,6 +16,8 @@
     <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
     <Property Name="FollowUpExamId" Type="Int64" />
     <Property Name="FollowUpClosedReasonId" Type="Int32" />
+    <Property Name="FacilityTypeId" Type="Int32" />
+    <NavigationProperty Name="FacilityType" Relationship="DashboardModel.FK_FollowUp_FacilityType" FromRole="FollowUp" ToRole="FacilityType" />
   </EntityType>
   <EntityType Name="FollowUpStatu">
     <Key>
@@ -64,6 +66,11 @@
     <EntitySet Name="Exams" EntityType="Self.Exam" />
     <EntitySet Name="FollowUpWithSynonymDatas" EntityType="Self.FollowUpWithSynonymData" />
     <EntitySet Name="FollowUpClosedReasons" EntityType="DashboardModel.FollowUpClosedReason" />
+    <EntitySet Name="FacilityTypes" EntityType="DashboardModel.FacilityType" />
+    <AssociationSet Name="FK_FollowUp_FacilityType" Association="DashboardModel.FK_FollowUp_FacilityType">
+      <End Role="FacilityType" EntitySet="FacilityTypes" />
+      <End Role="FollowUp" EntitySet="FollowUps" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="FollowUpClosedReason">
     <Key>
@@ -72,4 +79,24 @@
     <Property Name="FollowUpClosedReasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FollowUpClosedReasonDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="FacilityType">
+    <Key>
+      <PropertyRef Name="FacilityTypeId" />
+    </Key>
+    <Property Name="FacilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FollowUps" Relationship="DashboardModel.FK_FollowUp_FacilityType" FromRole="FacilityType" ToRole="FollowUp" />
+  </EntityType>
+  <Association Name="FK_FollowUp_FacilityType">
+    <End Type="DashboardModel.FacilityType" Role="FacilityType" Multiplicity="0..1" />
+    <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacilityType">
+        <PropertyRef Name="FacilityTypeId" />
+      </Principal>
+      <Dependent Role="FollowUp">
+        <PropertyRef Name="FacilityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

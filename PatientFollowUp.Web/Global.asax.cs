@@ -2,6 +2,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using PatientFollowUp.Web.Application;
 
 namespace PatientFollowUp.Web
 {
@@ -17,8 +18,6 @@ namespace PatientFollowUp.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutomapperConfig.RegisterMappings();
             UnityConfig.RegisterComponents();
-
-
         }
     }
 }

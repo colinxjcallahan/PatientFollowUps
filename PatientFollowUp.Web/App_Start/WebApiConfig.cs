@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using PatientFollowUp.Web.Application;
 
 namespace PatientFollowUp.Web
 {
@@ -17,6 +18,9 @@ namespace PatientFollowUp.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
+            config.Filters.Add(new GlobalExceptionFilter());
         }
     }
 }

@@ -106,7 +106,6 @@ C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Unity.Mvc4.dll
 C:\Projects\PatientFollowUps\PatientFollowUp.Specs\bin\Debug\Unity.Mvc3.dll
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\FluentValidation.dll
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\Unity.WebApi.dll
-C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\Unity.Mvc3.dll
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\FluentValidation.pdb
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\FluentValidation.xml
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\da\FluentValidation.resources.dll

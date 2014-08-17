@@ -10,6 +10,7 @@ namespace PatientFollowUp.Web.Application
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
+            var ex = actionExecutedContext.Exception;
             if (actionExecutedContext.Exception is ValidationException)
             {
                 var exception = actionExecutedContext.Exception as ValidationException;

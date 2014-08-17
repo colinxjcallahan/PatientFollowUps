@@ -33,14 +33,20 @@
         <script>
             $(document).ready(function () {
 
-
-
                 $("#no_relevant_followup").click(function () {
                     $(":radio").prop('checked', false);
+                    $("#NewFollowUpDate").val('');
                 });
 
 
                 $(":radio").click(function() {
+                    $("#no_relevant_followup").prop('checked', false);
+                    $("#NewFollowUpDate").val('');
+                });
+
+
+                $("#NewFollowUpDate").change(function() {
+                    $(":radio").prop('checked', false);
                     $("#no_relevant_followup").prop('checked', false);
                 });
 
@@ -48,7 +54,6 @@
                     $('#patientDetailModal').modal('hide');
                 });
                 
-
 
                 $("#btn_submit").click(function () {
 
@@ -186,7 +191,7 @@
                                 </select><br/>
                                 Comments <textarea id="comments" rows="4" cols="50"></textarea><br/>
                                 
-                                <input type="text" id="NewFollowUpDate" />
+                                Change FollowUp Date: <input type="text" id="NewFollowUpDate" />
                                 
                                 <a href="http://ris.premierradiology.com/registration/registration.aspx?fp=1&pt=@Model.FollowUp.PatientMRN" target="_blank">Schedule FollowUp</a>
                                

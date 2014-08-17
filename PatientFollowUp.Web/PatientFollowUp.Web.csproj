@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AutoMapperMapper.cs" />
+    <Compile Include="Models\ChangeFollowUpDateInputModel.cs" />
     <Compile Include="Models\ExamViewModel.cs" />
     <Compile Include="Models\FollowUpClosedReasonViewModel.cs" />
     <Compile Include="Models\FollowUpViewModel.cs" />
@@ -194,7 +195,9 @@
     <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap-theme.min.css" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap.css" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-3.2.0-dist\css\datepicker.css" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap.js" />
     <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />

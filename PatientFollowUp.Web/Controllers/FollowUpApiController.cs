@@ -26,7 +26,7 @@ namespace PatientFollowUp.Web.Controllers
         }
 
 
-        [Route("api/FollowUpApi/SaveFollowUpUpdates")]
+        [Route("api/FollowUps/SaveFollowUpUpdates")]
         [HttpPost]
         public HttpResponseMessage SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel)
         {
@@ -46,15 +46,21 @@ namespace PatientFollowUp.Web.Controllers
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
             existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
 
+            if (!(saveFollowUpUpdatesInputModel.NewFollowUpDate == DateTime.MinValue))
+            {
+                existingFollowUp.FollowUpDate = saveFollowUpUpdatesInputModel.NewFollowUpDate;
+            }
+
             _repository.Save(existingFollowUp);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [Route("api/FollowUpApi/ChangeFollowUpDate")]
-        public HttpResponseMessage ChangeFollowUpDate(int followUpId, DateTime newFollowUpDate)
+        [Route("api/FollowUps/ChangeFollowUpDate")]
+        [HttpPost]
+        public HttpResponseMessage ChangeFollowUpDate(ChangeFollowUpDateInputModel changeFollowUpDateInputModel)
         {
-            if (newFollowUpDate < _date.GetCurrentDate())
+            if (changeFollowUpDateInputModel.NewFollowUpDate < _date.GetCurrentDate())
             {
                 var validationResult = new ValidationResult();
                 validationResult.AddError("FollowUpId", "Follow Up Date must be later than today");
@@ -62,8 +68,8 @@ namespace PatientFollowUp.Web.Controllers
                 throw validationException;
             }
 
-            var followUpToUpdate = _repository.GetById<FollowUp>(followUpId);
-            followUpToUpdate.FollowUpDate = newFollowUpDate;
+            var followUpToUpdate = _repository.GetById<FollowUp>(changeFollowUpDateInputModel.FollowUpId);
+            followUpToUpdate.FollowUpDate = changeFollowUpDateInputModel.NewFollowUpDate;
 
             _repository.Save(followUpToUpdate);
 

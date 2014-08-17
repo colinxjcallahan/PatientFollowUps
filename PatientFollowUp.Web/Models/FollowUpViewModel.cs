@@ -8,6 +8,9 @@ namespace PatientFollowUp.Web.Models
         public long AccessionNumber { get; set; }
         public string ExamType { get; set; }
         public DateTime FollowUpDate { get; set; }
+
+        public string PatientMRN { get; set; }
+
         public string PatientFirstName { get; set; }
         public string PatientLastName { get; set; }
         public string PatientHomePhone { get; set; }

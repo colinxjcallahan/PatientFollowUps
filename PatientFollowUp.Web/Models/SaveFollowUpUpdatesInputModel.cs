@@ -1,4 +1,6 @@
-﻿namespace PatientFollowUp.Web.Models
+﻿using System;
+
+namespace PatientFollowUp.Web.Models
 {
     public class SaveFollowUpUpdatesInputModel
     {
@@ -8,5 +10,7 @@
 
         public int FollowUpClosedReasonId { get; set; }
         public string Comments { get; set; }
+
+        public DateTime NewFollowUpDate { get; set; }
     }
 }

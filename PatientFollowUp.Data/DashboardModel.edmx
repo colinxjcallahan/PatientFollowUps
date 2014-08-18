@@ -57,6 +57,7 @@ warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key de
           <Property Name="ScheduleDate" Type="datetime" />
           <Property Name="CompletionDate" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -112,7 +113,8 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [Exam].[PatientMRN] AS [PatientMRN], 
     [Exam].[ScheduleDate] AS [ScheduleDate], 
     [Exam].[CompletionDate] AS [CompletionDate], 
-    [Exam].[Status] AS [Status]
+    [Exam].[Status] AS [Status], 
+    [Exam].[AccessionNumber] AS [AccessionNumber]
     FROM [dbo].[Exam] AS [Exam]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="FollowUpWithSynonymData" EntityType="Self.FollowUpWithSynonymData" store:Type="Views" store:Schema="dbo">
@@ -182,6 +184,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
           <Property Name="CompletionDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="FollowUpWithSynonymData">
           <Key>
@@ -280,6 +283,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <EntitySetMapping Name="Exams">
             <EntityTypeMapping TypeName="DashboardModel.Exam">
               <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
                 <ScalarProperty Name="ExamType" ColumnName="ExamType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

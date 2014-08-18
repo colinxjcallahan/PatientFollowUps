@@ -118,7 +118,7 @@
                 </div>
                 <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
                     <div id="message-box"></div>
-                    <div id="topBox" style="width: 98%; color: white; background-color: #438EB9; padding: 10px; margin: 3px; overflow: hidden">
+                    <div id="topBox" style="width: 98%; color: white; background-color: #76BAE7; padding: 10px; margin: 3px; overflow: hidden">
                         <div class="first-column">
                             <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID"/>
                             <table style="width: 100%">
@@ -156,29 +156,37 @@
                     </div>
                     <div id="bottomBox"  style="clear: both; width: 100%;">
                         
-                        <div style="width: 49%; float: left;  background-color: #FFB752; padding: 10px; margin:3px;">
+                        <div style="width: 49%; float: left;  background-color: #F3B25E; padding: 10px; margin:3px;">
                             @Html.Raw(Model.FollowUp.Report)
                         </div>
-                        <div style="width: 49%; float: left;  background-color: #DA5430; padding: 10px; margin:3px;">
+                        <div style="width: 48%; float: left;  background-color: #71D398; padding: 10px; margin:3px;">
                             <div>
-                                <table style="width: 100%; border-spacing: 3px; ">
-                                    <tr>
-                                        <td style="padding: 3px;">&nbsp;</td>
-                                        <th style="padding: 3px;">Exam Date</th>
-                                        <th style="padding: 3px;">Exam Type</th>
-                                        <th style="padding: 3px;">Exam Description</th>
-                                    </tr>
-                                    @foreach (var exam in Model.Exams)
-                                    {
-                                        <tr data-row-key="@exam.ExamID">
-                                            <td style="padding: 3px;"><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.ExamID" /></td>
-                                            <td style="padding: 3px;">@if (exam.ScheduleDate.HasValue)
-                                            {@exam.ScheduleDate.Value.ToShortDateString()}</td>
-                                            <td style="padding: 3px;">@exam.ExamType</td>
-                                            <td style="padding: 3px;">@exam.Description</td>
+                                @if (Model.Exams.Count > 0)
+                                {
+
+
+                                    <table style="width: 100%; border-spacing: 3px;">
+                                        <tr>
+                                            <td style="padding: 3px;">&nbsp;</td>
+                                            <th style="padding: 3px;">Exam Date</th>
+                                            <th style="padding: 3px;">Exam Type</th>
+                                            <th style="padding: 3px;">Exam Description</th>
                                         </tr>
-                                    }
-                                </table>
+                                        @foreach (var exam in Model.Exams)
+                                        {
+                                            <tr data-row-key="@exam.ExamID">
+                                                <td style="padding: 3px;"><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.AccessionNumber" /></td>
+                                                <td style="padding: 3px;">@if (exam.ScheduleDate.HasValue)
+                                                                          {
+                                                                              @exam.ScheduleDate.Value.ToShortDateString()
+                                                                          }</td>
+                                                <td style="padding: 3px;">@exam.ExamType</td>
+                                                <td style="padding: 3px;">@exam.Description</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                    <br />
+                                }
                             </div>
                             <div>
                                 <input type="checkbox" id="no_relevant_followup" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>

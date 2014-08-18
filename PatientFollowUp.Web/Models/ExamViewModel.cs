@@ -8,5 +8,6 @@ namespace PatientFollowUp.Web.Models
         public string ExamType { get; set; }
         public string Description { get; set; }
         public DateTime? ScheduleDate { get; set; }
+        public long AccessionNumber { get; set; }
     }
 }

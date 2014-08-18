@@ -21,5 +21,6 @@ namespace PatientFollowUp.Data
         public Nullable<System.DateTime> ScheduleDate { get; set; }
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Status { get; set; }
+        public long AccessionNumber { get; set; }
     }
 }

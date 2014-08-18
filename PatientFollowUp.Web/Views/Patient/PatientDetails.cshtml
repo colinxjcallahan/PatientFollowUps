@@ -118,7 +118,7 @@
                 </div>
                 <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
                     <div id="message-box"></div>
-                    <div id="topBox" style="width: 98%; color: white; background-color: #76BAE7; padding: 10px; margin: 3px; overflow: hidden">
+                    <div id="topBox" style="width: 98%;  color: white; background-color: #76BAE7; padding: 10px; margin: 3px; overflow: hidden">
                         <div class="first-column">
                             <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID"/>
                             <table style="width: 100%">
@@ -136,7 +136,7 @@
                         <div class="second-column">
                             <table style="width: 100%">
                                 <tr>
-                                    <td>Accession #: <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@Model.FollowUp.AccessionNumber" target="_blank"> @Model.FollowUp.AccessionNumber</a></td>
+                                    <td>Accession #: <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@Model.FollowUp.AccessionNumber" style="color:white; text-decoration: underline;" target="_blank"> @Model.FollowUp.AccessionNumber</a></td>
                                 </tr>
                                 <tr>
                                     <td>Referrer: @Model.FollowUp.ReferrerFirstName @Model.FollowUp.ReferrerLastName</td>
@@ -177,9 +177,11 @@
                                             <tr data-row-key="@exam.ExamID">
                                                 <td style="padding: 3px;"><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.AccessionNumber" /></td>
                                                 <td style="padding: 3px;">@if (exam.ScheduleDate.HasValue)
-                                                                          {
-                                                                              @exam.ScheduleDate.Value.ToShortDateString()
-                                                                          }</td>
+                                                {
+                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                        @exam.ScheduleDate.Value.ToShortDateString()
+                                                    </a>
+                                                }</td>
                                                 <td style="padding: 3px;">@exam.ExamType</td>
                                                 <td style="padding: 3px;">@exam.Description</td>
                                             </tr>

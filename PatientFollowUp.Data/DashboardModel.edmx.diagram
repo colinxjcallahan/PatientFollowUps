@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a292501da61a477193ac4c27413abf2b" Name="Diagram1">
-        <EntityTypeShape EntityType="DashboardModel.FollowUp" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpStatu" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.Exam" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpWithSynonymData" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpClosedReason" Width="3.125" PointX="5.375" PointY="6.375" />
-        <EntityTypeShape EntityType="DashboardModel.FacilityType" Width="1.5" PointX="0.75" PointY="7.75" />
-        <AssociationConnector Association="DashboardModel.FK_FollowUp_FacilityType" />
+      <Diagram DiagramId="56c4faa2a69441b9b15506d758251408" Name="Diagram1">
+        <EntityTypeShape EntityType="DashboardModel.FacilityType" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUp" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpClosedReason" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpStatu" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Exam" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpWithSynonymData" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="DashboardModel.FK_FollowUp_FacilityType" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -190,8 +190,17 @@
                                                                                   @exam.ScheduleDate.Value.ToShortDateString()
                                                                               </a>
                                                                           }</td>
-                                                <td style="padding: 3px;">@exam.ExamType</td>
-                                                <td style="padding: 3px;">@exam.Description</td>
+                                                <td style="padding: 3px;">
+                                                    
+                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                        @exam.ExamType
+                                                    </a>
+                                                </td>
+                                                <td style="padding: 3px;">
+                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                        @exam.Description
+                                                    </a>
+                                                </td>
                                             </tr>
                                         }
                                     </table>

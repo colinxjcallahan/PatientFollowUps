@@ -233,13 +233,13 @@
     <Content Include="Views\FollowUp\GetOpenFollowUps.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\FollowUps.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PatientFollowUp.Data\PatientFollowUp.Data.csproj">
       <Project>{8fb8a477-7fda-4c29-a037-93b27f7ce5f4}</Project>
       <Name>PatientFollowUp.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\PremierFollowUps.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

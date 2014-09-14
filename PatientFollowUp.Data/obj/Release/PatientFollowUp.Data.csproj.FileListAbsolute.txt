@@ -7,3 +7,4 @@ C:\Projects\Premier\PatientFollowUp.Data\bin\Release\EntityFramework.xml
 C:\Projects\Premier\PatientFollowUp.Data\bin\Release\EntityFramework.SqlServer.xml
 C:\Projects\Premier\PatientFollowUp.Data\obj\Release\PatientFollowUp.Data.dll
 C:\Projects\Premier\PatientFollowUp.Data\obj\Release\PatientFollowUp.Data.pdb
+C:\Projects\Premier\PatientFollowUp.Data\obj\Release\PatientFollowUp.Data.csprojResolveAssemblyReference.cache

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="DashboardEntities-Web.config Connection String" description="DashboardEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DashboardModel.csdl|res://*/DashboardModel.ssdl|res://*/DashboardModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=test-rissql;initial catalog=Dashboard;persist security info=True;user id=ccallahan;password=CC@ll@h@n;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+  <parameter name="DashboardEntities-Web.config Connection String" description="DashboardEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DashboardModel.csdl|res://*/DashboardModel.ssdl|res://*/DashboardModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=test-rissql;initial catalog=Dashboard;persist security info=True;user id=ccallahan;password=CC@ll@h@n;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Projects\\Premier\\PatientFollowUp\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DashboardEntities']/@connectionString" />
   </parameter>
 </parameters>

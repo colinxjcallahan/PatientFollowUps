@@ -30,10 +30,6 @@
                 width: 98%;  color: white; background-color: #76BAE7; padding: 10px; margin: 3px;overflow: hidden;
             }
 
-
-
-
-
         </style>
         <script>
             $(document).ready(function () {
@@ -92,10 +88,9 @@
                         statusCode: {
                             200: function (xhr, textStatus) {
                                 $('#patientDetailModal').modal('hide');
-                                getOpenFollowUps();
+                                refreshTable();
                             },
-                            400: function (data) {
-                                alert('oops');
+                            400: function (data) {                                
 
                                 $("#error-message").empty();
 

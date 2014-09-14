@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using PatientFollowUp.Data;
 using PatientFollowUp.Web.Application;
@@ -23,6 +26,33 @@ namespace PatientFollowUp.Web.Controllers
             _mapper = mapper;
             _date = date;
             _validator = validator;
+        }
+
+        [Route("api/FollowUps/GetOpenFollowUps")]
+        [HttpGet]
+        public HttpResponseMessage GetOpenFollowUps()
+        {
+            DateTime currentDate = _date.GetCurrentDate();
+
+            List<FollowUpWithSynonymData> followUps =
+                _repository.GetAll<FollowUpWithSynonymData>()
+                    .Where(x => x.FollowUpStatus == "Open" && x.FollowUpDate < currentDate)
+                    .ToList();
+
+
+
+            var followUpViewModels =
+                followUps.Select(x => _mapper.Map<FollowUpWithSynonymData, FollowUpViewModel>(x)).ToList();
+
+
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content =
+                    new ObjectContent<List<FollowUpViewModel>>(followUpViewModels,
+                        new JsonMediaTypeFormatter()),
+                        
+            };
         }
 
 

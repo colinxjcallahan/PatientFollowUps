@@ -199,16 +199,64 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap-theme.css" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap-theme.min.css" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap.css" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap.min.css" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\datepicker.css" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap-datepicker.js" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap.js" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-table-master\.gitignore" />
+    <Content Include="Scripts\bootstrap-table-master\dist\bootstrap-table.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\dist\bootstrap-table.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-da-DK.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-en.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-es_AR.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-fr_BE.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-pt-BR.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\dist\locale\bootstrap-table-zh-TW.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\css\bootstrap-responsive.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\css\bootstrap-responsive.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap2.3\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bulletin\bulletin.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bulletin\bulletin.gif" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bulletin\jquery.bulletin.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\highlightjs\default.min.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\highlightjs\highlight.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\jquery.min.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\blank.gif" />
+    <Content Include="Scripts\bootstrap-table-master\docs\bootstrap-table-config.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\common.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\docs.css" />
+    <Content Include="Scripts\bootstrap-table-master\docs\docs.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\documentation.html" />
+    <Content Include="Scripts\bootstrap-table-master\docs\examples.html" />
+    <Content Include="Scripts\bootstrap-table-master\docs\examples.js" />
+    <Content Include="Scripts\bootstrap-table-master\docs\flags.png" />
+    <Content Include="Scripts\bootstrap-table-master\docs\getting-started.html" />
+    <Content Include="Scripts\bootstrap-table-master\docs\index.html" />
+    <Content Include="Scripts\bootstrap-table-master\docs\test.html" />
+    <Content Include="Scripts\bootstrap-table-master\Gruntfile.js" />
+    <Content Include="Scripts\bootstrap-table-master\index.html" />
+    <Content Include="Scripts\bootstrap-table-master\src\bootstrap-table.css" />
+    <Content Include="Scripts\bootstrap-table-master\src\bootstrap-table.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-da-DK.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-en.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-es_AR.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-fr_BE.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-pt-BR.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-zh-TW.js" />
+    <Content Include="Scripts\datepicker.css" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery.formatDateTime.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
@@ -223,13 +271,6 @@
     <Content Include="Views\FollowUp\OpenFollowUps.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap-theme.css.map" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\css\bootstrap.css.map" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Scripts\bootstrap-3.2.0-dist\fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\FollowUp\GetOpenFollowUps.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +281,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\PremierFollowUps.pubxml" />
+    <Content Include="Scripts\bootstrap-table-master\bootstrap-table.jquery.json" />
+    <Content Include="Scripts\bootstrap-table-master\bower.json" />
+    <Content Include="Scripts\bootstrap-table-master\CHANGELOG.md" />
+    <Content Include="Scripts\bootstrap-table-master\CONTRIBUTORS.md" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\bootstrap-table-master\docs\assets\bulletin\README.md" />
+    <Content Include="Scripts\bootstrap-table-master\docs\data1.json" />
+    <Content Include="Scripts\bootstrap-table-master\docs\data2.json" />
+    <Content Include="Scripts\bootstrap-table-master\docs\data3.json" />
+    <Content Include="Scripts\bootstrap-table-master\docs\data4.json" />
+    <Content Include="Scripts\bootstrap-table-master\LICENSE" />
+    <Content Include="Scripts\bootstrap-table-master\package.json" />
+    <Content Include="Scripts\bootstrap-table-master\README.md" />
+    <Content Include="Scripts\bootstrap-table-master\src\locale\bootstrap-table-en.js.template" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

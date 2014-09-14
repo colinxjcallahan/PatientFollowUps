@@ -4,44 +4,86 @@
     <head>
         <title>Open Follow-ups</title>
         
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="~/Scripts/jquery-1.11.1.min.js"></script>
-        
-        <link href="/Scripts/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="~/Scripts/bootstrap-3.2.0-dist/css/datepicker.css" rel="stylesheet" />
-        
-        <script src="/Scripts/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="~/Scripts/bootstrap-3.2.0-dist/js/bootstrap-datepicker.js"></script>   
+        <meta name="viewport" content="width=device-width, initial-scale=1">             
+
+        <link href="~/Scripts/bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/Scripts/bootstrap-table-master/src/bootstrap-table.css" rel="stylesheet" />
         <link href="~/styles.css" rel="stylesheet" />
-        <script language="javascript">
+        <link href="~/Scripts/datepicker.css" rel="stylesheet" />
+        
+        <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+        <script src="~/Scripts/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.js"></script>
+        <script src="~/Scripts/bootstrap-table-master/src/bootstrap-table.js"></script>
+        <script src="~/Scripts/bootstrap-datepicker.js"></script>   
+        <script src="~/Scripts/jquery.formatDateTime.js"></script>
 
-            $(document).ready(function() {
+        
+    </head>
+    <body>
+        <div class="table-responsive">
+            <table id="followups-table" data-toggle="table" data-url="../api/FollowUps/GetOpenFollowUps" data-show-refresh="true" data-cache="false" >
+                <thead>
+                    <tr>
+                        <th data-field="PatientName" data-sortable="true">PT Name</th>
+                        <th data-field="AccessionNumber" data-sortable="true">Accession #</th>
+                        <th data-field="ExamType" data-sortable="true">Exam Type</th>
+                        <th data-field="FollowUpDate" data-sortable="true" data-formatter="dateFormatter">Follow-up Date</th>
+                        <th data-field="ReferrerName" data-sortable="true">Referrer</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="modal fade" id="patientDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+        <script>
+            
+            function dateFormatter(value) {
 
-                getOpenFollowUps();
+                var formattedDate = $.formatDateTime('mm/dd/y', new Date(value));
+
+               
+
+                return formattedDate;
+            }
+
+            function refreshTable() {
+                
+                $('#followups-table').bootstrapTable({
+
+                   
+                }).refresh();
+            }
+
+
+            $('#followups-table').bootstrapTable({           
+
+                onClickRow: function (row) {
+
+                    openModal(row.FollowUpID);
+                }
             });
 
-            function getOpenFollowUps() {
+            function openModal(followUpId) {
+
                 $.ajax({
-                        url: '/FollowUp/GetOpenFollowUps',
+                        url: '/Patient/PatientDetails/?followUpId= ' + followUpId,
                         contentType: 'application/html; charset=utf-8',
                         type: 'GET',
                         dataType: 'html'
                     })
                     .success(function(result) {
 
-                        $("#openFollowUps").html(result);
+                        $("#patientDetailModal").html(result);
+                        $('#patientDetailModal').modal('show');
 
 
                     }).error(function(xhr, status) {
-                        alert('Error');
-
+                        alert(status);
                     });
+
             }
 
+
         </script>
-    </head>
-    <body>
-        <div id="openFollowUps" style="position: absolute; top:10%; left:10%; width: 80%;"></div>
-        <div class="modal fade" id="patientDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-</body>
+
+    </body>
 </html>

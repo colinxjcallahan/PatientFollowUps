@@ -31,11 +31,14 @@
             }
 
         </style>
+        <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
         
-        
-
         <script>
             $(document).ready(function () {
+
+                $("#NewFollowUpDate").datepicker();
+
 
                 $("#no_relevant_followup").click(function () {
                     $(":radio").prop('checked', false);
@@ -218,7 +221,7 @@
                                 Comments <textarea id="comments" rows="4" cols="50"></textarea>
                                 
                                 <hr/>
-                                
+
                                 Change FollowUp Date: <input type="text" id="NewFollowUpDate" /><br/>
                                 
                                 <a href="http://ris.premierradiology.com/registration/registration.aspx?fp=1&pt=@Model.FollowUp.PatientMRN" target="_blank">Schedule FollowUp</a>

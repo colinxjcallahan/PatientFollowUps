@@ -5,17 +5,18 @@
         <title>Open Follow-ups</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">             
-
-        <link href="~/Scripts/bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
-        <link href="~/Scripts/bootstrap-table-master/src/bootstrap-table.css" rel="stylesheet" />
-        <link href="~/styles.css" rel="stylesheet" />
-        <link href="~/Scripts/datepicker.css" rel="stylesheet" />
         
-        <script src="~/Scripts/jquery-1.11.1.min.js"></script>
-        <script src="~/Scripts/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.js"></script>
-        <script src="~/Scripts/bootstrap-table-master/src/bootstrap-table.js"></script>
-        <script src="~/Scripts/bootstrap-datepicker.js"></script>   
-        <script src="~/Scripts/jquery.formatDateTime.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap-table.css" rel="stylesheet" />
+
+        <link href="~/styles.css" rel="stylesheet" />
+        
+        
+        <script src="~/Scripts/jquery-1.9.0.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/bootstrap-table.js"></script>
+        <script src="~/Scripts/jquery.dateFormat-1.0.js"></script>
+        <script src="~/Scripts/bootstrap-table.js"></script>
 
         
     </head>
@@ -37,12 +38,7 @@
         <script>
             
             function dateFormatter(value) {
-
-                var formattedDate = $.formatDateTime('mm/dd/y', new Date(value));
-
-               
-
-                return formattedDate;
+                return $.format.date(new Date(value), " MM/dd/yyyy");
             }
 
             function refreshTable() {

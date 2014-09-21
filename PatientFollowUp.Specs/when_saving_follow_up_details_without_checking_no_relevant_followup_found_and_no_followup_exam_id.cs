@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PatientFollowUp.Web.App_Data;
+using PatientFollowUp.Web.Application;
 using PatientFollowUp.Web.Controllers;
 using PatientFollowUp.Web.Models;
 

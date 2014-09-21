@@ -1,5 +1,4 @@
 ﻿using System;
-using PatientFollowUp.Web.App_Data;
 
 namespace PatientFollowUp.Web.Application
 {

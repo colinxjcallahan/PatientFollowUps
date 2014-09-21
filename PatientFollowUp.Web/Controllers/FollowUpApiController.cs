@@ -7,7 +7,6 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using PatientFollowUp.Data;
 using PatientFollowUp.Web.Application;
-using PatientFollowUp.Web.App_Data;
 using PatientFollowUp.Web.Models;
 
 namespace PatientFollowUp.Web.Controllers

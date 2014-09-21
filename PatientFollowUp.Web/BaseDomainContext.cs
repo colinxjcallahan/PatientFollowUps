@@ -6,7 +6,8 @@ namespace PatientFollowUp.Web
     {
         static BaseDomainContext()
         {
-            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            //Needed to fix EF - 
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
 }

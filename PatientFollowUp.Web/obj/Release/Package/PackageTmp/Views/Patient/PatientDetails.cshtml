@@ -30,10 +30,6 @@
                 width: 98%;  color: white; background-color: #76BAE7; padding: 10px; margin: 3px;overflow: hidden;
             }
 
-
-
-
-
         </style>
         <script>
             $(document).ready(function () {
@@ -92,10 +88,9 @@
                         statusCode: {
                             200: function (xhr, textStatus) {
                                 $('#patientDetailModal').modal('hide');
-                                getOpenFollowUps();
+                                refreshTable();
                             },
-                            400: function (data) {
-                                alert('oops');
+                            400: function (data) {                                
 
                                 $("#error-message").empty();
 
@@ -190,8 +185,17 @@
                                                                                   @exam.ScheduleDate.Value.ToShortDateString()
                                                                               </a>
                                                                           }</td>
-                                                <td style="padding: 3px;">@exam.ExamType</td>
-                                                <td style="padding: 3px;">@exam.Description</td>
+                                                <td style="padding: 3px;">
+                                                    
+                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                        @exam.ExamType
+                                                    </a>
+                                                </td>
+                                                <td style="padding: 3px;">
+                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                        @exam.Description
+                                                    </a>
+                                                </td>
                                             </tr>
                                         }
                                     </table>

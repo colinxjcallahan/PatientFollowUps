@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using PatientFollowUp.Data;
-using PatientFollowUp.Web.App_Data;
+using PatientFollowUp.Web.Application;
 using PatientFollowUp.Web.Models;
 using Unity.WebApi;
 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PatientFollowUp.Data;
-using PatientFollowUp.Web.App_Data;
+using PatientFollowUp.Web.Application;
 using PatientFollowUp.Web.Models;
 
 namespace PatientFollowUp.Web.Controllers
 {
+    [GlobalExceptionFilter]
     public class FollowUpController : Controller
     {
         private readonly IDate _date;

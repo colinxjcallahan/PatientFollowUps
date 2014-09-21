@@ -144,3 +144,5 @@ C:\Projects\Premier\PatientFollowUp.Web\bin\tr\FluentValidation.resources.dll
 C:\Projects\Premier\PatientFollowUp.Web\obj\Debug\PatientFollowUp.Web.csprojResolveAssemblyReference.cache
 C:\Projects\Premier\PatientFollowUp.Web\obj\Debug\PatientFollowUp.Web.dll
 C:\Projects\Premier\PatientFollowUp.Web\obj\Debug\PatientFollowUp.Web.pdb
+C:\Projects\Premier\PatientFollowUp.Web\bin\log4net.dll
+C:\Projects\Premier\PatientFollowUp.Web\bin\log4net.xml

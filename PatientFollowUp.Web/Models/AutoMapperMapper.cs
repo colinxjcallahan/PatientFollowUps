@@ -1,4 +1,4 @@
-using PatientFollowUp.Web.App_Data;
+using PatientFollowUp.Web.Application;
 
 namespace PatientFollowUp.Web.Models
 {

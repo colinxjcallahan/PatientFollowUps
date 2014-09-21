@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PatientFollowUp.Data;
-using PatientFollowUp.Web.App_Data;
+using PatientFollowUp.Web.Application;
 using PatientFollowUp.Web.Controllers;
 using PatientFollowUp.Web.Models;
 

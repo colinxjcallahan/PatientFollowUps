@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="table-responsive">
-            <table id="followups-table" data-toggle="table" data-url="../api/FollowUps/GetOpenFollowUps" data-show-refresh="true" data-cache="false" >
+            <table id="followups-table" data-toggle="table" data-url="../api/FollowUps/GetOpenFollowUps" data-show-refresh="true" data-cache="false">
                 <thead>
                     <tr>
                         <th data-field="PatientName" data-sortable="true">PT Name</th>
@@ -46,11 +46,10 @@
             }
 
             function refreshTable() {
-                
-                $('#followups-table').bootstrapTable({
+                var $table = $('#followups-table').bootstrapTable({
 
-                   
-                }).refresh();
+                });
+                $table.bootstrapTable.refresh();
             }
 
 

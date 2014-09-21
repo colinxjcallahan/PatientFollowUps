@@ -123,3 +123,5 @@ C:\Projects\Premier\PatientFollowUp.Specs\obj\Debug\PatientFollowUp.Specs.dll
 C:\Projects\Premier\PatientFollowUp.Specs\obj\Debug\PatientFollowUp.Specs.pdb
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\log4net.dll
+C:\Projects\Premier\PatientFollowUp.Specs\bin\Debug\log4net.xml

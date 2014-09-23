@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FacilityType">
           <Key>
             <PropertyRef Name="FacilityTypeId" />
@@ -29,6 +29,7 @@
           <Property Name="FollowUpExamId" Type="bigint" />
           <Property Name="FollowUpClosedReasonId" Type="int" />
           <Property Name="FacilityTypeId" Type="int" />
+          <Property Name="OriginalFollowUpDate" Type="datetime" />
         </EntityType>
         <EntityType Name="FollowUpClosedReason">
           <Key>
@@ -36,6 +37,26 @@
           </Key>
           <Property Name="FollowUpClosedReasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FollowUpClosedReasonDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FollowUpHistory">
+          <Key>
+            <PropertyRef Name="FollowUpHistoryId" />
+          </Key>
+          <Property Name="FollowUpHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FollowUpID" Type="int" Nullable="false" />
+          <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReferrerID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+          <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="NoRelevantFollowUpFound" Type="bit" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="2000" />
+          <Property Name="FollowUpExamId" Type="bigint" />
+          <Property Name="FollowUpClosedReasonId" Type="int" />
+          <Property Name="FacilityTypeId" Type="int" />
+          <Property Name="OriginalFollowUpDate" Type="datetime" />
         </EntityType>
         <EntityType Name="FollowUpStatus">
           <Key>
@@ -49,6 +70,7 @@ warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key de
         <EntityType Name="Exam">
           <Key>
             <PropertyRef Name="ExamID" />
+            
           </Key>
           <Property Name="ExamID" Type="bigint" Nullable="false" />
           <Property Name="ExamType" Type="nchar" MaxLength="10" />
@@ -64,6 +86,11 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
         <EntityType Name="FollowUpWithSynonymData">
           <Key>
             <PropertyRef Name="FollowUpID" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="FollowUpID" Type="int" Nullable="false" />
           <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -95,10 +122,35 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FollowUpHistory_FacilityType">
+          <End Role="FacilityType" Type="Self.FacilityType" Multiplicity="0..1" />
+          <End Role="FollowUpHistory" Type="Self.FollowUpHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityType">
+              <PropertyRef Name="FacilityTypeId" />
+            </Principal>
+            <Dependent Role="FollowUpHistory">
+              <PropertyRef Name="FacilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FollowUpHistory_FollowUp">
+          <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
+          <End Role="FollowUpHistory" Type="Self.FollowUpHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FollowUp">
+              <PropertyRef Name="FollowUpID" />
+            </Principal>
+            <Dependent Role="FollowUpHistory">
+              <PropertyRef Name="FollowUpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DashboardModelStoreContainer">
           <EntitySet Name="FacilityType" EntityType="Self.FacilityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FollowUpHistory" EntityType="Self.FollowUpHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -137,9 +189,16 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
             <End Role="FacilityType" EntitySet="FacilityType" />
             <End Role="FollowUp" EntitySet="FollowUp" />
           </AssociationSet>
+          <AssociationSet Name="FK_FollowUpHistory_FacilityType" Association="Self.FK_FollowUpHistory_FacilityType">
+            <End Role="FacilityType" EntitySet="FacilityType" />
+            <End Role="FollowUpHistory" EntitySet="FollowUpHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="Self.FK_FollowUpHistory_FollowUp">
+            <End Role="FollowUp" EntitySet="FollowUp" />
+            <End Role="FollowUpHistory" EntitySet="FollowUpHistory" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -150,6 +209,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="FacilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FacilityTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="FollowUps" Relationship="Self.FK_FollowUp_FacilityType" FromRole="FacilityType" ToRole="FollowUp" />
+          <NavigationProperty Name="FollowUpHistories" Relationship="DashboardModel.FK_FollowUpHistory_FacilityType" FromRole="FacilityType" ToRole="FollowUpHistory" />
         </EntityType>
         <EntityType Name="FollowUp">
           <Key>
@@ -169,6 +229,8 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <Property Name="FollowUpClosedReasonId" Type="Int32" />
           <Property Name="FacilityTypeId" Type="Int32" />
           <NavigationProperty Name="FacilityType" Relationship="Self.FK_FollowUp_FacilityType" FromRole="FollowUp" ToRole="FacilityType" />
+          <Property Name="OriginalFollowUpDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FollowUpHistories" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUp" ToRole="FollowUpHistory" />
         </EntityType>
         <EntityType Name="FollowUpClosedReason">
           <Key>
@@ -242,7 +304,62 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
             <End Role="FacilityType" EntitySet="FacilityTypes" />
             <End Role="FollowUp" EntitySet="FollowUps" />
           </AssociationSet>
+          <EntitySet Name="FollowUpHistories" EntityType="DashboardModel.FollowUpHistory" />
+          <AssociationSet Name="FK_FollowUpHistory_FacilityType" Association="DashboardModel.FK_FollowUpHistory_FacilityType">
+            <End Role="FacilityType" EntitySet="FacilityTypes" />
+            <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="DashboardModel.FK_FollowUpHistory_FollowUp">
+            <End Role="FollowUp" EntitySet="FollowUps" />
+            <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FollowUpHistory">
+          <Key>
+            <PropertyRef Name="FollowUpHistoryId" />
+          </Key>
+          <Property Name="FollowUpHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FollowUpID" Type="Int32" Nullable="false" />
+          <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+          <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
+          <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpExamId" Type="Int64" />
+          <Property Name="FollowUpClosedReasonId" Type="Int32" />
+          <Property Name="FacilityTypeId" Type="Int32" />
+          <Property Name="OriginalFollowUpDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FacilityType" Relationship="DashboardModel.FK_FollowUpHistory_FacilityType" FromRole="FollowUpHistory" ToRole="FacilityType" />
+          <NavigationProperty Name="FollowUp" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUpHistory" ToRole="FollowUp" />
+        </EntityType>
+        <Association Name="FK_FollowUpHistory_FacilityType">
+          <End Type="DashboardModel.FacilityType" Role="FacilityType" Multiplicity="0..1" />
+          <End Type="DashboardModel.FollowUpHistory" Role="FollowUpHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityType">
+              <PropertyRef Name="FacilityTypeId" />
+            </Principal>
+            <Dependent Role="FollowUpHistory">
+              <PropertyRef Name="FacilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FollowUpHistory_FollowUp">
+          <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="1" />
+          <End Type="DashboardModel.FollowUpHistory" Role="FollowUpHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FollowUp">
+              <PropertyRef Name="FollowUpID" />
+            </Principal>
+            <Dependent Role="FollowUpHistory">
+              <PropertyRef Name="FollowUpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -260,6 +377,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
           <EntitySetMapping Name="FollowUps">
             <EntityTypeMapping TypeName="DashboardModel.FollowUp">
               <MappingFragment StoreEntitySet="FollowUp">
+                <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
                 <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
                 <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
                 <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
@@ -326,6 +444,27 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
                 <ScalarProperty Name="ReferrerMobilePhone" ColumnName="ReferrerMobilePhone" />
                 <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
                 <ScalarProperty Name="Report" ColumnName="Report" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FollowUpHistories">
+            <EntityTypeMapping TypeName="DashboardModel.FollowUpHistory">
+              <MappingFragment StoreEntitySet="FollowUpHistory">
+                <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
+                <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+                <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
+                <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
+                <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+                <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+                <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+                <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+                <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+                <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+                <ScalarProperty Name="FollowUpHistoryId" ColumnName="FollowUpHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

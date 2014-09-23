@@ -7,6 +7,7 @@
     <Property Name="FacilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FacilityTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="FollowUps" Relationship="Self.FK_FollowUp_FacilityType" FromRole="FacilityType" ToRole="FollowUp" />
+    <NavigationProperty Name="FollowUpHistories" Relationship="DashboardModel.FK_FollowUpHistory_FacilityType" FromRole="FacilityType" ToRole="FollowUpHistory" />
   </EntityType>
   <EntityType Name="FollowUp">
     <Key>
@@ -26,6 +27,8 @@
     <Property Name="FollowUpClosedReasonId" Type="Int32" />
     <Property Name="FacilityTypeId" Type="Int32" />
     <NavigationProperty Name="FacilityType" Relationship="Self.FK_FollowUp_FacilityType" FromRole="FollowUp" ToRole="FacilityType" />
+    <Property Name="OriginalFollowUpDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FollowUpHistories" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUp" ToRole="FollowUpHistory" />
   </EntityType>
   <EntityType Name="FollowUpClosedReason">
     <Key>
@@ -99,5 +102,60 @@
       <End Role="FacilityType" EntitySet="FacilityTypes" />
       <End Role="FollowUp" EntitySet="FollowUps" />
     </AssociationSet>
+    <EntitySet Name="FollowUpHistories" EntityType="DashboardModel.FollowUpHistory" />
+    <AssociationSet Name="FK_FollowUpHistory_FacilityType" Association="DashboardModel.FK_FollowUpHistory_FacilityType">
+      <End Role="FacilityType" EntitySet="FacilityTypes" />
+      <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="DashboardModel.FK_FollowUpHistory_FollowUp">
+      <End Role="FollowUp" EntitySet="FollowUps" />
+      <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="FollowUpHistory">
+    <Key>
+      <PropertyRef Name="FollowUpHistoryId" />
+    </Key>
+    <Property Name="FollowUpHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowUpID" Type="Int32" Nullable="false" />
+    <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+    <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
+    <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpExamId" Type="Int64" />
+    <Property Name="FollowUpClosedReasonId" Type="Int32" />
+    <Property Name="FacilityTypeId" Type="Int32" />
+    <Property Name="OriginalFollowUpDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FacilityType" Relationship="DashboardModel.FK_FollowUpHistory_FacilityType" FromRole="FollowUpHistory" ToRole="FacilityType" />
+    <NavigationProperty Name="FollowUp" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUpHistory" ToRole="FollowUp" />
+  </EntityType>
+  <Association Name="FK_FollowUpHistory_FacilityType">
+    <End Type="DashboardModel.FacilityType" Role="FacilityType" Multiplicity="0..1" />
+    <End Type="DashboardModel.FollowUpHistory" Role="FollowUpHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacilityType">
+        <PropertyRef Name="FacilityTypeId" />
+      </Principal>
+      <Dependent Role="FollowUpHistory">
+        <PropertyRef Name="FacilityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FollowUpHistory_FollowUp">
+    <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="1" />
+    <End Type="DashboardModel.FollowUpHistory" Role="FollowUpHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FollowUp">
+        <PropertyRef Name="FollowUpID" />
+      </Principal>
+      <Dependent Role="FollowUpHistory">
+        <PropertyRef Name="FollowUpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

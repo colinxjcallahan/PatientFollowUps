@@ -12,6 +12,7 @@
     <EntitySetMapping Name="FollowUps">
       <EntityTypeMapping TypeName="DashboardModel.FollowUp">
         <MappingFragment StoreEntitySet="FollowUp">
+          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
           <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
           <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
           <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
@@ -78,6 +79,27 @@
           <ScalarProperty Name="ReferrerMobilePhone" ColumnName="ReferrerMobilePhone" />
           <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
           <ScalarProperty Name="Report" ColumnName="Report" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpHistories">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpHistory">
+        <MappingFragment StoreEntitySet="FollowUpHistory">
+          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+          <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
+          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
+          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+          <ScalarProperty Name="FollowUpHistoryId" ColumnName="FollowUpHistoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

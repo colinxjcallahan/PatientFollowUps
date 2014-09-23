@@ -34,7 +34,7 @@
                 </thead>
             </table>
         </div>
-        <div class="modal fade" id="patientDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+        <div class="modal" id="patientDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
         <script>
             
             function dateFormatter(value) {
@@ -42,10 +42,7 @@
             }
 
             function refreshTable() {
-                var $table = $('#followups-table').bootstrapTable({
 
-                });
-                $table.bootstrapTable.refresh();
             }
 
 

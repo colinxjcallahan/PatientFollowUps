@@ -12,6 +12,9 @@
         <EntityTypeShape EntityType="DashboardModel.Exam" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DashboardModel.FollowUpWithSynonymData" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="DashboardModel.FK_FollowUp_FacilityType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpHistory" Width="1.5" PointX="8.25" PointY="0.875" />
+        <AssociationConnector Association="DashboardModel.FK_FollowUpHistory_FacilityType" />
+        <AssociationConnector Association="DashboardModel.FK_FollowUpHistory_FollowUp" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

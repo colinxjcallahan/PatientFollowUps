@@ -12,13 +12,9 @@ namespace PatientFollowUp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class FollowUp
+    public partial class FollowUpHistory
     {
-        public FollowUp()
-        {
-            this.FollowUpHistories = new HashSet<FollowUpHistory>();
-        }
-    
+        public int FollowUpHistoryId { get; set; }
         public int FollowUpID { get; set; }
         public string PatientMRN { get; set; }
         public string ReferrerID { get; set; }
@@ -35,6 +31,6 @@ namespace PatientFollowUp.Data
         public Nullable<System.DateTime> OriginalFollowUpDate { get; set; }
     
         public virtual FacilityType FacilityType { get; set; }
-        public virtual ICollection<FollowUpHistory> FollowUpHistories { get; set; }
+        public virtual FollowUp FollowUp { get; set; }
     }
 }

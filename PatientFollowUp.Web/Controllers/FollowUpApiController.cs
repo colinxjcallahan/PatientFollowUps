@@ -69,7 +69,11 @@ namespace PatientFollowUp.Web.Controllers
 
             var existingFollowUp = _repository.GetById<FollowUp>(saveFollowUpUpdatesInputModel.FollowUpId);
 
-            existingFollowUp.StatusID = (int) FollowUpStatusEnum.Closed;
+            if (saveFollowUpUpdatesInputModel.NewFollowUpDate == DateTime.MinValue)
+            {
+                existingFollowUp.StatusID = (int) FollowUpStatusEnum.Closed;
+            }
+
             existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
@@ -82,27 +86,31 @@ namespace PatientFollowUp.Web.Controllers
 
             _repository.Save(existingFollowUp);
 
+
+            var followUpHistory = _mapper.Map<FollowUp, FollowUpHistory>(existingFollowUp);
+            _repository.Save(followUpHistory);
+
+
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [Route("api/FollowUps/ChangeFollowUpDate")]
-        [HttpPost]
-        public HttpResponseMessage ChangeFollowUpDate(ChangeFollowUpDateInputModel changeFollowUpDateInputModel)
+        [Route("api/FollowUps/FollowUpHistory/{followUpID}")]
+        [HttpGet]
+        public HttpResponseMessage FollowUpHistory(int followUpID)
         {
-            if (changeFollowUpDateInputModel.NewFollowUpDate < _date.GetCurrentDate())
+            var followUpHistoryItems = _repository.Find<FollowUpHistory>(x => x.FollowUpID == followUpID);
+
+            var followUpHistoryViewModels =
+                followUpHistoryItems.Select(x => _mapper.Map<FollowUpHistory, FollowUpHistoryViewModel>(x)).ToList();
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                var validationResult = new ValidationResult();
-                validationResult.AddError("FollowUpId", "Follow Up Date must be later than today");
-                var validationException = new ValidationException(validationResult);
-                throw validationException;
-            }
+                Content =
+                    new ObjectContent<List<FollowUpHistoryViewModel>>(followUpHistoryViewModels,
+                        new JsonMediaTypeFormatter()),
 
-            var followUpToUpdate = _repository.GetById<FollowUp>(changeFollowUpDateInputModel.FollowUpId);
-            followUpToUpdate.FollowUpDate = changeFollowUpDateInputModel.NewFollowUpDate;
+            };
 
-            _repository.Save(followUpToUpdate);
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }

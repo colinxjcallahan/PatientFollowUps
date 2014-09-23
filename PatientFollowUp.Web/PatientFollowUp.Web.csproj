@@ -191,6 +191,7 @@
     <Compile Include="Models\ChangeFollowUpDateInputModel.cs" />
     <Compile Include="Models\ExamViewModel.cs" />
     <Compile Include="Models\FollowUpClosedReasonViewModel.cs" />
+    <Compile Include="Models\FollowUpHistoryViewModel.cs" />
     <Compile Include="Models\FollowUpViewModel.cs" />
     <Compile Include="Models\OpenFollowUpsViewModel.cs" />
     <Compile Include="Models\PatientDetailsViewModel.cs" />

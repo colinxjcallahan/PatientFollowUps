@@ -31,5 +31,6 @@ namespace PatientFollowUp.Data
         public virtual DbSet<FollowUpStatu> FollowUpStatus { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<FollowUpWithSynonymData> FollowUpWithSynonymDatas { get; set; }
+        public virtual DbSet<FollowUpHistory> FollowUpHistories { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace PatientFollowUp.Web
             AutoMapper.Mapper.CreateMap<Exam, ExamViewModel>();
             AutoMapper.Mapper.CreateMap<SaveFollowUpUpdatesInputModel, FollowUp>();
             AutoMapper.Mapper.CreateMap<FollowUpClosedReason, FollowUpClosedReasonViewModel>();
+            AutoMapper.Mapper.CreateMap<FollowUp, FollowUpHistory>();
+            AutoMapper.Mapper.CreateMap<FollowUpHistory, FollowUpHistoryViewModel>();
 
         }
     }

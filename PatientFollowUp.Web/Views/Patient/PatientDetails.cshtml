@@ -37,6 +37,9 @@
         <script>
             $(document).ready(function () {
 
+                $('#followup-history-table').bootstrapTable({
+                });
+
                 $("#NewFollowUpDate").datepicker();
 
 
@@ -227,8 +230,21 @@
                                 <a href="http://ris.premierradiology.com/registration/registration.aspx?fp=1&pt=@Model.FollowUp.PatientMRN" target="_blank">Schedule FollowUp</a>
                                
                             </div>
+
                         </div>
-                    </div>
+                        <div class="table-responsive" style="width: 48%; float: left; color: white;  background-color: #999999; padding: 10px; margin:3px;">
+                            Follow up change history<br/><br/>
+                            <table id="followup-history-table" data-toggle="table" data-url="../api/FollowUps/FollowUpHistory/@Model.FollowUp.FollowUpID">
+                                <thead>
+                                    <tr>
+                                        <th data-field="FollowUpCode" data-sortable="true">Code</th>
+                                        <th data-field="FollowUpDate" data-sortable="true" data-formatter="dateFormatter">Follow-up Date</th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
                 </div>                
                 <div class="modal-footer" style="position: relative; clear: both;">
                     <button id="btn_submit" type="button" class="btn btn-primary">Submit</button>

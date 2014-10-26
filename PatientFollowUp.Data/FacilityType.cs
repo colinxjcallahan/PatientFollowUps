@@ -14,16 +14,7 @@ namespace PatientFollowUp.Data
     
     public partial class FacilityType
     {
-        public FacilityType()
-        {
-            this.FollowUps = new HashSet<FollowUp>();
-            this.FollowUpHistories = new HashSet<FollowUpHistory>();
-        }
-    
         public int FacilityTypeId { get; set; }
         public string FacilityTypeDescription { get; set; }
-    
-        public virtual ICollection<FollowUp> FollowUps { get; set; }
-        public virtual ICollection<FollowUpHistory> FollowUpHistories { get; set; }
     }
 }

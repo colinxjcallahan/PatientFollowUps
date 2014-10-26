@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CallLog">
+    <Key>
+      <PropertyRef Name="CallLogId" />
+    </Key>
+    <Property Name="CallLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CallLogText" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CallLogTypeId" Type="int" />
+    <Property Name="FollowUpId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallLogType">
+    <Key>
+      <PropertyRef Name="CallLogTypeId" />
+    </Key>
+    <Property Name="CallLogTypeId" Type="int" Nullable="false" />
+    <Property Name="CallLogTypeText" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="FacilityType">
     <Key>
       <PropertyRef Name="FacilityTypeId" />
@@ -25,6 +41,7 @@
     <Property Name="FollowUpClosedReasonId" Type="int" />
     <Property Name="FacilityTypeId" Type="int" />
     <Property Name="OriginalFollowUpDate" Type="datetime" />
+    <Property Name="UpdatedByUserId" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="FollowUpClosedReason">
     <Key>
@@ -52,6 +69,7 @@
     <Property Name="FollowUpClosedReasonId" Type="int" />
     <Property Name="FacilityTypeId" Type="int" />
     <Property Name="OriginalFollowUpDate" Type="datetime" />
+    <Property Name="UpdatedByUserId" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="FollowUpStatus">
     <Key>
@@ -99,27 +117,27 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Report" Type="varchar(max)" />
   </EntityType>
-  <Association Name="FK_FollowUp_FacilityType">
-    <End Role="FacilityType" Type="Self.FacilityType" Multiplicity="0..1" />
-    <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="*" />
+  <Association Name="FK_CallLog_CallLogType">
+    <End Role="CallLogType" Type="Self.CallLogType" Multiplicity="0..1" />
+    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="FacilityType">
-        <PropertyRef Name="FacilityTypeId" />
+      <Principal Role="CallLogType">
+        <PropertyRef Name="CallLogTypeId" />
       </Principal>
-      <Dependent Role="FollowUp">
-        <PropertyRef Name="FacilityTypeId" />
+      <Dependent Role="CallLog">
+        <PropertyRef Name="CallLogTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FollowUpHistory_FacilityType">
-    <End Role="FacilityType" Type="Self.FacilityType" Multiplicity="0..1" />
-    <End Role="FollowUpHistory" Type="Self.FollowUpHistory" Multiplicity="*" />
+  <Association Name="FK_CallLog_FollowUp">
+    <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
+    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="FacilityType">
-        <PropertyRef Name="FacilityTypeId" />
+      <Principal Role="FollowUp">
+        <PropertyRef Name="FollowUpID" />
       </Principal>
-      <Dependent Role="FollowUpHistory">
-        <PropertyRef Name="FacilityTypeId" />
+      <Dependent Role="CallLog">
+        <PropertyRef Name="FollowUpId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -136,6 +154,8 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="CallLog" EntityType="Self.CallLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallLogType" EntityType="Self.CallLogType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FacilityType" EntityType="Self.FacilityType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
@@ -174,13 +194,13 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[Report] AS [Report]
     FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK_FollowUp_FacilityType" Association="Self.FK_FollowUp_FacilityType">
-      <End Role="FacilityType" EntitySet="FacilityType" />
-      <End Role="FollowUp" EntitySet="FollowUp" />
+    <AssociationSet Name="FK_CallLog_CallLogType" Association="Self.FK_CallLog_CallLogType">
+      <End Role="CallLogType" EntitySet="CallLogType" />
+      <End Role="CallLog" EntitySet="CallLog" />
     </AssociationSet>
-    <AssociationSet Name="FK_FollowUpHistory_FacilityType" Association="Self.FK_FollowUpHistory_FacilityType">
-      <End Role="FacilityType" EntitySet="FacilityType" />
-      <End Role="FollowUpHistory" EntitySet="FollowUpHistory" />
+    <AssociationSet Name="FK_CallLog_FollowUp" Association="Self.FK_CallLog_FollowUp">
+      <End Role="FollowUp" EntitySet="FollowUp" />
+      <End Role="CallLog" EntitySet="CallLog" />
     </AssociationSet>
     <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="Self.FK_FollowUpHistory_FollowUp">
       <End Role="FollowUp" EntitySet="FollowUp" />

@@ -1,4 +1,4 @@
-2014-09-21 18:15:01,555 [18] ERROR PatientFollowUp.Web.Application.GlobalExceptionFilter - Patient FollowUps Error
+2014-10-19 14:05:53,522 [16] ERROR PatientFollowUp.Web.Application.GlobalExceptionFilter - Patient FollowUps Error
 PatientFollowUp.Web.Application.ValidationException: Exception of type 'PatientFollowUp.Web.Application.ValidationException' was thrown.
    at PatientFollowUp.Web.Controllers.FollowUpApiController.SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel) in c:\Projects\Premier\PatientFollowUp.Web\Controllers\FollowUpApiController.cs:line 70
    at lambda_method(Closure , Object , Object[] )
@@ -19,7 +19,7 @@ PatientFollowUp.Web.Application.ValidationException: Exception of type 'PatientF
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
-2014-09-21 18:15:01,632 [18] ERROR PatientFollowUp.Web.Application.GlobalExceptionFilter - Patient FollowUps Error
+2014-10-19 14:05:53,615 [16] ERROR PatientFollowUp.Web.Application.GlobalExceptionFilter - Patient FollowUps Error
 PatientFollowUp.Web.Application.ValidationException: Exception of type 'PatientFollowUp.Web.Application.ValidationException' was thrown.
    at PatientFollowUp.Web.Controllers.FollowUpApiController.SaveFollowUpUpdates(SaveFollowUpUpdatesInputModel saveFollowUpUpdatesInputModel) in c:\Projects\Premier\PatientFollowUp.Web\Controllers\FollowUpApiController.cs:line 70
    at lambda_method(Closure , Object , Object[] )

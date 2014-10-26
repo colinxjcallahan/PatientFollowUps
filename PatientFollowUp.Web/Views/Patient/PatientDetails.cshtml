@@ -4,46 +4,52 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <title>Patient Details</title>
 
-        <style>
-            .first-column {
-                width: 33%;
-                float: left;
-            }
+<style>
+    .first-column {
+        width: 33%;
+        float: left;
+    }
 
-            .second-column {
-                width: 33%;
-                float: left;
-            }
+    .second-column {
+        width: 33%;
+        float: left;
+    }
 
-            .third-column {
-                width: 33%;
-                float: left;
-            }
+    .third-column {
+        width: 33%;
+        float: left;
+    }
 
-            .topbox {
-                width: 98%;  color: white; background-color: #76BAE7; padding: 10px; margin: 3px;overflow: hidden;
-            }
+    .topbox {
+        width: 99%;  color: white; background-color: #76BAE7; padding: 10px; margin: 3px;overflow: hidden;
+    }
 
-        </style>
-        <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
+    .datepicker{z-index: 1151 !important;}
+
+</style>
+
         
+
+
+
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 $('#followup-history-table').bootstrapTable({
+                
                 });
 
-                $("#NewFollowUpDate").datepicker();
+                
+                $('#NewFollowUpDate').datepicker().on('changeDate', function (e) {
+                    $(this).datepicker('hide');
+                });
 
 
-                $("#no_relevant_followup").click(function () {
+
+
+                $("#no_relevant_followup").click(function() {
                     $(":radio").prop('checked', false);
                     $("#NewFollowUpDate").val('');
                 });
@@ -63,23 +69,22 @@
                 $("#btn_close").click(function() {
                     $('#patientDetailModal').modal('hide');
                 });
-                
 
-                $("#btn_submit").click(function () {
 
-                    
+                $("#btn_submit").click(function() {
+
+                    var loggedInUserId = GetUrlParameter('UserID');
 
                     var followUpExamId = $('input:radio[name="cb_exam"]:checked').val();
                     if (followUpExamId) {
                         followUpExamId = followUpExamId.replace('cb_exam_', '');
                     }
-                    var noRelevantFollowupFound = $('input[name ="no_relevant_followup"]').is(":checked");
+                    var noRelevantFollowupFound = $('input[name="no_relevant_followup"]').is(":checked");
                     var followUpClosedReasonId = $("#FollowUpClosedReasonId").val();
                     var comments = $("#comments").val();
-                    var followUpId = $("#FollowUpId").val();                    
+                    var followUpId = $("#FollowUpId").val();
                     var newFollowUpDate = $("#NewFollowUpDate").val();
 
-                    
 
                     $.ajax({
                         url: "../api/FollowUps/SaveFollowUpUpdates",
@@ -93,13 +98,14 @@
                             "Comments": comments,
                             "FollowUpClosedReasonId": followUpClosedReasonId,
                             "NewFollowUpDate": newFollowUpDate,
+                            "LoggedInUserId": loggedInUserId
                         }),
                         statusCode: {
-                            200: function (xhr, textStatus) {
+                            200: function(xhr, textStatus) {
                                 $('#patientDetailModal').modal('hide');
                                 refreshTable();
                             },
-                            400: function (data) {                                
+                            400: function(data) {
 
                                 $("#error-message").empty();
 
@@ -116,141 +122,168 @@
                     });
                 });
             });
+
+
+            function GetUrlParameter(parameter) {
+
+                var pageUrl = window.location.search.substring(1);
+                var urLVariables = pageUrl.split('&');
+
+                for (var i = 0; i < urLVariables.length; i++) {
+
+                    var sParameterName = urLVariables[i].split('=');
+
+                    if (sParameterName[0] == parameter) {
+
+                        return sParameterName[1];
+
+                    }
+                }
+            }
+
+
         </script>
-    </head>
-    <body>
-        <div class="modal-dialog" style="width: 800px;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <div id="error-message" style="color: red"></div>
-                    <h4 class="modal-title" id="myModalLabel">Patient Information</h4>
+
+<div class="modal-dialog" style="width: 1000px;">
+    <div class="modal-content" style="width: 100%">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <div id="error-message" style="color: red"></div>
+            <h4 class="modal-title" id="myModalLabel">Patient Information</h4>
+        </div>
+        <div class="modal-body">
+            <div id="message-box"></div>
+            <div class="topbox">
+                <div class="first-column">
+                    <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID" />
+                    <table style="width: 100%">
+                        <tr>
+                            <td>Name: @Model.FollowUp.PatientFirstName @Model.FollowUp.PatientLastName</td>
+                        </tr>
+                        <tr>
+                            <td>Follow Up: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Patient Phone: @(!string.IsNullOrEmpty(Model.FollowUp.PatientHomePhone) ? Model.FollowUp.PatientHomePhone : Model.FollowUp.PatientMobilePhone)</td>
+                        </tr>
+                    </table>
                 </div>
-                <div id="patientDetailModalBody" class="modal-body" style="margin-bottom: 50px;">
-                    <div id="message-box"></div>
-                    <div class="topbox">
-                        <div class="first-column">
-                            <input type="hidden" id="FollowUpId" value="@Model.FollowUp.FollowUpID"/>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td>Name: @Model.FollowUp.PatientFirstName @Model.FollowUp.PatientLastName</td>
-                                </tr>
-                                <tr>
-                                    <td>Follow Up: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
-                                </tr>
-                                <tr>
-                                    <td>Patient Phone: @(!string.IsNullOrEmpty(Model.FollowUp.PatientHomePhone) ? Model.FollowUp.PatientHomePhone : Model.FollowUp.PatientMobilePhone)</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="second-column">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td>Accession #: <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@Model.FollowUp.AccessionNumber" style="color:white; text-decoration: underline;" target="_blank"> @Model.FollowUp.AccessionNumber</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Referrer: @Model.FollowUp.ReferrerFirstName @Model.FollowUp.ReferrerLastName</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="third-column">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td>Exam Type: @Model.FollowUp.ExamType</td>
-                                </tr>
-                                <tr>
-                                    <td>Ref Phone: @(!string.IsNullOrEmpty(Model.FollowUp.ReferrerPhone) ? Model.FollowUp.ReferrerPhone : Model.FollowUp.ReferrerMobilePhone)</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div id="bottomBox"  style="clear: both; width: 100%;">
-                        
-                        <div style="width: 49%; float: left;  background-color: #F3B25E; padding: 10px; margin:3px;">
-                            @Html.Raw(Model.FollowUp.Report)
-                        </div>
-                        <div style="width: 48%; float: left;  background-color: #71D398; padding: 10px; margin:3px;">
-                            <div>
-                                @if (Model.Exams.Count > 0)
-                                {
-
-
-                                    <table style="width: 100%; border-spacing: 3px;">
-                                        <tr>
-                                            <td style="padding: 3px; width: 5%;">&nbsp;</td>
-                                            <th style="padding: 3px; width: 25%">Exam Date</th>
-                                            <th style="padding: 3px;">Type</th>
-                                            <th style="padding: 3px;">Description</th>
-                                        </tr>
-                                        @foreach (var exam in Model.Exams)
-                                        {
-                                            <tr data-row-key="@exam.ExamID">
-                                                <td style="padding: 3px;"><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.AccessionNumber" /></td>
-                                                <td style="padding: 3px;">@if (exam.ScheduleDate.HasValue)
-                                                                          {
-                                                                              <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
-                                                                                  @exam.ScheduleDate.Value.ToShortDateString()
-                                                                              </a>
-                                                                          }</td>
-                                                <td style="padding: 3px;">
-                                                    
-                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
-                                                        @exam.ExamType
-                                                    </a>
-                                                </td>
-                                                <td style="padding: 3px;">
-                                                    <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
-                                                        @exam.Description
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </table>
-                                    <hr/>
-                                    
-                                }
-                            </div>
-                            <div>
-                                <input type="checkbox" id="no_relevant_followup" name="no_relevant_followup" value="no_relevant_followup"/>NO RELEVANT FOLLOWUP<br/>
-                                <select id="FollowUpClosedReasonId">
-                                    <option id="0">--No follow up selected reason</option>
-                                    @foreach (var followUpClosedReason in Model.FollowUpClosedReasons)
-                                    {
-                                        <option value="@followUpClosedReason.FollowUpClosedReasonId">@followUpClosedReason.FollowUpClosedReasonDescription</option>
-                                    }
-                                </select><br/>
-                                Comments <textarea id="comments" rows="4" cols="50"></textarea>
-                                
-                                <hr/>
-
-                                Change FollowUp Date: <input type="text" id="NewFollowUpDate" /><br/>
-                                
-                                <a href="http://ris.premierradiology.com/registration/registration.aspx?fp=1&pt=@Model.FollowUp.PatientMRN" target="_blank">Schedule FollowUp</a>
-                               
-                            </div>
-
-                        </div>
-                        <div class="table-responsive" style="width: 48%; float: left; color: white;  background-color: #999999; padding: 10px; margin:3px;">
-                            Follow up change history<br/><br/>
-                            <table id="followup-history-table" data-toggle="table" data-url="../api/FollowUps/FollowUpHistory/@Model.FollowUp.FollowUpID">
-                                <thead>
-                                    <tr>
-                                        <th data-field="FollowUpCode" data-sortable="true">Code</th>
-                                        <th data-field="FollowUpDate" data-sortable="true" data-formatter="dateFormatter">Follow-up Date</th>
-
-                                    </tr>
-                                </thead>
-                            </table>
-
-                        </div>
-                </div>                
-                <div class="modal-footer" style="position: relative; clear: both;">
-                    <button id="btn_submit" type="button" class="btn btn-primary">Submit</button>
-                    <button id="btn_close" type="button" class="btn">Cancel</button>
+                <div class="second-column">
+                    <table style="width: 100%">
+                        <tr>
+                            <td>Accession #: <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@Model.FollowUp.AccessionNumber" style="color:white; text-decoration: underline;" target="_blank"> @Model.FollowUp.AccessionNumber</a></td>
+                        </tr>
+                        <tr>
+                            <td>Referrer: @Model.FollowUp.ReferrerFirstName @Model.FollowUp.ReferrerLastName</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="third-column">
+                    <table style="width: 100%">
+                        <tr>
+                            <td>Exam Type: @Model.FollowUp.ExamType</td>
+                        </tr>
+                        <tr>
+                            <td>Ref Phone: @(!string.IsNullOrEmpty(Model.FollowUp.ReferrerPhone) ? Model.FollowUp.ReferrerPhone : Model.FollowUp.ReferrerMobilePhone)</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <div id="bottomBox" style="clear: both; width: 100%;">
+
+                <div style="width: 33%; float: left;  background-color: #F3B25E; padding: 10px; margin:3px;">
+                    @Html.Raw(Model.FollowUp.Report)
+                </div>
+
+                <div style="width: 33%; float: left;">
+                    <div style="background-color: #71D398; padding: 10px; margin:3px;">
+                        <div>
+                            @if (Model.Exams.Count > 0)
+                        {
+
+
+                        <table style="width: 100%; border-spacing: 3px;">
+                            <tr>
+                                <td style="padding: 3px; width: 5%;">&nbsp;</td>
+                                <th style="padding: 3px; width: 25%">Exam Date</th>
+                                <th style="padding: 3px;">Type</th>
+                                <th style="padding: 3px;">Description</th>
+                            </tr>
+                            @foreach (var exam in Model.Exams)
+                                {
+                                <tr data-row-key="@exam.ExamID">
+                                    <td style="padding: 3px;"><input type="radio" class="radio" name="cb_exam" value="cb_exam_@exam.AccessionNumber" /></td>
+                                    <td style="padding: 3px;">
+                                        @if (exam.ScheduleDate.HasValue)
+                                            {
+                                            <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                                @exam.ScheduleDate.Value.ToShortDateString()
+                                            </a>
+                                            }
+                                    </td>
+                                    <td style="padding: 3px;">
+
+                                        <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                            @exam.ExamType
+                                        </a>
+                                    </td>
+                                    <td style="padding: 3px;">
+                                        <a href="http://ris.premierradiology.com/Reports/radiologyreport.aspx?acc=@exam.AccessionNumber" style="color:black; text-decoration: underline;" target="_blank">
+                                            @exam.Description
+                                        </a>
+                                    </td>
+                                </tr>
+                                }
+                        </table>
+                        <hr />
+
+                        }
+                        </div>
+                        <div>
+                            <input type="checkbox" id="no_relevant_followup" name="no_relevant_followup" value="no_relevant_followup" />NO RELEVANT FOLLOWUP<br />
+                            <select id="FollowUpClosedReasonId">
+                                <option id="0">--No follow up selected reason</option>
+                                @foreach (var followUpClosedReason in Model.FollowUpClosedReasons)
+                            {
+                        <option value="@followUpClosedReason.FollowUpClosedReasonId">@followUpClosedReason.FollowUpClosedReasonDescription</option>
+                            }
+                            </select><br />
+                            Comments <textarea id="comments" rows="4" cols="50"></textarea>
+
+                            <hr />
+
+                            Change FollowUp Date: <input type="text" id="NewFollowUpDate" class="datepicker" /><br />
+
+                            <a href="http://ris.premierradiology.com/registration/registration.aspx?fp=1&pt=@Model.FollowUp.PatientMRN" target="_blank">Schedule FollowUp</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="width: 33%; float: left;">
+                    <div class="table-responsive" style="color: white;  background-color: #999999; padding: 10px; margin:3px;">
+                        Follow up change history<br /><br />
+                        <table id="followup-history-table" data-toggle="table" data-url="../api/FollowUps/FollowUpHistory/@Model.FollowUp.FollowUpID">
+                            <thead>
+                                <tr>
+                                    <th data-field="FollowUpCode" data-sortable="true">Code</th>
+                                    <th data-field="FollowUpDate" data-sortable="true" data-formatter="dateFormatter">Follow-up Date</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="position: relative; clear: both;">
+                <button id="btn_submit" type="button" class="btn btn-primary">Submit</button>
+                <button id="btn_close" type="button" class="btn">Cancel</button>
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>

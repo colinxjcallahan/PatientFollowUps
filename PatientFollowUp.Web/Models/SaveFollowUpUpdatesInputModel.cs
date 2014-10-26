@@ -12,5 +12,7 @@ namespace PatientFollowUp.Web.Models
         public string Comments { get; set; }
 
         public DateTime NewFollowUpDate { get; set; }
+
+        public string LoggedInUserId { get; set; }
     }
 }

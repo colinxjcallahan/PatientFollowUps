@@ -29,8 +29,8 @@ namespace PatientFollowUp.Data
         public Nullable<int> FollowUpClosedReasonId { get; set; }
         public Nullable<int> FacilityTypeId { get; set; }
         public Nullable<System.DateTime> OriginalFollowUpDate { get; set; }
+        public string UpdatedByUserId { get; set; }
     
-        public virtual FacilityType FacilityType { get; set; }
         public virtual FollowUp FollowUp { get; set; }
     }
 }

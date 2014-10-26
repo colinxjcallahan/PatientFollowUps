@@ -17,6 +17,7 @@ namespace PatientFollowUp.Data
         public FollowUp()
         {
             this.FollowUpHistories = new HashSet<FollowUpHistory>();
+            this.CallLogs = new HashSet<CallLog>();
         }
     
         public int FollowUpID { get; set; }
@@ -33,8 +34,9 @@ namespace PatientFollowUp.Data
         public Nullable<int> FollowUpClosedReasonId { get; set; }
         public Nullable<int> FacilityTypeId { get; set; }
         public Nullable<System.DateTime> OriginalFollowUpDate { get; set; }
+        public string UpdatedByUserId { get; set; }
     
-        public virtual FacilityType FacilityType { get; set; }
         public virtual ICollection<FollowUpHistory> FollowUpHistories { get; set; }
+        public virtual ICollection<CallLog> CallLogs { get; set; }
     }
 }

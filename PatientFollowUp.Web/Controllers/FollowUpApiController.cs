@@ -78,6 +78,7 @@ namespace PatientFollowUp.Web.Controllers
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
             existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
             existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
+            existingFollowUp.UpdatedByUserId = saveFollowUpUpdatesInputModel.LoggedInUserId;
 
             if (!(saveFollowUpUpdatesInputModel.NewFollowUpDate == DateTime.MinValue))
             {

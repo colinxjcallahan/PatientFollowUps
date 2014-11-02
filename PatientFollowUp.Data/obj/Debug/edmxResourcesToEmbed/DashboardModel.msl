@@ -1,11 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DashboardModelStoreContainer" CdmEntityContainer="DashboardEntities">
-    <EntitySetMapping Name="FacilityTypes">
-      <EntityTypeMapping TypeName="DashboardModel.FacilityType">
-        <MappingFragment StoreEntitySet="FacilityType">
+    <EntitySetMapping Name="CallLogs">
+      <EntityTypeMapping TypeName="DashboardModel.CallLog">
+        <MappingFragment StoreEntitySet="CallLog">
+          <ScalarProperty Name="CallLogId" ColumnName="CallLogId" />
+          <ScalarProperty Name="CallLogText" ColumnName="CallLogText" />
+          <ScalarProperty Name="CallLogTypeId" ColumnName="CallLogTypeId" />
+          <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallLogTypes">
+      <EntityTypeMapping TypeName="DashboardModel.CallLogType">
+        <MappingFragment StoreEntitySet="CallLogType">
+          <ScalarProperty Name="CallLogTypeId" ColumnName="CallLogTypeId" />
+          <ScalarProperty Name="CallLogTypeText" ColumnName="CallLogTypeText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUps">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUp">
+        <MappingFragment StoreEntitySet="FollowUp">
+          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+          <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
           <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
-          <ScalarProperty Name="FacilityTypeDescription" ColumnName="FacilityTypeDescription" />
+          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
+          <ScalarProperty Name="UpdatedByUserId" ColumnName="UpdatedByUserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -14,6 +45,40 @@
         <MappingFragment StoreEntitySet="FollowUpClosedReason">
           <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
           <ScalarProperty Name="FollowUpClosedReasonDescription" ColumnName="FollowUpClosedReasonDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpCodes">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpCode">
+        <MappingFragment StoreEntitySet="FollowUpCode">
+          <ScalarProperty Name="FollowUpCode_Id" ColumnName="FollowUpCode_Id" />
+          <ScalarProperty Name="FollowUpCode1" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="FollowUpType" ColumnName="FollowUpType" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="PathologyCode" ColumnName="PathologyCode" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpHistories">
+      <EntityTypeMapping TypeName="DashboardModel.FollowUpHistory">
+        <MappingFragment StoreEntitySet="FollowUpHistory">
+          <ScalarProperty Name="FollowUpHistoryId" ColumnName="FollowUpHistoryId" />
+          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
+          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
+          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
+          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
+          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
+          <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
+          <ScalarProperty Name="UpdatedByUserId" ColumnName="UpdatedByUserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -47,6 +112,7 @@
           <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
           <ScalarProperty Name="ExamType" ColumnName="ExamType" />
           <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
           <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
           <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
           <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
@@ -59,67 +125,6 @@
           <ScalarProperty Name="ReferrerMobilePhone" ColumnName="ReferrerMobilePhone" />
           <ScalarProperty Name="FollowUpStatus" ColumnName="FollowUpStatus" />
           <ScalarProperty Name="Report" ColumnName="Report" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FollowUps">
-      <EntityTypeMapping TypeName="DashboardModel.FollowUp">
-        <MappingFragment StoreEntitySet="FollowUp">
-          <ScalarProperty Name="UpdatedByUserId" ColumnName="UpdatedByUserId" />
-          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
-          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
-          <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
-          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
-          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
-          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
-          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
-          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
-          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
-          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FollowUpHistories">
-      <EntityTypeMapping TypeName="DashboardModel.FollowUpHistory">
-        <MappingFragment StoreEntitySet="FollowUpHistory">
-          <ScalarProperty Name="UpdatedByUserId" ColumnName="UpdatedByUserId" />
-          <ScalarProperty Name="OriginalFollowUpDate" ColumnName="OriginalFollowUpDate" />
-          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
-          <ScalarProperty Name="FollowUpClosedReasonId" ColumnName="FollowUpClosedReasonId" />
-          <ScalarProperty Name="FollowUpExamId" ColumnName="FollowUpExamId" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="NoRelevantFollowUpFound" ColumnName="NoRelevantFollowUpFound" />
-          <ScalarProperty Name="FollowUpCode" ColumnName="FollowUpCode" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
-          <ScalarProperty Name="ExamType" ColumnName="ExamType" />
-          <ScalarProperty Name="AccessionNumber" ColumnName="AccessionNumber" />
-          <ScalarProperty Name="ReferrerID" ColumnName="ReferrerID" />
-          <ScalarProperty Name="PatientMRN" ColumnName="PatientMRN" />
-          <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
-          <ScalarProperty Name="FollowUpHistoryId" ColumnName="FollowUpHistoryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CallLogs">
-      <EntityTypeMapping TypeName="DashboardModel.CallLog">
-        <MappingFragment StoreEntitySet="CallLog">
-          <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
-          <ScalarProperty Name="CallLogTypeId" ColumnName="CallLogTypeId" />
-          <ScalarProperty Name="CallLogText" ColumnName="CallLogText" />
-          <ScalarProperty Name="CallLogId" ColumnName="CallLogId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CallLogTypes">
-      <EntityTypeMapping TypeName="DashboardModel.CallLogType">
-        <MappingFragment StoreEntitySet="CallLogType">
-          <ScalarProperty Name="CallLogTypeText" ColumnName="CallLogTypeText" />
-          <ScalarProperty Name="CallLogTypeId" ColumnName="CallLogTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

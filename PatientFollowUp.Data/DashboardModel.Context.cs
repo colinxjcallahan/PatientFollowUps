@@ -25,14 +25,14 @@ namespace PatientFollowUp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<FacilityType> FacilityTypes { get; set; }
+        public virtual DbSet<CallLog> CallLogs { get; set; }
+        public virtual DbSet<CallLogType> CallLogTypes { get; set; }
+        public virtual DbSet<FollowUp> FollowUps { get; set; }
         public virtual DbSet<FollowUpClosedReason> FollowUpClosedReasons { get; set; }
+        public virtual DbSet<FollowUpCode> FollowUpCodes { get; set; }
+        public virtual DbSet<FollowUpHistory> FollowUpHistories { get; set; }
         public virtual DbSet<FollowUpStatu> FollowUpStatus { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<FollowUpWithSynonymData> FollowUpWithSynonymDatas { get; set; }
-        public virtual DbSet<FollowUp> FollowUps { get; set; }
-        public virtual DbSet<FollowUpHistory> FollowUpHistories { get; set; }
-        public virtual DbSet<CallLog> CallLogs { get; set; }
-        public virtual DbSet<CallLogType> CallLogTypes { get; set; }
     }
 }

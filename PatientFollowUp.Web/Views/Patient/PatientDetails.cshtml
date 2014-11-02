@@ -163,7 +163,10 @@
                             <td>Name: @Model.FollowUp.PatientFirstName @Model.FollowUp.PatientLastName</td>
                         </tr>
                         <tr>
-                            <td>Follow Up: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
+                            <td>Follow-Up Date: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Original Follow-Up Date: @Model.FollowUp.OriginalFollowUpDate.ToShortDateString()</td>
                         </tr>
                         <tr>
                             <td>Patient Phone: @(!string.IsNullOrEmpty(Model.FollowUp.PatientHomePhone) ? Model.FollowUp.PatientHomePhone : Model.FollowUp.PatientMobilePhone)</td>

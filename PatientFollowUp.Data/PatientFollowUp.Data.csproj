@@ -75,13 +75,13 @@
     <Compile Include="Exam.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FacilityType.cs">
-      <DependentUpon>DashboardModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="FollowUp.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUpClosedReason.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FollowUpCode.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUpHistory.cs">

@@ -12,9 +12,13 @@ namespace PatientFollowUp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class FacilityType
+    public partial class FollowUpCode
     {
-        public int FacilityTypeId { get; set; }
-        public string FacilityTypeDescription { get; set; }
+        public int FollowUpCode_Id { get; set; }
+        public string FollowUpCode1 { get; set; }
+        public string FollowUpType { get; set; }
+        public string ExamType { get; set; }
+        public string PathologyCode { get; set; }
+        public Nullable<short> Days { get; set; }
     }
 }

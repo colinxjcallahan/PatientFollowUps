@@ -19,6 +19,7 @@ namespace PatientFollowUp.Data
         public long AccessionNumber { get; set; }
         public string ExamType { get; set; }
         public System.DateTime FollowUpDate { get; set; }
+        public System.DateTime OriginalFollowUpDate { get; set; }
         public string FollowUpCode { get; set; }
         public Nullable<long> FollowUpExamId { get; set; }
         public string PatientFirstName { get; set; }

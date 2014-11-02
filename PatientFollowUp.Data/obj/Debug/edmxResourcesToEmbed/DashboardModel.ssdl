@@ -16,13 +16,6 @@
     <Property Name="CallLogTypeId" Type="int" Nullable="false" />
     <Property Name="CallLogTypeText" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="FacilityType">
-    <Key>
-      <PropertyRef Name="FacilityTypeId" />
-    </Key>
-    <Property Name="FacilityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FacilityTypeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="FollowUp">
     <Key>
       <PropertyRef Name="FollowUpID" />
@@ -40,7 +33,7 @@
     <Property Name="FollowUpExamId" Type="bigint" />
     <Property Name="FollowUpClosedReasonId" Type="int" />
     <Property Name="FacilityTypeId" Type="int" />
-    <Property Name="OriginalFollowUpDate" Type="datetime" />
+    <Property Name="OriginalFollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="UpdatedByUserId" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="FollowUpClosedReason">
@@ -49,6 +42,17 @@
     </Key>
     <Property Name="FollowUpClosedReasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FollowUpClosedReasonDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FollowUpCode">
+    <Key>
+      <PropertyRef Name="FollowUpCode_Id" />
+    </Key>
+    <Property Name="FollowUpCode_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FollowUpCode" Type="varchar" MaxLength="8" />
+    <Property Name="FollowUpType" Type="varchar" MaxLength="170" />
+    <Property Name="ExamType" Type="nvarchar" MaxLength="10" />
+    <Property Name="PathologyCode" Type="nchar" MaxLength="10" />
+    <Property Name="Days" Type="smallint" />
   </EntityType>
   <EntityType Name="FollowUpHistory">
     <Key>
@@ -104,6 +108,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
     <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
+    <Property Name="OriginalFollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
     <Property Name="FollowUpExamId" Type="bigint" />
     <Property Name="PatientFirstName" Type="nvarchar" MaxLength="50" />
@@ -156,9 +161,9 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
   <EntityContainer Name="DashboardModelStoreContainer">
     <EntitySet Name="CallLog" EntityType="Self.CallLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CallLogType" EntityType="Self.CallLogType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="FacilityType" EntityType="Self.FacilityType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FollowUpCode" EntityType="Self.FollowUpCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpHistory" EntityType="Self.FollowUpHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
@@ -180,6 +185,7 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[AccessionNumber] AS [AccessionNumber], 
     [FollowUpWithSynonymData].[ExamType] AS [ExamType], 
     [FollowUpWithSynonymData].[FollowUpDate] AS [FollowUpDate], 
+    [FollowUpWithSynonymData].[OriginalFollowUpDate] AS [OriginalFollowUpDate], 
     [FollowUpWithSynonymData].[FollowUpCode] AS [FollowUpCode], 
     [FollowUpWithSynonymData].[FollowUpExamId] AS [FollowUpExamId], 
     [FollowUpWithSynonymData].[PatientFirstName] AS [PatientFirstName], 

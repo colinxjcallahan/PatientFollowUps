@@ -185,15 +185,18 @@
     <Compile Include="Controllers\FollowUpApiController.cs" />
     <Compile Include="Controllers\FollowUpController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AutoMapperMapper.cs" />
-    <Compile Include="Models\CallLogViewModel.cs" />
+    <Compile Include="Models\CreateCallLogInputModel.cs" />
+    <Compile Include="Models\FollowUpCallLogViewModel.cs" />
     <Compile Include="Models\ChangeFollowUpDateInputModel.cs" />
     <Compile Include="Models\ExamViewModel.cs" />
     <Compile Include="Models\FollowUpClosedReasonViewModel.cs" />
     <Compile Include="Models\FollowUpHistoryViewModel.cs" />
+    <Compile Include="Models\FollowUpType.cs" />
     <Compile Include="Models\FollowUpViewModel.cs" />
     <Compile Include="Models\OpenFollowUpsViewModel.cs" />
     <Compile Include="Models\PatientDetailsViewModel.cs" />
@@ -336,6 +339,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\Task\Tasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Patient\PatientDetails.cshtml" />

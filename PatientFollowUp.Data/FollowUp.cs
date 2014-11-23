@@ -16,27 +16,29 @@ namespace PatientFollowUp.Data
     {
         public FollowUp()
         {
-            this.CallLogs = new HashSet<CallLog>();
+            this.FollowUpCallLogs = new HashSet<FollowUpCallLog>();
             this.FollowUpHistories = new HashSet<FollowUpHistory>();
         }
     
         public int FollowUpID { get; set; }
         public string PatientMRN { get; set; }
         public string ReferrerID { get; set; }
-        public long AccessionNumber { get; set; }
+        public string AccessionNumber { get; set; }
         public string ExamType { get; set; }
         public System.DateTime FollowUpDate { get; set; }
         public int StatusID { get; set; }
         public string FollowUpCode { get; set; }
         public Nullable<bool> NoRelevantFollowUpFound { get; set; }
         public string Comments { get; set; }
-        public Nullable<long> FollowUpExamId { get; set; }
+        public string FollowUpExamCptCode { get; set; }
         public Nullable<int> FollowUpClosedReasonId { get; set; }
         public Nullable<int> FacilityTypeId { get; set; }
         public System.DateTime OriginalFollowUpDate { get; set; }
         public string UpdatedByUserId { get; set; }
+        public bool IsPathology { get; set; }
+        public string LocationCode { get; set; }
     
-        public virtual ICollection<CallLog> CallLogs { get; set; }
+        public virtual ICollection<FollowUpCallLog> FollowUpCallLogs { get; set; }
         public virtual ICollection<FollowUpHistory> FollowUpHistories { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace PatientFollowUp.Web
             AutoMapper.Mapper.CreateMap<FollowUpClosedReason, FollowUpClosedReasonViewModel>();
             AutoMapper.Mapper.CreateMap<FollowUp, FollowUpHistory>();
             AutoMapper.Mapper.CreateMap<FollowUpHistory, FollowUpHistoryViewModel>();
+            AutoMapper.Mapper.CreateMap<FollowUpCallLog, FollowUpCallLogViewModel>();
+            AutoMapper.Mapper.CreateMap<CreateCallLogInputModel, FollowUpCallLog>();
 
         }
     }

@@ -5,19 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c5993ebf0b9d446bb5481c6706afc982" Name="Diagram1">
-        <EntityTypeShape EntityType="DashboardModel.CallLog" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.CallLogType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUp" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpClosedReason" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpCode" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpHistory" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpStatu" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.Exam" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.FollowUpWithSynonymData" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
-        <AssociationConnector Association="DashboardModel.FK_CallLog_CallLogType" ManuallyRouted="false" />
-        <AssociationConnector Association="DashboardModel.FK_CallLog_FollowUp" ManuallyRouted="false" />
-        <AssociationConnector Association="DashboardModel.FK_FollowUpHistory_FollowUp" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="DashboardModel.FollowUpClosedReason" Width="1.5" PointX="5.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpCode" Width="1.5" PointX="5.375" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpHistory" Width="1.5" PointX="3.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpStatu" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpCallLog" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpCallLogType" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="DashboardModel.FK_CallLog_CallLogType" />
+        <EntityTypeShape EntityType="DashboardModel.WorkList" Width="1.5" PointX="7.875" PointY="1" />
+        <EntityTypeShape EntityType="DashboardModel.WorkListStatu" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="DashboardModel.FK_WorkList_WorkListStatus" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUp" Width="1.5" PointX="1.125" PointY="3.875" />
+        <AssociationConnector Association="DashboardModel.FK_CallLog_FollowUp" />
+        <AssociationConnector Association="DashboardModel.FK_FollowUpHistory_FollowUp" />
+        <EntityTypeShape EntityType="DashboardModel.FollowUpWithSynonymData" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="DashboardModel.Exam" Width="1.5" PointX="10" PointY="6" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

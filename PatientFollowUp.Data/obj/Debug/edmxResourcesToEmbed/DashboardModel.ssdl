@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="CallLog">
-    <Key>
-      <PropertyRef Name="CallLogId" />
-    </Key>
-    <Property Name="CallLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CallLogText" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="CallLogTypeId" Type="int" />
-    <Property Name="FollowUpId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CallLogType">
-    <Key>
-      <PropertyRef Name="CallLogTypeId" />
-    </Key>
-    <Property Name="CallLogTypeId" Type="int" Nullable="false" />
-    <Property Name="CallLogTypeText" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="FollowUp">
     <Key>
       <PropertyRef Name="FollowUpID" />
     </Key>
     <Property Name="FollowUpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PatientMRN" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ReferrerID" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+    <Property Name="AccessionNumber" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="StatusID" Type="int" Nullable="false" />
     <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
     <Property Name="NoRelevantFollowUpFound" Type="bit" />
     <Property Name="Comments" Type="nvarchar" MaxLength="2000" />
-    <Property Name="FollowUpExamId" Type="bigint" />
+    <Property Name="FollowUpExamCptCode" Type="varchar" MaxLength="10" />
     <Property Name="FollowUpClosedReasonId" Type="int" />
     <Property Name="FacilityTypeId" Type="int" />
     <Property Name="OriginalFollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="UpdatedByUserId" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPathology" Type="bit" Nullable="false" />
+    <Property Name="LocationCode" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="FollowUpCallLog">
+    <Key>
+      <PropertyRef Name="FollowUpCallLogId" />
+    </Key>
+    <Property Name="FollowUpCallLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FollowUpCallLogText" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="FollowUpCallLogTypeId" Type="int" />
+    <Property Name="FollowUpCallLogDate" Type="datetime" Nullable="false" />
+    <Property Name="FollowUpId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FollowUpCallLogType">
+    <Key>
+      <PropertyRef Name="FollowUpCallLogTypeId" />
+    </Key>
+    <Property Name="FollowUpCallLogTypeId" Type="int" Nullable="false" />
+    <Property Name="FollowUpCallLogTypeText" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="FollowUpClosedReason">
     <Key>
@@ -82,6 +85,29 @@
     <Property Name="FollowUpStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FollowUpStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
   </EntityType>
+  <EntityType Name="WorkList">
+    <Key>
+      <PropertyRef Name="WorkListId" />
+    </Key>
+    <Property Name="WorkListId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" />
+    <Property Name="Task" Type="varchar" MaxLength="20" />
+    <Property Name="ExamNumber" Type="varchar" MaxLength="20" />
+    <Property Name="InsurancePlan" Type="nvarchar" MaxLength="50" />
+    <Property Name="Modality" Type="nchar" MaxLength="10" />
+    <Property Name="ScheduledDateTime" Type="smalldatetime" />
+    <Property Name="WorkListStatusId" Type="int" />
+    <Property Name="RisStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="AssignedUser" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="WorkListStatus">
+    <Key>
+      <PropertyRef Name="WorkListStatusId" />
+    </Key>
+    <Property Name="WorkListStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="StatusDescription" Type="varchar" MaxLength="512" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Exam">
@@ -89,13 +115,15 @@ warning 6002: The table/view 'Dashboard.dbo.Exam' does not have a primary key de
       <PropertyRef Name="ExamID" />
     </Key>
     <Property Name="ExamID" Type="bigint" Nullable="false" />
+    <Property Name="ExamCptCode" Type="varchar" MaxLength="10" />
     <Property Name="ExamType" Type="nchar" MaxLength="10" />
     <Property Name="Description" Type="nvarchar" MaxLength="75" />
     <Property Name="PatientMRN" Type="nchar" MaxLength="20" />
     <Property Name="ScheduleDate" Type="datetime" />
     <Property Name="CompletionDate" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" />
-    <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+    <Property Name="AccessionNumber" Type="varchar" MaxLength="20" />
+    <Property Name="LocationCode" Type="varchar" MaxLength="3" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -104,17 +132,19 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
       <PropertyRef Name="FollowUpID" />
     </Key>
     <Property Name="FollowUpID" Type="int" Nullable="false" />
-    <Property Name="PatientMRN" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="AccessionNumber" Type="bigint" Nullable="false" />
+    <Property Name="PatientMRN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccessionNumber" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="ExamType" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="FollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="OriginalFollowUpDate" Type="datetime" Nullable="false" />
     <Property Name="FollowUpCode" Type="nvarchar" MaxLength="10" />
-    <Property Name="FollowUpExamId" Type="bigint" />
-    <Property Name="PatientFirstName" Type="nvarchar" MaxLength="50" />
-    <Property Name="PatientLastName" Type="nvarchar" MaxLength="50" />
-    <Property Name="PatientHomePhone" Type="nvarchar" MaxLength="50" />
-    <Property Name="PatientMobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="FollowUpExamCptCode" Type="varchar" MaxLength="10" />
+    <Property Name="IsPathology" Type="bit" Nullable="false" />
+    <Property Name="PatientFirstName" Type="varchar" MaxLength="8000" />
+    <Property Name="PatientLastName" Type="varchar" MaxLength="100" />
+    <Property Name="Sex" Type="varchar" MaxLength="128" />
+    <Property Name="PatientHomePhone" Type="varchar" MaxLength="128" />
+    <Property Name="PatientMobilePhone" Type="varchar" MaxLength="128" />
     <Property Name="ReferrerFirstName" Type="nvarchar" MaxLength="255" />
     <Property Name="ReferrerLastName" Type="nvarchar" MaxLength="255" />
     <Property Name="ReferrerPhone" Type="nvarchar" MaxLength="255" />
@@ -123,25 +153,25 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     <Property Name="Report" Type="varchar(max)" />
   </EntityType>
   <Association Name="FK_CallLog_CallLogType">
-    <End Role="CallLogType" Type="Self.CallLogType" Multiplicity="0..1" />
-    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
+    <End Role="FollowUpCallLogType" Type="Self.FollowUpCallLogType" Multiplicity="0..1" />
+    <End Role="FollowUpCallLog" Type="Self.FollowUpCallLog" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CallLogType">
-        <PropertyRef Name="CallLogTypeId" />
+      <Principal Role="FollowUpCallLogType">
+        <PropertyRef Name="FollowUpCallLogTypeId" />
       </Principal>
-      <Dependent Role="CallLog">
-        <PropertyRef Name="CallLogTypeId" />
+      <Dependent Role="FollowUpCallLog">
+        <PropertyRef Name="FollowUpCallLogTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CallLog_FollowUp">
     <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
-    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
+    <End Role="FollowUpCallLog" Type="Self.FollowUpCallLog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FollowUp">
         <PropertyRef Name="FollowUpID" />
       </Principal>
-      <Dependent Role="CallLog">
+      <Dependent Role="FollowUpCallLog">
         <PropertyRef Name="FollowUpId" />
       </Dependent>
     </ReferentialConstraint>
@@ -158,24 +188,40 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_WorkList_WorkListStatus">
+    <End Role="WorkListStatus" Type="Self.WorkListStatus" Multiplicity="0..1" />
+    <End Role="WorkList" Type="Self.WorkList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkListStatus">
+        <PropertyRef Name="WorkListStatusId" />
+      </Principal>
+      <Dependent Role="WorkList">
+        <PropertyRef Name="WorkListStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DashboardModelStoreContainer">
-    <EntitySet Name="CallLog" EntityType="Self.CallLog" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CallLogType" EntityType="Self.CallLogType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUp" EntityType="Self.FollowUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FollowUpCallLog" EntityType="Self.FollowUpCallLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FollowUpCallLogType" EntityType="Self.FollowUpCallLogType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpClosedReason" EntityType="Self.FollowUpClosedReason" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpCode" EntityType="Self.FollowUpCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpHistory" EntityType="Self.FollowUpHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkList" EntityType="Self.WorkList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkListStatus" EntityType="Self.WorkListStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exam" EntityType="Self.Exam" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Exam].[ExamID] AS [ExamID], 
+    [Exam].[ExamCptCode] AS [ExamCptCode], 
     [Exam].[ExamType] AS [ExamType], 
     [Exam].[Description] AS [Description], 
     [Exam].[PatientMRN] AS [PatientMRN], 
     [Exam].[ScheduleDate] AS [ScheduleDate], 
     [Exam].[CompletionDate] AS [CompletionDate], 
     [Exam].[Status] AS [Status], 
-    [Exam].[AccessionNumber] AS [AccessionNumber]
+    [Exam].[AccessionNumber] AS [AccessionNumber], 
+    [Exam].[LocationCode] AS [LocationCode]
     FROM [dbo].[Exam] AS [Exam]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="FollowUpWithSynonymData" EntityType="Self.FollowUpWithSynonymData" store:Type="Views" store:Schema="dbo">
@@ -187,9 +233,11 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     [FollowUpWithSynonymData].[FollowUpDate] AS [FollowUpDate], 
     [FollowUpWithSynonymData].[OriginalFollowUpDate] AS [OriginalFollowUpDate], 
     [FollowUpWithSynonymData].[FollowUpCode] AS [FollowUpCode], 
-    [FollowUpWithSynonymData].[FollowUpExamId] AS [FollowUpExamId], 
+    [FollowUpWithSynonymData].[FollowUpExamCptCode] AS [FollowUpExamCptCode], 
+    [FollowUpWithSynonymData].[IsPathology] AS [IsPathology], 
     [FollowUpWithSynonymData].[PatientFirstName] AS [PatientFirstName], 
     [FollowUpWithSynonymData].[PatientLastName] AS [PatientLastName], 
+    [FollowUpWithSynonymData].[Sex] AS [Sex], 
     [FollowUpWithSynonymData].[PatientHomePhone] AS [PatientHomePhone], 
     [FollowUpWithSynonymData].[PatientMobilePhone] AS [PatientMobilePhone], 
     [FollowUpWithSynonymData].[ReferrerFirstName] AS [ReferrerFirstName], 
@@ -201,16 +249,20 @@ warning 6002: The table/view 'Dashboard.dbo.FollowUpWithSynonymData' does not ha
     FROM [dbo].[FollowUpWithSynonymData] AS [FollowUpWithSynonymData]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_CallLog_CallLogType" Association="Self.FK_CallLog_CallLogType">
-      <End Role="CallLogType" EntitySet="CallLogType" />
-      <End Role="CallLog" EntitySet="CallLog" />
+      <End Role="FollowUpCallLogType" EntitySet="FollowUpCallLogType" />
+      <End Role="FollowUpCallLog" EntitySet="FollowUpCallLog" />
     </AssociationSet>
     <AssociationSet Name="FK_CallLog_FollowUp" Association="Self.FK_CallLog_FollowUp">
       <End Role="FollowUp" EntitySet="FollowUp" />
-      <End Role="CallLog" EntitySet="CallLog" />
+      <End Role="FollowUpCallLog" EntitySet="FollowUpCallLog" />
     </AssociationSet>
     <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="Self.FK_FollowUpHistory_FollowUp">
       <End Role="FollowUp" EntitySet="FollowUp" />
       <End Role="FollowUpHistory" EntitySet="FollowUpHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkList_WorkListStatus" Association="Self.FK_WorkList_WorkListStatus">
+      <End Role="WorkListStatus" EntitySet="WorkListStatus" />
+      <End Role="WorkList" EntitySet="WorkList" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

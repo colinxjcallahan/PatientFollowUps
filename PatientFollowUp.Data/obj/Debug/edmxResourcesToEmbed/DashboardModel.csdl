@@ -1,46 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="CallLog">
-    <Key>
-      <PropertyRef Name="CallLogId" />
-    </Key>
-    <Property Name="CallLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CallLogText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CallLogTypeId" Type="Int32" />
-    <Property Name="FollowUpId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CallLogType" Relationship="Self.FK_CallLog_CallLogType" FromRole="CallLog" ToRole="CallLogType" />
-    <NavigationProperty Name="FollowUp" Relationship="Self.FK_CallLog_FollowUp" FromRole="CallLog" ToRole="FollowUp" />
-  </EntityType>
-  <EntityType Name="CallLogType">
-    <Key>
-      <PropertyRef Name="CallLogTypeId" />
-    </Key>
-    <Property Name="CallLogTypeId" Type="Int32" Nullable="false" />
-    <Property Name="CallLogTypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="CallLogs" Relationship="Self.FK_CallLog_CallLogType" FromRole="CallLogType" ToRole="CallLog" />
-  </EntityType>
-  <EntityType Name="FollowUp">
-    <Key>
-      <PropertyRef Name="FollowUpID" />
-    </Key>
-    <Property Name="FollowUpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PatientMRN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ReferrerID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
-    <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="StatusID" Type="Int32" Nullable="false" />
-    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
-    <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-    <Property Name="FollowUpExamId" Type="Int64" />
-    <Property Name="FollowUpClosedReasonId" Type="Int32" />
-    <Property Name="FacilityTypeId" Type="Int32" />
-    <Property Name="OriginalFollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UpdatedByUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CallLogs" Relationship="Self.FK_CallLog_FollowUp" FromRole="FollowUp" ToRole="CallLog" />
-    <NavigationProperty Name="FollowUpHistories" Relationship="Self.FK_FollowUpHistory_FollowUp" FromRole="FollowUp" ToRole="FollowUpHistory" />
-  </EntityType>
   <EntityType Name="FollowUpClosedReason">
     <Key>
       <PropertyRef Name="FollowUpClosedReasonId" />
@@ -79,7 +38,7 @@
     <Property Name="FacilityTypeId" Type="Int32" />
     <Property Name="OriginalFollowUpDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedByUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="FollowUp" Relationship="Self.FK_FollowUpHistory_FollowUp" FromRole="FollowUpHistory" ToRole="FollowUp" />
+    <NavigationProperty Name="FollowUp" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUpHistory" ToRole="FollowUp" />
   </EntityType>
   <EntityType Name="FollowUpStatu">
     <Key>
@@ -88,69 +47,143 @@
     <Property Name="FollowUpStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FollowUpStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="Exam">
+  <EntityContainer Name="DashboardEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FollowUpClosedReasons" EntityType="Self.FollowUpClosedReason" />
+    <EntitySet Name="FollowUpCodes" EntityType="Self.FollowUpCode" />
+    <EntitySet Name="FollowUpHistories" EntityType="Self.FollowUpHistory" />
+    <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatu" />
+    <EntitySet Name="FollowUpCallLogs" EntityType="DashboardModel.FollowUpCallLog" />
+    <EntitySet Name="FollowUpCallLogTypes" EntityType="DashboardModel.FollowUpCallLogType" />
+    <AssociationSet Name="FK_CallLog_CallLogType" Association="DashboardModel.FK_CallLog_CallLogType">
+      <End Role="FollowUpCallLogType" EntitySet="FollowUpCallLogTypes" />
+      <End Role="FollowUpCallLog" EntitySet="FollowUpCallLogs" />
+    </AssociationSet>
+    <EntitySet Name="WorkLists" EntityType="DashboardModel.WorkList" />
+    <EntitySet Name="WorkListStatus" EntityType="DashboardModel.WorkListStatu" />
+    <AssociationSet Name="FK_WorkList_WorkListStatus" Association="DashboardModel.FK_WorkList_WorkListStatus">
+      <End Role="WorkListStatu" EntitySet="WorkListStatus" />
+      <End Role="WorkList" EntitySet="WorkLists" />
+    </AssociationSet>
+    <EntitySet Name="FollowUps" EntityType="DashboardModel.FollowUp" />
+    <AssociationSet Name="FK_CallLog_FollowUp" Association="DashboardModel.FK_CallLog_FollowUp">
+      <End Role="FollowUp" EntitySet="FollowUps" />
+      <End Role="FollowUpCallLog" EntitySet="FollowUpCallLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="DashboardModel.FK_FollowUpHistory_FollowUp">
+      <End Role="FollowUp" EntitySet="FollowUps" />
+      <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
+    </AssociationSet>
+    <EntitySet Name="FollowUpWithSynonymDatas" EntityType="DashboardModel.FollowUpWithSynonymData" />
+    <EntitySet Name="Exams" EntityType="DashboardModel.Exam" />
+  </EntityContainer>
+  <EntityType Name="FollowUpCallLog">
     <Key>
-      <PropertyRef Name="ExamID" />
+      <PropertyRef Name="FollowUpCallLogId" />
     </Key>
-    <Property Name="ExamID" Type="Int64" Nullable="false" />
-    <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-    <Property Name="PatientMRN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
-    <Property Name="CompletionDate" Type="DateTime" Precision="3" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
+    <Property Name="FollowUpCallLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowUpCallLogText" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpCallLogTypeId" Type="Int32" />
+    <Property Name="FollowUpId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FollowUpCallLogType" Relationship="DashboardModel.FK_CallLog_CallLogType" FromRole="FollowUpCallLog" ToRole="FollowUpCallLogType" />
+    <Property Name="FollowUpCallLogDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="FollowUp" Relationship="DashboardModel.FK_CallLog_FollowUp" FromRole="FollowUpCallLog" ToRole="FollowUp" />
   </EntityType>
-  <EntityType Name="FollowUpWithSynonymData">
+  <EntityType Name="FollowUpCallLogType">
     <Key>
-      <PropertyRef Name="FollowUpID" />
+      <PropertyRef Name="FollowUpCallLogTypeId" />
     </Key>
-    <Property Name="FollowUpID" Type="Int32" Nullable="false" />
-    <Property Name="PatientMRN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="AccessionNumber" Type="Int64" Nullable="false" />
-    <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="OriginalFollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FollowUpExamId" Type="Int64" />
-    <Property Name="PatientFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PatientLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PatientHomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PatientMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ReferrerFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ReferrerLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ReferrerPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ReferrerMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FollowUpStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FollowUpCallLogTypeId" Type="Int32" Nullable="false" />
+    <Property Name="FollowUpCallLogTypeText" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FollowUpCallLogs" Relationship="DashboardModel.FK_CallLog_CallLogType" FromRole="FollowUpCallLogType" ToRole="FollowUpCallLog" />
   </EntityType>
   <Association Name="FK_CallLog_CallLogType">
-    <End Role="CallLogType" Type="Self.CallLogType" Multiplicity="0..1" />
-    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
+    <End Type="DashboardModel.FollowUpCallLogType" Role="FollowUpCallLogType" Multiplicity="0..1" />
+    <End Type="DashboardModel.FollowUpCallLog" Role="FollowUpCallLog" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CallLogType">
-        <PropertyRef Name="CallLogTypeId" />
+      <Principal Role="FollowUpCallLogType">
+        <PropertyRef Name="FollowUpCallLogTypeId" />
       </Principal>
-      <Dependent Role="CallLog">
-        <PropertyRef Name="CallLogTypeId" />
+      <Dependent Role="FollowUpCallLog">
+        <PropertyRef Name="FollowUpCallLogTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="WorkList">
+    <Key>
+      <PropertyRef Name="WorkListId" />
+    </Key>
+    <Property Name="WorkListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" />
+    <Property Name="Task" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ExamNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="InsurancePlan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Modality" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ScheduledDateTime" Type="DateTime" Precision="0" />
+    <Property Name="WorkListStatusId" Type="Int32" />
+    <Property Name="RisStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AssignedUser" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="WorkListStatu" Relationship="DashboardModel.FK_WorkList_WorkListStatus" FromRole="WorkList" ToRole="WorkListStatu" />
+  </EntityType>
+  <EntityType Name="WorkListStatu">
+    <Key>
+      <PropertyRef Name="WorkListStatusId" />
+    </Key>
+    <Property Name="WorkListStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StatusDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WorkLists" Relationship="DashboardModel.FK_WorkList_WorkListStatus" FromRole="WorkListStatu" ToRole="WorkList" />
+  </EntityType>
+  <Association Name="FK_WorkList_WorkListStatus">
+    <End Type="DashboardModel.WorkListStatu" Role="WorkListStatu" Multiplicity="0..1" />
+    <End Type="DashboardModel.WorkList" Role="WorkList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkListStatu">
+        <PropertyRef Name="WorkListStatusId" />
+      </Principal>
+      <Dependent Role="WorkList">
+        <PropertyRef Name="WorkListStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FollowUp">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReferrerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NoRelevantFollowUpFound" Type="Boolean" />
+    <Property Name="Comments" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpExamCptCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="FollowUpClosedReasonId" Type="Int32" />
+    <Property Name="FacilityTypeId" Type="Int32" />
+    <Property Name="OriginalFollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedByUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsPathology" Type="Boolean" Nullable="false" />
+    <Property Name="LocationCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FollowUpCallLogs" Relationship="DashboardModel.FK_CallLog_FollowUp" FromRole="FollowUp" ToRole="FollowUpCallLog" />
+    <NavigationProperty Name="FollowUpHistories" Relationship="DashboardModel.FK_FollowUpHistory_FollowUp" FromRole="FollowUp" ToRole="FollowUpHistory" />
+  </EntityType>
   <Association Name="FK_CallLog_FollowUp">
-    <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
-    <End Role="CallLog" Type="Self.CallLog" Multiplicity="*" />
+    <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="1" />
+    <End Type="DashboardModel.FollowUpCallLog" Role="FollowUpCallLog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FollowUp">
         <PropertyRef Name="FollowUpID" />
       </Principal>
-      <Dependent Role="CallLog">
+      <Dependent Role="FollowUpCallLog">
         <PropertyRef Name="FollowUpId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FollowUpHistory_FollowUp">
-    <End Role="FollowUp" Type="Self.FollowUp" Multiplicity="1" />
-    <End Role="FollowUpHistory" Type="Self.FollowUpHistory" Multiplicity="*" />
+    <End Type="DashboardModel.FollowUp" Role="FollowUp" Multiplicity="1" />
+    <End Type="DashboardModel.FollowUpHistory" Role="FollowUpHistory" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FollowUp">
         <PropertyRef Name="FollowUpID" />
@@ -160,27 +193,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DashboardEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CallLogs" EntityType="Self.CallLog" />
-    <EntitySet Name="CallLogTypes" EntityType="Self.CallLogType" />
-    <EntitySet Name="FollowUps" EntityType="Self.FollowUp" />
-    <EntitySet Name="FollowUpClosedReasons" EntityType="Self.FollowUpClosedReason" />
-    <EntitySet Name="FollowUpCodes" EntityType="Self.FollowUpCode" />
-    <EntitySet Name="FollowUpHistories" EntityType="Self.FollowUpHistory" />
-    <EntitySet Name="FollowUpStatus" EntityType="Self.FollowUpStatu" />
-    <EntitySet Name="Exams" EntityType="Self.Exam" />
-    <EntitySet Name="FollowUpWithSynonymDatas" EntityType="Self.FollowUpWithSynonymData" />
-    <AssociationSet Name="FK_CallLog_CallLogType" Association="Self.FK_CallLog_CallLogType">
-      <End Role="CallLogType" EntitySet="CallLogTypes" />
-      <End Role="CallLog" EntitySet="CallLogs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CallLog_FollowUp" Association="Self.FK_CallLog_FollowUp">
-      <End Role="FollowUp" EntitySet="FollowUps" />
-      <End Role="CallLog" EntitySet="CallLogs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FollowUpHistory_FollowUp" Association="Self.FK_FollowUpHistory_FollowUp">
-      <End Role="FollowUp" EntitySet="FollowUps" />
-      <End Role="FollowUpHistory" EntitySet="FollowUpHistories" />
-    </AssociationSet>
-  </EntityContainer>
+  <EntityType Name="FollowUpWithSynonymData">
+    <Key>
+      <PropertyRef Name="FollowUpID" />
+    </Key>
+    <Property Name="FollowUpID" Type="Int32" Nullable="false" />
+    <Property Name="PatientMRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccessionNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ExamType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OriginalFollowUpDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FollowUpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpExamCptCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsPathology" Type="Boolean" Nullable="false" />
+    <Property Name="PatientFirstName" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <Property Name="PatientLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="PatientHomePhone" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="PatientMobilePhone" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="ReferrerFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ReferrerMobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FollowUpStatus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="ExamID" Type="Int64" Nullable="false" />
+    <Property Name="ExamCptCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ExamType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="PatientMRN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocationCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

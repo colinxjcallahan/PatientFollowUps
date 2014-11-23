@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Open Follow-ups</title>
+        <title>Tasks</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">             
         
@@ -24,12 +24,14 @@
     </head>
     <body>
         <div class="table-responsive">
-            <select id="followUpType" class="form-control" style="width: 250px; margin: 5px;">
-                <option value="All">All</option>
-                <option value="Pathology">Pathology Follow-ups Only</option>
-                <option value="Regular">Regular Follow-ups Only</option>
+            <select id="task-status" class="form-control" style="width: 250px; margin: 5px;">
+                <option value="New">New</option>
+                <option value="Entered">Entered</option>
+                <option value="NeedsReview">Needs Review</option>
+                <option value="IncompleteData">Incomplete Data</option>
+                <option value="Completed">Completed</option>
             </select>
-            <table id="followups-table" data-toggle="table" data-url="../api/FollowUps/GetOpenFollowUps/All" data-show-refresh="false" data-cache="false">
+            <table id="followups-table" data-toggle="table" data-url="../api/Task/Tasks/All" data-show-refresh="false" data-cache="false">
                 <thead>
                     <tr>
                         <th data-field="PatientName" data-sortable="true">PT Name</th>

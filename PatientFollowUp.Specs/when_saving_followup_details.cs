@@ -32,7 +32,7 @@ namespace PatientFollowUp.Specs
             _followUpReturnedByRepository = new FollowUp
             {
                 Comments = "",
-                FollowUpExamId = 0,
+                FollowUpExamCptCode = "",
                 NoRelevantFollowUpFound = false,
                 FollowUpID = 890,
             };

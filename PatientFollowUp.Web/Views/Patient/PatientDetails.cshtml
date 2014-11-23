@@ -41,12 +41,46 @@
                 
                 });
 
+                var callLogTable = $('#call-log-history-table').bootstrapTable({
+
+                });
+
                 
                 $('#NewFollowUpDate').datepicker().on('changeDate', function (e) {
                     $(this).datepicker('hide');
                 });
 
 
+                $("#add-call-log-button").click(function() {
+
+                    var callLogText = $("#call-log-text").val();
+                    var followUpId = $("#FollowUpId").val();
+
+                    if (callLogText.trim().length >0) {
+
+
+                        $.ajax({
+                            url: "../api/CallLogs/CallLog",
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(
+                            {
+                                "FollowUpCallLogText": callLogText,
+                                "FollowUpId": followUpId
+                            }),
+                            statusCode: {
+                                200: function(xhr, textStatus) {
+                                    $("#call-log-text").val('');
+                                    callLogTable.bootstrapTable('refresh');
+                                },
+                                400: function(data) {
+
+                                },
+                            }
+                        });
+                    }
+
+                });
 
 
                 $("#no_relevant_followup").click(function() {
@@ -115,7 +149,6 @@
 
                                     $("#error-message").append(error.Message + "<br/>");
 
-
                                 });
                             },
                         }
@@ -161,15 +194,15 @@
                     <table style="width: 100%">
                         <tr>
                             <td>Name: @Model.FollowUp.PatientFirstName @Model.FollowUp.PatientLastName</td>
-                        </tr>
-                        <tr>
-                            <td>Follow-Up Date: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
-                        </tr>
-                        <tr>
-                            <td>Original Follow-Up Date: @Model.FollowUp.OriginalFollowUpDate.ToShortDateString()</td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <td>Patient Phone: @(!string.IsNullOrEmpty(Model.FollowUp.PatientHomePhone) ? Model.FollowUp.PatientHomePhone : Model.FollowUp.PatientMobilePhone)</td>
+                        </tr>
+                        <tr>
+                            <td>Sex: @Model.FollowUp.Sex</td>
+                        </tr>
+                        <tr>
+                            <td>DOB: (waiting for data source)</td>
                         </tr>
                     </table>
                 </div>
@@ -180,6 +213,12 @@
                         </tr>
                         <tr>
                             <td>Referrer: @Model.FollowUp.ReferrerFirstName @Model.FollowUp.ReferrerLastName</td>
+                        </tr>
+                        <tr>
+                            <td>Follow-Up Date: @Model.FollowUp.FollowUpDate.ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Original Follow-Up Date: @Model.FollowUp.OriginalFollowUpDate.ToShortDateString()</td>
                         </tr>
                     </table>
                 </div>
@@ -280,6 +319,22 @@
                         </table>
 
                     </div>
+                    
+                    <div class="table-responsive" style="color: white;  background-color: #DA5430; padding: 10px; margin:3px;">
+                        Call Log History<br /><br />
+                        <table id="call-log-history-table" data-toggle="table" data-url="../api/CallLogs/GetCallLogs/@Model.FollowUp.FollowUpID">
+                            <thead>
+                                <tr>
+                                    <th data-field="FollowUpCallLogDate" data-sortable="true" data-formatter="dateFormatter">Date</th>
+                                    <th data-field="FollowUpCallLogText">Call Log Message</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                        <button id="add-call-log-button" style="background-color: #999999; margin: 2px;">Add Call Log</button>
+                        <textarea id="call-log-text" rows="4" cols="50" style="color:black"></textarea>
+                    </div>
+
                 </div>
 
             </div>

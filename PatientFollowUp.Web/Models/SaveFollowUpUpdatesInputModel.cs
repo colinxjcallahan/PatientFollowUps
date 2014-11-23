@@ -14,5 +14,6 @@ namespace PatientFollowUp.Web.Models
         public DateTime NewFollowUpDate { get; set; }
 
         public string LoggedInUserId { get; set; }
+        public string FollowUpExamCptCode { get; set; }
     }
 }

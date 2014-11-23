@@ -16,7 +16,7 @@ namespace PatientFollowUp.Specs
     public class when_getting_call_logs
     {
         private CallLogApiController _callLogApiController;
-        private IEnumerable<CallLog> _callLogsReturnedByRepository;
+        private IEnumerable<FollowUpCallLog> _callLogsReturnedByRepository;
         private int _followUpId;
         private Mock<IRepository> _repository;
         private Mock<IMapper> _mapper;
@@ -28,18 +28,18 @@ namespace PatientFollowUp.Specs
 
             _repository = new Mock<IRepository>();
 
-            _callLogsReturnedByRepository = new List<CallLog>
+            _callLogsReturnedByRepository = new List<FollowUpCallLog>
             {
-                new CallLog(),
-                new CallLog(),
-                new CallLog(),
+                new FollowUpCallLog(),
+                new FollowUpCallLog(),
+                new FollowUpCallLog(),
             };
-            _repository.Setup(x => x.Find(It.IsAny<Expression<Func<CallLog, bool>>>()))
+            _repository.Setup(x => x.Find(It.IsAny<Expression<Func<FollowUpCallLog, bool>>>()))
                 .Returns(_callLogsReturnedByRepository);
 
             _mapper = new Mock<IMapper>();
-            _mapper.Setup(x => x.Map<CallLog, CallLogViewModel>(It.IsAny<CallLog>()))
-                .Returns(new CallLogViewModel());
+            _mapper.Setup(x => x.Map<FollowUpCallLog, FollowUpCallLogViewModel>(It.IsAny<FollowUpCallLog>()))
+                .Returns(new FollowUpCallLogViewModel());
 
             _callLogApiController = new CallLogApiController(_repository.Object, _mapper.Object);
         }
@@ -50,7 +50,7 @@ namespace PatientFollowUp.Specs
             HttpResponseMessage result = _callLogApiController.GetCallLogs(_followUpId);
 
             var callLogViewModels =
-                ((List<CallLogViewModel>) ((ObjectContent<List<CallLogViewModel>>) (result.Content)).Value);
+                ((List<FollowUpCallLogViewModel>) ((ObjectContent<List<FollowUpCallLogViewModel>>) (result.Content)).Value);
 
             Assert.AreEqual(_callLogsReturnedByRepository.Count(), callLogViewModels.Count);
         }

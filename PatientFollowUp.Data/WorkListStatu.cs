@@ -12,14 +12,17 @@ namespace PatientFollowUp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CallLog
+    public partial class WorkListStatu
     {
-        public int CallLogId { get; set; }
-        public string CallLogText { get; set; }
-        public Nullable<int> CallLogTypeId { get; set; }
-        public int FollowUpId { get; set; }
+        public WorkListStatu()
+        {
+            this.WorkLists = new HashSet<WorkList>();
+        }
     
-        public virtual CallLogType CallLogType { get; set; }
-        public virtual FollowUp FollowUp { get; set; }
+        public int WorkListStatusId { get; set; }
+        public string StatusName { get; set; }
+        public string StatusDescription { get; set; }
+    
+        public virtual ICollection<WorkList> WorkLists { get; set; }
     }
 }

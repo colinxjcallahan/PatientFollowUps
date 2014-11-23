@@ -51,12 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDomainContext.cs" />
-    <Compile Include="CallLog.cs">
-      <DependentUpon>DashboardModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CallLogType.cs">
-      <DependentUpon>DashboardModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DashboardModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,6 +72,12 @@
     <Compile Include="FollowUp.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FollowUpCallLog.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FollowUpCallLogType.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FollowUpClosedReason.cs">
       <DependentUpon>DashboardModel.tt</DependentUpon>
     </Compile>
@@ -96,6 +96,12 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="WorkList.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkListStatu.cs">
+      <DependentUpon>DashboardModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

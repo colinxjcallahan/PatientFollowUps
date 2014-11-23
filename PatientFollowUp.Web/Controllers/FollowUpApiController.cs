@@ -27,9 +27,9 @@ namespace PatientFollowUp.Web.Controllers
             _validator = validator;
         }
 
-        [Route("api/FollowUps/GetOpenFollowUps")]
+        [Route("api/FollowUps/GetOpenFollowUps/{followUpType}")]
         [HttpGet]
-        public HttpResponseMessage GetOpenFollowUps()
+        public HttpResponseMessage GetOpenFollowUps(FollowUpType followUpType)
         {
             DateTime currentDate = _date.GetCurrentDate();
 
@@ -39,10 +39,16 @@ namespace PatientFollowUp.Web.Controllers
                     .ToList();
 
 
+            if (followUpType != FollowUpType.All)
+            {
+                var isPathology = followUpType.Equals(FollowUpType.Pathology);
 
-            var followUpViewModels =
+                followUps = followUps.Where(x => x.IsPathology == isPathology).ToList();
+            }
+
+
+            List<FollowUpViewModel> followUpViewModels =
                 followUps.Select(x => _mapper.Map<FollowUpWithSynonymData, FollowUpViewModel>(x)).ToList();
-
 
 
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -50,7 +56,6 @@ namespace PatientFollowUp.Web.Controllers
                 Content =
                     new ObjectContent<List<FollowUpViewModel>>(followUpViewModels,
                         new JsonMediaTypeFormatter()),
-                        
             };
         }
 
@@ -76,7 +81,7 @@ namespace PatientFollowUp.Web.Controllers
 
             existingFollowUp.Comments = saveFollowUpUpdatesInputModel.Comments;
             existingFollowUp.NoRelevantFollowUpFound = saveFollowUpUpdatesInputModel.NoRelevantFollowUpFound;
-            existingFollowUp.FollowUpExamId = saveFollowUpUpdatesInputModel.FollowUpExamId;
+            existingFollowUp.FollowUpExamCptCode = saveFollowUpUpdatesInputModel.FollowUpExamCptCode;
             existingFollowUp.FollowUpClosedReasonId = saveFollowUpUpdatesInputModel.FollowUpClosedReasonId;
             existingFollowUp.UpdatedByUserId = saveFollowUpUpdatesInputModel.LoggedInUserId;
 
@@ -88,7 +93,7 @@ namespace PatientFollowUp.Web.Controllers
             _repository.Save(existingFollowUp);
 
 
-            var followUpHistory = _mapper.Map<FollowUp, FollowUpHistory>(existingFollowUp);
+            FollowUpHistory followUpHistory = _mapper.Map<FollowUp, FollowUpHistory>(existingFollowUp);
             _repository.Save(followUpHistory);
 
 
@@ -99,9 +104,10 @@ namespace PatientFollowUp.Web.Controllers
         [HttpGet]
         public HttpResponseMessage FollowUpHistory(int followUpID)
         {
-            var followUpHistoryItems = _repository.Find<FollowUpHistory>(x => x.FollowUpID == followUpID);
+            IEnumerable<FollowUpHistory> followUpHistoryItems =
+                _repository.Find<FollowUpHistory>(x => x.FollowUpID == followUpID);
 
-            var followUpHistoryViewModels =
+            List<FollowUpHistoryViewModel> followUpHistoryViewModels =
                 followUpHistoryItems.Select(x => _mapper.Map<FollowUpHistory, FollowUpHistoryViewModel>(x)).ToList();
 
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -109,9 +115,7 @@ namespace PatientFollowUp.Web.Controllers
                 Content =
                     new ObjectContent<List<FollowUpHistoryViewModel>>(followUpHistoryViewModels,
                         new JsonMediaTypeFormatter()),
-
             };
-
         }
     }
 }

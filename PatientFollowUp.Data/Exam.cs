@@ -15,12 +15,14 @@ namespace PatientFollowUp.Data
     public partial class Exam
     {
         public long ExamID { get; set; }
+        public string ExamCptCode { get; set; }
         public string ExamType { get; set; }
         public string Description { get; set; }
         public string PatientMRN { get; set; }
         public Nullable<System.DateTime> ScheduleDate { get; set; }
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Status { get; set; }
-        public long AccessionNumber { get; set; }
+        public string AccessionNumber { get; set; }
+        public string LocationCode { get; set; }
     }
 }

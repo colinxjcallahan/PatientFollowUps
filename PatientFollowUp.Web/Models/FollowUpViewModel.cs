@@ -9,7 +9,7 @@ namespace PatientFollowUp.Web.Models
         public string ExamType { get; set; }
         public DateTime FollowUpDate { get; set; }
         public DateTime OriginalFollowUpDate { get; set; }
-
+        public string Sex { get; set; }
         public string PatientMRN { get; set; }
 
         public string PatientFirstName { get; set; }
